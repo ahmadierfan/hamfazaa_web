@@ -1,0 +1,33 @@
+{
+  "name": "hamfazaa",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "start": "nuxt start",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "deploy": "PORT=8301 pm2 start npm --name hamfazaa -- start"
+  },
+  "dependencies": {
+    "@iconify-json/uil": "^1.2.3",
+    "@pinia/nuxt": "^0.10.1",
+    "@vueform/multiselect": "^2.6.11",
+    "axios": "^1.7.9",
+    "gsap": "^3.13.0",
+    "izitoast": "^1.4.0",
+    "lodash": "^4.17.21",
+    "nuxt": "^3.15.2",
+    "nuxt-toast": "^1.1.4",
+    "vue": "latest",
+    "vue-cal": "^5.0.1-rc.33",
+    "vue-router": "latest"
+  },
+  "devDependencies": {
+    "@nuxt/icon": "^1.15.0",
+    "@nuxtjs/tailwindcss": "^6.13.1",
+    "jsdom": "^26.0.0"
+  }
+}
