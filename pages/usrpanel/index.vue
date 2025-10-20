@@ -216,17 +216,6 @@
                             <div class="flex items-center space-x-2 space-x-reverse text-sm text-gray-600 mb-1">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                                </svg>
-                                <span>کاربر</span>
-                            </div>
-                            <p class="text-gray-900 font-medium text-sm">{{ selectedUserName || 'نامشخص' }}</p>
-                        </div>
-
-                        <div class="bg-gray-50 rounded-xl p-4">
-                            <div class="flex items-center space-x-2 space-x-reverse text-sm text-gray-600 mb-1">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                                 </svg>
                                 <span>اتاق</span>
@@ -327,7 +316,7 @@
 
                     <!-- دکمه‌های action -->
                     <div class="flex gap-3 mt-8 pt-6 border-t border-gray-200">
-                        <button @click="saveEvent" :disabled="!!isSaving || !!modalTimeError || !selectedUser"
+                        <button @click="saveEvent" :disabled="!!isSaving || !!modalTimeError"
                             class="flex-1 inline-flex justify-center items-center px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-xl hover:from-green-600 hover:to-emerald-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
                             <svg v-if="isSaving" class="animate-spin -mr-1 ml-2 h-5 w-5 text-white" fill="none"
                                 viewBox="0 0 24 24">
@@ -431,18 +420,10 @@ definePageMeta({
 
 // داده‌های اصلی
 const selectedRoom = ref('')
-const selectedUser = ref(null)
 const rooms = ref([])
-const users = ref([])
 const events = ref([])
 const isRefreshing = ref(false)
 const showPastTimeWarning = ref(false)
-
-// داده‌های دراپ‌دان
-const dropdownOpen = ref(false)
-const searchQuery = ref('')
-const filteredUsers = ref([])
-const searchInput = ref(null)
 
 // تنظیمات تقویم
 const locale = ref('fa')
@@ -487,11 +468,6 @@ const selectedRoomInfo = computed(() => {
     }
 })
 
-// نام کاربر انتخاب شده
-const selectedUserName = computed(() => {
-    return selectedUser.value ? selectedUser.value.name : ''
-})
-
 // ایونت‌های فیلتر شده بر اساس اتاق انتخاب شده
 const filteredEvents = computed(() => {
     if (!selectedRoom.value) return []
@@ -508,42 +484,6 @@ const isPastEvent = (event) => {
     const now = new Date()
     const eventEnd = new Date(event.end)
     return eventEnd < now
-}
-
-// توابع دراپ‌دان
-const toggleDropdown = () => {
-    dropdownOpen.value = !dropdownOpen.value
-    if (dropdownOpen.value) {
-        nextTick(() => {
-            searchInput.value?.focus()
-            filterUsers()
-        })
-    }
-}
-
-const filterUsers = () => {
-    if (!searchQuery.value) {
-        filteredUsers.value = users.value
-    } else {
-        filteredUsers.value = users.value.filter(user =>
-            user.name.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
-            user.email.toLowerCase().includes(searchQuery.value.toLowerCase())
-        )
-    }
-}
-
-const selectUser = (user) => {
-    selectedUser.value = user
-    dropdownOpen.value = false
-    searchQuery.value = ''
-}
-
-// بستن دراپ‌دان هنگام کلیک خارج
-const handleClickOutside = (event) => {
-    const dropdown = event.target.closest('.relative')
-    if (!dropdown) {
-        dropdownOpen.value = false
-    }
 }
 
 // توابع کمکی
@@ -594,12 +534,6 @@ const formatEventDate = (dateTime) => {
         month: 'long',
         day: 'numeric'
     })
-}
-
-// گرفتن حروف اول نام کاربر
-const getInitials = (name) => {
-    if (!name) return ''
-    return name.split(' ').map(word => word[0]).join('').toUpperCase().substring(0, 2)
 }
 
 // بررسی اینکه زمان انتخاب شده گذشته است یا نه
@@ -722,7 +656,7 @@ const validateModalTime = () => {
 }
 
 const saveEvent = async () => {
-    if (modalTimeError.value || !selectedUser.value) return
+    if (modalTimeError.value) return
 
     isSaving.value = true
     try {
@@ -744,7 +678,6 @@ const saveEvent = async () => {
             startdatetime: startDate.toISOString(),
             enddatetime: endDate.toISOString(),
             fk_room: selectedRoom.value,
-            fk_user: selectedUser.value.id,
         }
         // اگر در حال ویرایش هستیم، ID را اضافه می‌کنیم
         if (isEditing.value && selectedEvent.value) {
@@ -837,16 +770,10 @@ const onEventCreate = async (event) => {
             return
         }
 
-        if (!selectedUser.value) {
-            toast.error({ title: 'خطا!', message: 'لطفاً ابتدا یک کاربر انتخاب کنید.' })
-            return
-        }
-
         const eventData = {
             startdatetime: event.event.start,
             enddatetime: event.event.end,
             fk_room: selectedRoom.value,
-            fk_user: selectedUser.value.id
         }
 
 
@@ -874,7 +801,6 @@ const onEventDrop = async (event, originalEvent) => {
             startdatetime: event.start,
             enddatetime: event.end,
             fk_room: selectedRoom.value,
-            fk_user: selectedUser.value.id
         }
 
         await createUpdateEvent(eventData)
@@ -898,7 +824,6 @@ const onEventDurationChange = async (event, originalEvent) => {
             startdatetime: event.start,
             enddatetime: event.end,
             fk_room: selectedRoom.value,
-            fk_user: selectedUser.value.id
         }
 
         await createUpdateEvent(eventData)
@@ -934,16 +859,13 @@ const onCalendarReady = () => {
 }
 
 const onRoomChange = () => {
-    selectedUser.value = null
-    dropdownOpen.value = false
-    searchQuery.value = ''
     loadRoomEvents()
 }
 
 // توابع API
 const createUpdateEvent = async (eventData) => {
     try {
-        const response = await $freeApi.post('company-create-update-event', eventData)
+        const response = await $freeApi.post('user-create-update-event', eventData)
         return response.data
     } catch (error) {
         throw error
@@ -952,7 +874,7 @@ const createUpdateEvent = async (eventData) => {
 
 const deleteEvent = async (eventId) => {
     try {
-        const response = await $freeApi.post('company-delete-event', { id: eventId })
+        const response = await $freeApi.post('user-delete-event', { id: eventId })
         return response.data
     } catch (error) {
         throw error
@@ -977,7 +899,6 @@ const loadRoomEvents = async () => {
                 end: endDate,
                 title: event.name,
                 fk_room: event.fk_room,
-                fk_user: event.fk_user
             }
         })
     } catch (error) {
@@ -987,7 +908,6 @@ const loadRoomEvents = async () => {
 const getRoomRequirement = async () => {
     try {
         const { data } = await $freeApi.get('company-rooms-requirement')
-        users.value = data.users
         rooms.value = data.rooms.map(room => ({
             ...room,
             parsedAvailableDays: getAvailableDaysArray(room)
@@ -1012,7 +932,6 @@ const handleKeydown = (e) => {
 onMounted(async () => {
     await getRoomRequirement()
 
-    document.addEventListener('click', handleClickOutside)
     document.addEventListener('keydown', handleKeydown)
 
     setInterval(() => {
@@ -1022,7 +941,6 @@ onMounted(async () => {
 
 // پاکسازی
 onUnmounted(() => {
-    document.removeEventListener('click', handleClickOutside)
     document.removeEventListener('keydown', handleKeydown)
 })
 </script>
