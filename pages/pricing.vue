@@ -31,113 +31,58 @@
                             d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
                     </svg>
                 </div>
-                <h1 class="text-4xl font-bold text-gray-900 mb-4">
+                <h1 class="text-4xl  text-gray-900 mb-4">
                     انتخاب <span class="bg-gradient-to-r from-orange-600 to-amber-600 bg-clip-text text-transparent">پلن
                         مناسب</span>
                 </h1>
                 <p class="text-xl text-gray-600 max-w-2xl mx-auto">
                     پلن‌های متنوع همفضا برای کسب‌وکارهای مختلف
                     <br>
-                    <span class="text-orange-600 ">۱۵ روز تست رایگان</span>
+                    <span class="text-orange-600 ">۷ روز تست رایگان</span>
                 </p>
-            </div>
 
-            <!-- کارت‌های قیمت‌گذاری -->
-            <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8 mb-16">
-
-                <!-- پلن Trial -->
-                <div class="relative group animate-fade-in-up" style="animation-delay: 0.1s">
+                <!-- انتخابگر نوع پلن -->
+                <div class="mt-8 flex justify-center">
                     <div
-                        class="absolute -inset-1 bg-gradient-to-r from-orange-400 to-amber-400 rounded-3xl blur opacity-25 group-hover:opacity-40 transition duration-1000 group-hover:duration-200">
-                    </div>
-                    <div
-                        class="relative bg-white rounded-2xl p-8 shadow-xl border border-orange-100 h-full flex flex-col">
-                        <div class="flex items-center justify-between mb-6">
-                            <div>
-                                <h3 class="text-2xl font-bold text-gray-900">آزمایشی</h3>
-                                <p class="text-orange-600 font-semibold mt-1">۱۵ روز رایگان</p>
-                            </div>
-                            <div class="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center">
-                                <svg class="w-6 h-6 text-orange-600" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M13 10V3L4 14h7v7l9-11h-7z" />
-                                </svg>
-                            </div>
-                        </div>
-
-                        <div class="mb-6">
-                            <div class="text-3xl font-bold text-gray-900 mb-2">رایگان</div>
-                            <p class="text-gray-600 text-sm">برای آشنایی با پلتفرم</p>
-                        </div>
-
-                        <div class="space-y-3 mb-8 flex-grow">
-                            <div class="flex items-center space-x-3 space-x-reverse">
-                                <div
-                                    class="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
-                                    <svg class="w-3 h-3 text-green-600" fill="none" stroke="currentColor"
-                                        viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M5 13l4 4L19 7" />
-                                    </svg>
-                                </div>
-                                <span class="text-gray-700 text-sm">تمام امکانات پایه</span>
-                            </div>
-                            <div class="flex items-center space-x-3 space-x-reverse">
-                                <div
-                                    class="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
-                                    <svg class="w-3 h-3 text-green-600" fill="none" stroke="currentColor"
-                                        viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M5 13l4 4L19 7" />
-                                    </svg>
-                                </div>
-                                <span class="text-gray-700 text-sm">پشتیبانی آنلاین</span>
-                            </div>
-                            <div class="flex items-center space-x-3 space-x-reverse">
-                                <div
-                                    class="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
-                                    <svg class="w-3 h-3 text-green-600" fill="none" stroke="currentColor"
-                                        viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M5 13l4 4L19 7" />
-                                    </svg>
-                                </div>
-                                <span class="text-gray-700 text-sm">۱۰ کاربر همزمان</span>
-                            </div>
-                        </div>
-
-                        <button
-                            class="w-full py-3 bg-gradient-to-r from-orange-500 to-amber-500 text-white rounded-xl font-semibold hover:shadow-lg hover:shadow-orange-200 transition-all duration-300 transform hover:scale-105">
-                            شروع آزمایشی
+                        class="bg-white/80 backdrop-blur-sm rounded-xl p-1.5 shadow-lg border border-orange-100 inline-flex">
+                        <button v-for="(period, index) in billingPeriods" :key="index"
+                            @click="selectedPeriod = period.value" :class="[
+                                'px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300',
+                                selectedPeriod === period.value
+                                    ? 'bg-gradient-to-r from-orange-500 to-amber-500 text-white shadow-md'
+                                    : 'text-gray-600 hover:text-gray-900 hover:bg-orange-50'
+                            ]">
+                            {{ period.label }}
                         </button>
                     </div>
                 </div>
+            </div>
 
-                <!-- پلن استارتاپ -->
-                <div class="relative group animate-fade-in-up" style="animation-delay: 0.2s">
+            <!-- کارت‌های قیمت‌گذاری -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-8 mb-16">
+                <!-- پلن آزمایشی رایگان -->
+                <div class="relative group animate-fade-in-up" style="animation-delay: 0.1s">
                     <div
-                        class="absolute -inset-1 bg-gradient-to-r from-orange-500 to-amber-500 rounded-3xl blur opacity-20 group-hover:opacity-30 transition duration-1000 group-hover:duration-200">
+                        class="absolute -inset-1 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-3xl blur opacity-20 group-hover:opacity-30 transition duration-1000 group-hover:duration-200">
                     </div>
                     <div
-                        class="relative bg-white rounded-2xl p-8 shadow-xl border border-orange-100 h-full flex flex-col">
+                        class="relative bg-white rounded-2xl p-8 shadow-xl border border-blue-100 h-full flex flex-col">
                         <div class="flex items-center justify-between mb-6">
                             <div>
-                                <h3 class="text-2xl font-bold text-gray-900">استارتاپ</h3>
-                                <p class="text-orange-600 font-semibold mt-1">تیم‌های کوچک</p>
+                                <h3 class="text-2xl  text-gray-900">آزمایشی</h3>
+                                <p class="text-blue-600  mt-1">رایگان</p>
                             </div>
-                            <div class="w-12 h-12 bg-orange-500 rounded-xl flex items-center justify-center">
+                            <div class="w-12 h-12 bg-blue-500 rounded-xl flex items-center justify-center">
                                 <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
                             </div>
                         </div>
 
                         <div class="mb-6">
-                            <div class="text-3xl font-bold text-gray-900 mb-2">۱,۸۵۰,۰۰۰<span
-                                    class="text-lg text-gray-600"> تومان</span></div>
-                            <p class="text-gray-600 text-sm">ماهیانه</p>
+                            <div class="text-3xl  text-gray-900 mb-2">رایگان</div>
+                            <p class="text-gray-600 text-sm">۷ روز آزمایشی</p>
                         </div>
 
                         <div class="space-y-3 mb-8 flex-grow">
@@ -150,7 +95,18 @@
                                             d="M5 13l4 4L19 7" />
                                     </svg>
                                 </div>
-                                <span class="text-gray-700 text-sm">تا ۱۰ کاربر</span>
+                                <span class="text-gray-700 text-sm">تا ۵ کاربر</span>
+                            </div>
+                            <div class="flex items-center space-x-3 space-x-reverse">
+                                <div
+                                    class="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-3 h-3 text-green-600" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M5 13l4 4L19 7" />
+                                    </svg>
+                                </div>
+                                <span class="text-gray-700 text-sm">۱ اتاق</span>
                             </div>
                             <div class="flex items-center space-x-3 space-x-reverse">
                                 <div
@@ -176,263 +132,57 @@
                             </div>
                         </div>
 
-                        <button
-                            class="w-full py-3 bg-gradient-to-r from-orange-500 to-amber-500 text-white rounded-xl font-semibold hover:shadow-lg hover:shadow-orange-200 transition-all duration-300 transform hover:scale-105">
-                            شروع کنید
-                        </button>
+                        <NuxtLink :to="getTrialPlanLink()"
+                            class="text-center w-full py-3 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-xl  hover:shadow-lg hover:shadow-blue-200 transition-all duration-300 transform hover:scale-105">
+                            شروع آزمایشی رایگان
+                        </NuxtLink>
                     </div>
                 </div>
 
-                <!-- پلن حرفه‌ای -->
-                <div class="relative group animate-fade-in-up" style="animation-delay: 0.3s">
+                <!-- پلن‌های پولی -->
+                <div v-for="(plan, index) in paidPlans" :key="plan.pk_plan" class="relative group animate-fade-in-up"
+                    :style="`animation-delay: ${0.2 + index * 0.1}s`">
                     <div
-                        class="absolute -inset-1 bg-gradient-to-r from-orange-600 to-amber-600 rounded-3xl blur opacity-25 group-hover:opacity-35 transition duration-1000 group-hover:duration-200">
-                    </div>
-                    <div
-                        class="relative bg-white rounded-2xl p-8 shadow-xl border border-orange-100 h-full flex flex-col transform hover:scale-105 transition duration-300">
-                        <div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                            <span
-                                class="bg-gradient-to-r from-orange-500 to-amber-500 text-white text-sm font-bold px-4 py-2 rounded-full shadow-lg">
-                                پرفروش
-                            </span>
-                        </div>
-
-                        <div class="flex items-center justify-between mb-6">
-                            <div>
-                                <h3 class="text-2xl font-bold text-gray-900">حرفه‌ای</h3>
-                                <p class="text-orange-600 font-semibold mt-1">کسب‌وکارهای متوسط</p>
-                            </div>
-                            <div class="w-12 h-12 bg-amber-500 rounded-xl flex items-center justify-center">
-                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                                </svg>
-                            </div>
-                        </div>
-
-                        <div class="mb-6">
-                            <div class="text-3xl font-bold text-gray-900 mb-2">۳,۸۵۰,۰۰۰<span
-                                    class="text-lg text-gray-600"> تومان</span></div>
-                            <p class="text-gray-600 text-sm">ماهیانه</p>
-                        </div>
-
-                        <div class="space-y-3 mb-8 flex-grow">
-                            <div class="flex items-center space-x-3 space-x-reverse">
-                                <div
-                                    class="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
-                                    <svg class="w-3 h-3 text-green-600" fill="none" stroke="currentColor"
-                                        viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M5 13l4 4L19 7" />
-                                    </svg>
-                                </div>
-                                <span class="text-gray-700 text-sm">تا ۲۳ کاربر</span>
-                            </div>
-                            <div class="flex items-center space-x-3 space-x-reverse">
-                                <div
-                                    class="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
-                                    <svg class="w-3 h-3 text-green-600" fill="none" stroke="currentColor"
-                                        viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M5 13l4 4L19 7" />
-                                    </svg>
-                                </div>
-                                <span class="text-gray-700 text-sm">پشتیبانی تلفنی</span>
-                            </div>
-                            <div class="flex items-center space-x-3 space-x-reverse">
-                                <div
-                                    class="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
-                                    <svg class="w-3 h-3 text-green-600" fill="none" stroke="currentColor"
-                                        viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M5 13l4 4L19 7" />
-                                    </svg>
-                                </div>
-                                <span class="text-gray-700 text-sm">API دسترسی</span>
-                            </div>
-                            <div class="flex items-center space-x-3 space-x-reverse">
-                                <div
-                                    class="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
-                                    <svg class="w-3 h-3 text-green-600" fill="none" stroke="currentColor"
-                                        viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M5 13l4 4L19 7" />
-                                    </svg>
-                                </div>
-                                <span class="text-gray-700 text-sm">گزارش‌های سفارشی</span>
-                            </div>
-                        </div>
-
-                        <button
-                            class="w-full py-3 bg-gradient-to-r from-orange-600 to-amber-600 text-white rounded-xl font-semibold hover:shadow-lg hover:shadow-orange-300 transition-all duration-300 transform hover:scale-105">
-                            شروع کنید
-                        </button>
-                    </div>
-                </div>
-
-                <!-- پلن سازمانی -->
-                <div class="relative group animate-fade-in-up" style="animation-delay: 0.4s">
-                    <div
-                        class="absolute -inset-1 bg-gradient-to-r from-amber-500 to-orange-500 rounded-3xl blur opacity-20 group-hover:opacity-30 transition duration-1000 group-hover:duration-200">
+                        class="absolute -inset-1 bg-gradient-to-r from-orange-500 to-amber-500 rounded-3xl blur opacity-20 group-hover:opacity-30 transition duration-1000 group-hover:duration-200">
                     </div>
                     <div
                         class="relative bg-white rounded-2xl p-8 shadow-xl border border-orange-100 h-full flex flex-col">
-                        <div class="flex items-center justify-between mb-6">
-                            <div>
-                                <h3 class="text-2xl font-bold text-gray-900">سازمانی</h3>
-                                <p class="text-orange-600 font-semibold mt-1">شرکت‌های بزرگ</p>
-                            </div>
-                            <div class="w-12 h-12 bg-orange-600 rounded-xl flex items-center justify-center">
-                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                                </svg>
-                            </div>
-                        </div>
-
-                        <div class="mb-6">
-                            <div class="text-3xl font-bold text-gray-900 mb-2">۵,۲۹۰,۰۰۰<span
-                                    class="text-lg text-gray-600"> تومان</span></div>
-                            <p class="text-gray-600 text-sm">ماهیانه</p>
-                        </div>
-
-                        <div class="space-y-3 mb-8 flex-grow">
-                            <div class="flex items-center space-x-3 space-x-reverse">
-                                <div
-                                    class="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
-                                    <svg class="w-3 h-3 text-green-600" fill="none" stroke="currentColor"
-                                        viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M5 13l4 4L19 7" />
-                                    </svg>
-                                </div>
-                                <span class="text-gray-700 text-sm">تا ۵۵ کاربر</span>
-                            </div>
-                            <div class="flex items-center space-x-3 space-x-reverse">
-                                <div
-                                    class="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
-                                    <svg class="w-3 h-3 text-green-600" fill="none" stroke="currentColor"
-                                        viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M5 13l4 4L19 7" />
-                                    </svg>
-                                </div>
-                                <span class="text-gray-700 text-sm">پشتیبانی اختصاصی</span>
-                            </div>
-                            <div class="flex items-center space-x-3 space-x-reverse">
-                                <div
-                                    class="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
-                                    <svg class="w-3 h-3 text-green-600" fill="none" stroke="currentColor"
-                                        viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M5 13l4 4L19 7" />
-                                    </svg>
-                                </div>
-                                <span class="text-gray-700 text-sm">SSO یکپارچه</span>
-                            </div>
-                        </div>
-
-                        <button
-                            class="w-full py-3 bg-gradient-to-r from-orange-500 to-amber-500 text-white rounded-xl font-semibold hover:shadow-lg hover:shadow-orange-200 transition-all duration-300 transform hover:scale-105">
-                            شروع کنید
-                        </button>
-                    </div>
-                </div>
-
-                <!-- پلن سازمانی بزرگ -->
-                <div class="relative group animate-fade-in-up" style="animation-delay: 0.5s">
-                    <div
-                        class="absolute -inset-1 bg-gradient-to-r from-amber-600 to-orange-600 rounded-3xl blur opacity-20 group-hover:opacity-30 transition duration-1000 group-hover:duration-200">
-                    </div>
-                    <div
-                        class="relative bg-white rounded-2xl p-8 shadow-xl border border-orange-100 h-full flex flex-col">
-                        <div class="flex items-center justify-between mb-6">
-                            <div>
-                                <h3 class="text-2xl font-bold text-gray-900">سازمانی بزرگ</h3>
-                                <p class="text-orange-600 font-semibold mt-1">شرکت‌های بسیار بزرگ</p>
-                            </div>
-                            <div class="w-12 h-12 bg-amber-600 rounded-xl flex items-center justify-center">
-                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-                                </svg>
-                            </div>
-                        </div>
-
-                        <div class="mb-6">
-                            <div class="text-3xl font-bold text-gray-900 mb-2">۹,۳۵۰,۰۰۰<span
-                                    class="text-lg text-gray-600"> تومان</span></div>
-                            <p class="text-gray-600 text-sm">ماهیانه</p>
-                        </div>
-
-                        <div class="space-y-3 mb-8 flex-grow">
-                            <div class="flex items-center space-x-3 space-x-reverse">
-                                <div
-                                    class="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
-                                    <svg class="w-3 h-3 text-green-600" fill="none" stroke="currentColor"
-                                        viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M5 13l4 4L19 7" />
-                                    </svg>
-                                </div>
-                                <span class="text-gray-700 text-sm">تا ۱۰۰ کاربر</span>
-                            </div>
-                            <div class="flex items-center space-x-3 space-x-reverse">
-                                <div
-                                    class="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
-                                    <svg class="w-3 h-3 text-green-600" fill="none" stroke="currentColor"
-                                        viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M5 13l4 4L19 7" />
-                                    </svg>
-                                </div>
-                                <span class="text-gray-700 text-sm">مدیر اختصاصی</span>
-                            </div>
-                            <div class="flex items-center space-x-3 space-x-reverse">
-                                <div
-                                    class="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
-                                    <svg class="w-3 h-3 text-green-600" fill="none" stroke="currentColor"
-                                        viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M5 13l4 4L19 7" />
-                                    </svg>
-                                </div>
-                                <span class="text-gray-700 text-sm">پشتیبانی ۲۴/۷</span>
-                            </div>
-                        </div>
-
-                        <button
-                            class="w-full py-3 bg-gradient-to-r from-orange-500 to-amber-500 text-white rounded-xl font-semibold hover:shadow-lg hover:shadow-orange-200 transition-all duration-300 transform hover:scale-105">
-                            شروع کنید
-                        </button>
-                    </div>
-                </div>
-
-                <!-- پلن Enterprise -->
-                <div class="relative group animate-fade-in-up" style="animation-delay: 0.6s">
-                    <div
-                        class="absolute -inset-1 bg-gradient-to-r from-orange-700 to-amber-700 rounded-3xl blur opacity-25 group-hover:opacity-35 transition duration-1000 group-hover:duration-200">
-                    </div>
-                    <div
-                        class="relative bg-white rounded-2xl p-8 shadow-xl border border-orange-100 h-full flex flex-col">
-                        <div class="flex items-center justify-between mb-6">
-                            <div>
-                                <h3 class="text-2xl font-bold text-gray-900">Enterprise</h3>
-                                <p class="text-orange-600 font-semibold mt-1">سازمان‌های عظیم</p>
-                            </div>
+                        <!-- تخفیف ویژه -->
+                        <div v-if="getDiscount(plan)" class="absolute -top-3 right-6">
                             <div
-                                class="w-12 h-12 bg-gradient-to-r from-orange-600 to-amber-600 rounded-xl flex items-center justify-center">
-                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                                </svg>
+                                class="bg-gradient-to-r from-red-500 to-pink-500 text-white text-xs  px-3 py-1 rounded-full shadow-lg">
+                                {{ getDiscount(plan) }}% تخفیف
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-between mb-6">
+                            <div>
+                                <h3 class="text-2xl  text-gray-900">{{ plan.plan }}</h3>
+                                <p class="text-orange-600  mt-1">{{ plan.subtitle }}</p>
+                            </div>
+                            <div class="w-12 hidden h-12 bg-orange-500 rounded-xl flex items-center justify-center">
+                                <div v-html="plan.icon"></div>
                             </div>
                         </div>
 
                         <div class="mb-6">
-                            <div class="text-3xl font-bold text-gray-900 mb-2">۲۳,۷۰۰,۰۰۰<span
-                                    class="text-lg text-gray-600"> تومان</span></div>
-                            <p class="text-gray-600 text-sm">ماهیانه</p>
+                            <div class="text-3xl  text-gray-900 mb-2">
+                                {{ formatPrice(getPlanPrice(plan)) }}
+                                <span class="text-lg text-gray-600"> تومان</span>
+                            </div>
+                            <p class="text-gray-600 text-sm">
+                                ماهانه
+                            </p>
+
+                            <!-- نمایش قیمت اصلی در صورت تخفیف -->
+                            <div v-if="hasDiscount(plan)" class="mt-1">
+                                <span class="text-gray-400 text-sm line-through">
+                                    {{ formatPrice(getOriginalPrice(plan)) }} تومان
+                                </span>
+                                <span class="text-green-600 text-sm font-medium mr-1">
+                                    {{ getDiscount(plan) }}% صرفه‌جویی
+                                </span>
+                            </div>
                         </div>
 
                         <div class="space-y-3 mb-8 flex-grow">
@@ -445,7 +195,7 @@
                                             d="M5 13l4 4L19 7" />
                                     </svg>
                                 </div>
-                                <span class="text-gray-700 text-sm">تا ۳۰۰ کاربر</span>
+                                <span class="text-gray-700 text-sm">تا {{ plan.maxusers }} کاربر</span>
                             </div>
                             <div class="flex items-center space-x-3 space-x-reverse">
                                 <div
@@ -456,9 +206,14 @@
                                             d="M5 13l4 4L19 7" />
                                     </svg>
                                 </div>
-                                <span class="text-gray-700 text-sm">پشتیبانی اختصاصی کامل</span>
+                                <span class="text-gray-700 text-sm">
+                                    {{ plan.max_room === 0 ? 'اتاق نامحدود' : `${plan.max_room} اتاق` }}
+                                </span>
                             </div>
-                            <div class="flex items-center space-x-3 space-x-reverse">
+
+                            <!-- ویژگی‌های اختصاصی -->
+                            <div v-for="(option, optionIndex) in getPlanOptions(plan)" :key="optionIndex"
+                                class="flex items-center space-x-3 space-x-reverse">
                                 <div
                                     class="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
                                     <svg class="w-3 h-3 text-green-600" fill="none" stroke="currentColor"
@@ -467,28 +222,18 @@
                                             d="M5 13l4 4L19 7" />
                                     </svg>
                                 </div>
-                                <span class="text-gray-700 text-sm">امکانات سفارشی</span>
-                            </div>
-                            <div class="flex items-center space-x-3 space-x-reverse">
-                                <div
-                                    class="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
-                                    <svg class="w-3 h-3 text-green-600" fill="none" stroke="currentColor"
-                                        viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M5 13l4 4L19 7" />
-                                    </svg>
-                                </div>
-                                <span class="text-gray-700 text-sm">آموزش تخصصی</span>
+                                <span class="text-gray-700 text-sm">{{ option }}</span>
                             </div>
                         </div>
 
-                        <button
-                            class="w-full py-3 bg-gradient-to-r from-orange-600 to-amber-600 text-white rounded-xl font-semibold hover:shadow-lg hover:shadow-orange-300 transition-all duration-300 transform hover:scale-105">
-                            شروع کنید
-                        </button>
+                        <NuxtLink :to="getPlanLink(plan)"
+                            class="w-full text-center py-3 bg-gradient-to-r from-orange-500 to-amber-500 text-white rounded-xl  hover:shadow-lg hover:shadow-orange-200 transition-all duration-300 transform hover:scale-105">
+                            انتخاب پلن
+                        </NuxtLink>
                     </div>
                 </div>
             </div>
+
 
             <!-- بخش اطلاعات اضافی -->
             <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-orange-100 animate-fade-in-up"
@@ -501,7 +246,7 @@
                                     d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                             </svg>
                         </div>
-                        <h4 class="font-semibold text-gray-900 mb-2">امنیت بالا</h4>
+                        <h4 class=" text-gray-900 mb-2">امنیت بالا</h4>
                         <p class="text-gray-600 text-sm">اطلاعات شما با بالاترین استانداردهای امنیتی محافظت می‌شود</p>
                     </div>
                     <div>
@@ -511,7 +256,7 @@
                                     d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192L5.636 18.364M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
                         </div>
-                        <h4 class="font-semibold text-gray-900 mb-2">پشتیبانی ۲۴/۷</h4>
+                        <h4 class=" text-gray-900 mb-2">پشتیبانی ۲۴/۷</h4>
                         <p class="text-gray-600 text-sm">تیم پشتیبانی همیشه در کنار شماست</p>
                     </div>
                     <div>
@@ -521,7 +266,7 @@
                                     d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
                             </svg>
                         </div>
-                        <h4 class="font-semibold text-gray-900 mb-2">آپتایم ۹۹.۹٪</h4>
+                        <h4 class=" text-gray-900 mb-2">آپتایم ۹۹.۹٪</h4>
                         <p class="text-gray-600 text-sm">سیستم همیشه در دسترس و پایدار</p>
                     </div>
                 </div>
@@ -531,14 +276,129 @@
 </template>
 
 <script setup>
+const route = useRoute()
+
 definePageMeta({
     layout: 'blank',
 })
 
-// می‌توانید توابع مربوط به دکمه‌ها را اینجا اضافه کنید
-const handlePlanSelect = (planName) => {
-    // منطق انتخاب پلن
-    console.log(`پلن انتخاب شده: ${planName}`)
+const { $freeApi } = useNuxtApp()
+const plans = ref([])
+
+const selectedPeriod = ref('monthly') // monthly, quarterly, annually
+
+// تعریف انواع پلن‌های پرداختی
+const billingPeriods = [
+    { label: 'ماهانه', value: 'monthly' },
+    { label: 'سه‌ماهه', value: 'quarterly' },
+    { label: 'سالانه', value: 'annually' }
+]
+
+onMounted(() => {
+    getPricing()
+})
+
+const getPricing = async () => {
+    const { data } = await $freeApi.get('plans')
+    plans.value = data
+}
+
+// فیلتر کردن پلن‌های پولی (غیر آزمایشی)
+const paidPlans = computed(() => {
+    return plans.value.filter(plan => !plan.istrial)
+})
+
+// محاسبه قیمت بر اساس نوع پلن و تبدیل به تومان
+const getPlanPrice = (plan) => {
+    if (!plan.price) return 0
+
+    const prices = JSON.parse(plan.price)
+    let price = 0
+    switch (selectedPeriod.value) {
+        case 'monthly':
+            price = prices[0]
+            break
+        case 'quarterly':
+            price = prices[1]
+            break
+        case 'annually':
+            price = prices[2]
+            break
+        default:
+            price = prices[0]
+    }
+
+    // تبدیل از ریال به تومان (تقسیم بر 10)
+    return Math.round(price / 10)
+}
+
+// محاسبه قیمت اصلی (بدون تخفیف) و تبدیل به تومان
+const getOriginalPrice = (plan) => {
+    if (!plan.price) return 0
+
+    const prices = JSON.parse(plan.price)
+    // قیمت اصلی همیشه ماهانه است
+    const originalPrice = prices[0] * getPeriodMultiplier()
+
+    // تبدیل از ریال به تومان (تقسیم بر 10)
+    return Math.round(originalPrice / 10)
+}
+
+// ضریب دوره پرداخت
+const getPeriodMultiplier = () => {
+    switch (selectedPeriod.value) {
+        case 'monthly':
+            return 1
+        case 'quarterly':
+            return 3
+        case 'annually':
+            return 12
+        default:
+            return 1
+    }
+}
+
+// بررسی وجود تخفیف
+const hasDiscount = (plan) => {
+    return getDiscount(plan) > 0
+}
+
+// محاسبه درصد تخفیف
+const getDiscount = (plan) => {
+    if (selectedPeriod.value === 'quarterly' && plan.seasonaldiscount) {
+        return plan.seasonaldiscount
+    } else if (selectedPeriod.value === 'annually' && plan.annuallydiscount) {
+        return plan.annuallydiscount
+    }
+    return 0
+}
+
+// فرمت کردن قیمت
+const formatPrice = (price) => {
+    return new Intl.NumberFormat('fa-IR').format(price)
+}
+
+// دریافت ویژگی‌های پلن
+const getPlanOptions = (plan) => {
+    if (!plan.options) return []
+    return JSON.parse(plan.options)
+}
+
+// ایجاد لینک برای پلن آزمایشی
+const getTrialPlanLink = () => {
+    const trialPlan = plans.value.find(plan => plan.istrial)
+    if (trialPlan) {
+        return `/register?plan_id=${trialPlan.pk_plan}&period=trial`
+    }
+    return '/register'
+}
+
+// ایجاد لینک برای پلن‌های پولی
+const getPlanLink = (plan) => {
+    const token = localStorage.getItem('jwt_token')
+    if (token)
+        return `/copanel/order?i=${plan.pk_plan}&p=${selectedPeriod.value}`
+    return `/register?i=${plan.pk_plan}&p=${selectedPeriod.value}`
 }
 </script>
 

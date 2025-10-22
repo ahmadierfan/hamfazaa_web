@@ -7,7 +7,7 @@
         <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <h2
-                    class="text-4xl md:text-5xl font-black bg-gradient-to-r from-orange-600 to-amber-600 bg-clip-text text-transparent mb-6">
+                    class="text-4xl md:text-5xl  bg-gradient-to-r from-orange-600 to-amber-600 bg-clip-text text-transparent mb-6">
                     تیم متخصص ما
                 </h2>
                 <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
@@ -23,7 +23,7 @@
                         <div
                             class="w-32 h-32 mx-auto bg-gradient-to-r from-orange-400 to-amber-400 rounded-full p-1 transform group-hover:scale-110 transition duration-500">
                             <div class="w-full h-full bg-gray-200 rounded-full flex items-center justify-center">
-                                <span class="text-2xl font-black text-gray-600">{{ member.initials }}</span>
+                                <span class="text-2xl  text-gray-600">{{ member.initials }}</span>
                             </div>
                         </div>
                         <!-- نشان آنلاین -->
@@ -33,7 +33,7 @@
                     </div>
 
                     <!-- اطلاعات -->
-                    <h3 class="text-xl font-black text-gray-900 mb-2">{{ member.name }}</h3>
+                    <h3 class="text-xl  text-gray-900 mb-2">{{ member.name }}</h3>
                     <p class="text-orange-600 font-medium mb-3">{{ member.position }}</p>
                     <p class="text-gray-600 text-sm mb-4 leading-relaxed">{{ member.bio }}</p>
 
@@ -60,7 +60,7 @@
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
                     <div v-for="stat in teamStats" :key="stat.id"
                         class="transform hover:scale-110 transition duration-300">
-                        <div class="text-3xl font-black mb-2">{{ stat.value }}</div>
+                        <div class="text-3xl  mb-2">{{ stat.value }}</div>
                         <div class="text-orange-100 text-sm">{{ stat.label }}</div>
                     </div>
                 </div>
@@ -102,7 +102,6 @@ const teamMembers = ref([
         initials: 'م.ر',
         position: 'مدیر فنی',
         bio: '۱۰ سال تجربه در توسعه سیستم‌های ابری و معماری نرم‌افزار',
-        skills: ['Cloud Architecture', 'Microservices', 'DevOps'],
         social: [
             { name: 'linkedin', icon: LinkedinIcon, link: '#' },
             { name: 'twitter', icon: TwitterIcon, link: '#' }
@@ -114,7 +113,6 @@ const teamMembers = ref([
         initials: 'ف.م',
         position: 'توسعه‌دهنده ارشد',
         bio: 'متخصص در توسعه front-end و تجربه کاربری با ۸ سال سابقه',
-        skills: ['Vue.js', 'Nuxt', 'UI/UX'],
         social: [
             { name: 'linkedin', icon: LinkedinIcon, link: '#' },
             { name: 'github', icon: GithubIcon, link: '#' }
@@ -126,7 +124,6 @@ const teamMembers = ref([
         initials: 'ع.ک',
         position: 'مدیر محصول',
         bio: 'کارشناس ارشد مدیریت فناوری اطلاعات و تحلیل بازار',
-        skills: ['Product Management', 'Market Analysis', 'Agile'],
         social: [
             { name: 'linkedin', icon: LinkedinIcon, link: '#' },
             { name: 'twitter', icon: TwitterIcon, link: '#' }
@@ -138,7 +135,6 @@ const teamMembers = ref([
         initials: 'ز.ح',
         position: 'متخصص امنیت',
         bio: 'مشاور امنیت سایبری با گواهی‌نامه‌های بین‌المللی',
-        skills: ['Cybersecurity', 'Penetration Testing', 'Compliance'],
         social: [
             { name: 'linkedin', icon: LinkedinIcon, link: '#' },
             { name: 'github', icon: GithubIcon, link: '#' }

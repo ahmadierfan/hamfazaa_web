@@ -22,10 +22,10 @@
                                     d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
                             </svg>
                         </div>
-                        <h1 class="text-4xl font-black text-white">همفضا</h1>
+                        <h1 class="text-4xl  text-white">همفضا</h1>
                     </div>
 
-                    <h2 class="text-2xl text-white font-bold mb-3 leading-relaxed">
+                    <h2 class="text-2xl text-white  mb-3 leading-relaxed">
                         پلتفرم ابری مدیریت<br />
                         فضاهای کار اشتراکی
                     </h2>
@@ -45,7 +45,7 @@
                             </svg>
                         </div>
                         <div>
-                            <h3 class="text-white font-semibold mb-1">مدیریت یکپارچه</h3>
+                            <h3 class="text-white  mb-1">مدیریت یکپارچه</h3>
                             <p class="text-white/70 text-sm">کنترل کامل اعضا، رزروها و پرداخت‌ها</p>
                         </div>
                     </div>
@@ -59,7 +59,7 @@
                             </svg>
                         </div>
                         <div>
-                            <h3 class="text-white font-semibold mb-1">دسترسی ابری</h3>
+                            <h3 class="text-white  mb-1">دسترسی ابری</h3>
                             <p class="text-white/70 text-sm">مدیریت از هر مکان، هر زمان</p>
                         </div>
                     </div>
@@ -73,7 +73,7 @@
                             </svg>
                         </div>
                         <div>
-                            <h3 class="text-white font-semibold mb-1">گزارش‌گیری هوشمند</h3>
+                            <h3 class="text-white  mb-1">گزارش‌گیری هوشمند</h3>
                             <p class="text-white/70 text-sm">تحلیل و بررسی عملکرد به صورت لحظه‌ای</p>
                         </div>
                     </div>
@@ -96,7 +96,7 @@
                                     d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
                             </svg>
                         </div>
-                        <h1 class="text-3xl font-black text-gray-800">همفضا</h1>
+                        <h1 class="text-3xl  text-gray-800">همفضا</h1>
                     </div>
                     <p class="text-sm text-gray-600">پلتفرم ابری مدیریت فضاهای کار اشتراکی</p>
                 </div>
@@ -106,7 +106,7 @@
 
                     <!-- هدر ساده -->
                     <div class="mb-8">
-                        <h2 class="text-2xl font-bold text-gray-800 mb-2">ورود به پنل مدیریت</h2>
+                        <h2 class="text-2xl  text-gray-800 mb-2">ورود به پنل مدیریت</h2>
                         <p class="text-sm text-gray-500">لطفاً شماره موبایل خود را وارد کنید</p>
                     </div>
 
@@ -122,7 +122,7 @@
                         </div>
 
                         <button :disabled="loadingStore.isLoading"
-                            class="w-full py-3.5 bg-gradient-to-r from-orange-500 to-amber-500 text-white font-semibold rounded-xl hover:shadow-lg hover:shadow-orange-200 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                            class="w-full py-3.5 bg-gradient-to-r from-orange-500 to-amber-500 text-white  rounded-xl hover:shadow-lg hover:shadow-orange-200 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                             @click="sendOtp">
                             ارسال کد تایید
                         </button>
@@ -141,19 +141,19 @@
 
                         <div class="mb-8">
                             <p class="text-sm text-gray-600 mb-1">کد تایید به شماره زیر ارسال شد:</p>
-                            <p class="text-base font-bold text-gray-800">{{ mobile }}</p>
+                            <p class="text-base  text-gray-800">{{ mobile }}</p>
                         </div>
 
                         <div class="flex justify-center gap-3 mb-8" dir="ltr">
                             <input v-for="(digit, index) in 4" :key="index" ref="otpRefs" v-model="otpDigits[index]"
                                 type="text" maxlength="1" inputmode="numeric"
-                                class="w-14 h-14 text-center border-2 border-gray-200 rounded-xl text-xl font-bold focus:border-orange-500 focus:ring-4 focus:ring-orange-100 outline-none transition-all duration-200"
+                                class="w-14 h-14 text-center border-2 border-gray-200 rounded-xl text-xl  focus:border-orange-500 focus:ring-4 focus:ring-orange-100 outline-none transition-all duration-200"
                                 @input="handleOtpInput($event, index)"
                                 @keydown.backspace="handleBackspace($event, index)" />
                         </div>
 
                         <button :disabled="loadingStore.isLoading"
-                            class="w-full py-3.5 bg-gradient-to-r from-orange-500 to-amber-500 text-white font-semibold rounded-xl hover:shadow-lg hover:shadow-orange-200 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed mb-4"
+                            class="w-full py-3.5 bg-gradient-to-r from-orange-500 to-amber-500 text-white  rounded-xl hover:shadow-lg hover:shadow-orange-200 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed mb-4"
                             @click="verifyOtp">
                             تایید و ورود
                         </button>

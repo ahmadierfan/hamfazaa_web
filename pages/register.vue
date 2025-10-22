@@ -12,50 +12,13 @@
         </div>
         <div class="absolute bottom-1/3 left-20 w-40 h-40 border-4 border-amber-200 rounded-full opacity-15"></div>
 
-        <!-- بخش سمت چپ (توضیح گرافیکی) -->
-        <div class="hidden md:flex w-full md:w-1/2 items-center justify-center">
-            <div
-                class="text-center text-gray-800 z-10 py-16 px-20 bg-white/90 backdrop-blur-sm shadow-2xl rounded-3xl border border-orange-100 animate-fade-in-long">
-                <div
-                    class="w-24 h-24 mx-auto mb-6 bg-gradient-to-br from-orange-500 to-amber-500 rounded-2xl flex items-center justify-center shadow-lg">
-                    <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-                    </svg>
-                </div>
-                <h2
-                    class="text-3xl font-bold mb-4 bg-gradient-to-r from-orange-600 to-amber-600 bg-clip-text text-transparent">
-                    ایجاد فضای کار جدید
-                </h2>
-                <p class="text-lg text-gray-600 mb-6 font-medium">
-                    در چند ثانیه فضای کار خود را بسازید و شروع کنید
-                </p>
-
-                <div class="flex flex-col items-center space-y-4">
-                    <div class="p-3 bg-orange-50 rounded-xl flex items-center space-x-3 space-x-reverse w-72">
-                        <div class="w-10 h-10 bg-orange-500 rounded-lg flex items-center justify-center">
-                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M5 13l4 4L19 7" />
-                            </svg>
-                        </div>
-                        <p class="text-gray-700 font-medium">ثبت سریع و آسان</p>
-                    </div>
-
-                    <div class="p-3 bg-amber-50 rounded-xl flex items-center space-x-3 space-x-reverse w-72">
-                        <div class="w-10 h-10 bg-amber-500 rounded-lg flex items-center justify-center">
-                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M12 8c1.104 0 2 .896 2 2v6a2 2 0 11-4 0v-6c0-1.104.896-2 2-2z" />
-                            </svg>
-                        </div>
-                        <p class="text-gray-700 font-medium">امنیت بالا و مدیریت ساده</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <!-- بخش سمت چپ (توضیح گرافیکی) - حذف شده -->
+        <!-- <div class="hidden md:flex w-full md:w-1/2 items-center justify-center">
+            ...
+        </div> -->
 
         <!-- بخش فرم ثبت‌نام -->
-        <div class="w-full md:w-1/2 flex items-center justify-center p-6 md:p-12 relative z-20">
+        <div class="w-full flex items-center justify-center p-6 md:p-12 relative z-20">
             <div
                 class="bg-white/90 backdrop-blur-xl rounded-3xl shadow-2xl w-full max-w-md py-10 px-8 border border-orange-100 animate-fade-in-long">
 
@@ -70,7 +33,7 @@
                                 d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                         </svg>
                     </div>
-                    <h2 class="text-2xl font-bold text-gray-800">
+                    <h2 class="text-2xl  text-gray-800">
                         {{ !otpSent ? 'ثبت‌نام در همفضا' : 'تأیید شماره موبایل' }}
                     </h2>
                     <p class="text-sm text-gray-600 mt-2">
@@ -90,7 +53,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M3 7h18M3 12h18M3 17h18" />
                             </svg>
-                            <input v-model="workspaceName" type="text"
+                            <input ref="workspaceNameInput" v-model="workspaceName" type="text"
                                 class="w-full text-center outline-none bg-transparent placeholder-gray-400"
                                 placeholder="مثلاً دفتر مرکزی تهران" />
                         </div>
@@ -114,7 +77,7 @@
 
                     <!-- دکمه ارسال کد -->
                     <button
-                        class="w-full py-4 text-white font-bold rounded-2xl overflow-hidden transition-all duration-500 bg-gradient-to-r from-orange-500 to-amber-500 hover:shadow-lg hover:shadow-orange-200 group"
+                        class="w-full py-4 text-white  rounded-2xl overflow-hidden transition-all duration-500 bg-gradient-to-r from-orange-500 to-amber-500 hover:shadow-lg hover:shadow-orange-200 group"
                         @click="sendOtp">
                         <span class="relative z-10">ثبت‌نام و دریافت کد تأیید</span>
                         <div
@@ -124,7 +87,7 @@
 
                     <p class="text-center text-sm text-gray-600 mt-4">
                         قبلاً ثبت‌نام کرده‌اید؟
-                        <NuxtLink to="/login" class="text-orange-600 hover:text-amber-600 font-semibold">وارد شوید
+                        <NuxtLink to="/login" class="text-orange-600 hover:text-amber-600 ">وارد شوید
                         </NuxtLink>
                     </p>
                 </div>
@@ -155,14 +118,14 @@
                     <div class="flex flex-row justify-center gap-3 mb-6" dir="ltr">
                         <template v-for="(digit, index) in 4" :key="index">
                             <input ref="otpRefs" v-model="otpDigits[index]" type="text" maxlength="1"
-                                class="w-14 h-14 text-center border-2 border-gray-300 rounded-xl text-xl font-bold focus:border-orange-500 focus:ring-2 focus:ring-orange-200 outline-none transition-all duration-200 bg-white"
+                                class="w-14 h-14 text-center border-2 border-gray-300 rounded-xl text-xl  focus:border-orange-500 focus:ring-2 focus:ring-orange-200 outline-none transition-all duration-200 bg-white"
                                 @input="handleOtpInput($event, index)"
                                 @keydown.backspace="handleBackspace($event, index)" />
                         </template>
                     </div>
 
                     <button :disabled="loading"
-                        class="w-full py-4 bg-gradient-to-r from-orange-500 to-amber-500 hover:shadow-lg hover:shadow-orange-200 text-white rounded-2xl font-bold transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                        class="w-full py-4 bg-gradient-to-r from-orange-500 to-amber-500 hover:shadow-lg hover:shadow-orange-200 text-white rounded-2xl  transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                         @click="verifyOtp">
                         تأیید و ساخت فضای کار
                     </button>
@@ -192,13 +155,15 @@
 </template>
 
 <script setup>
-import { ref, nextTick } from "vue";
+import { ref, nextTick, onMounted } from "vue";
 import { useRouter } from "vue-router";
+import { useRoute } from "vue-router";
 
 definePageMeta({ layout: "blank" });
 
 const { $freeApi, $updateAuthHeader } = useNuxtApp();
 const router = useRouter();
+const route = useRoute();
 
 const workspaceName = ref("");
 const mobile = ref("");
@@ -206,6 +171,9 @@ const otpSent = ref(false);
 const otpDigits = ref(['', '', '', '']);
 const otpRefs = ref([]);
 const loading = ref(false);
+const workspaceNameInput = ref(null);
+
+const toast = useToast()
 
 const toEnglishDigits = (str) => {
     if (!str) return '';
@@ -217,11 +185,12 @@ const sendOtp = async () => {
     mobile.value = toEnglishDigits(mobile.value);
 
     if (!workspaceName.value.trim()) {
-        alert("نام فضای کار را وارد کنید");
+        toast.error({ title: 'خطا!', message: "نام فضای کار را وارد کنید" })
         return;
     }
+
     if (!/^09\d{9}$/.test(mobile.value)) {
-        alert("شماره موبایل معتبر نیست");
+        toast.error({ title: 'خطا!', message: "شماره موبایل معتبر نیست" })
         return;
     }
 
@@ -230,7 +199,7 @@ const sendOtp = async () => {
         // ارسال درخواست برای دریافت کد تأیید
         await $freeApi.post('auth/company-otp-register', {
             sendedto: mobile.value,
-            name: workspaceName.value
+            name: workspaceName.value,
         });
 
         otpSent.value = true;
@@ -242,7 +211,6 @@ const sendOtp = async () => {
             }
         });
     } catch (error) {
-        alert("خطا در ارسال کد تأیید. لطفاً مجدداً تلاش کنید.");
         console.error(error);
     } finally {
         loading.value = false;
@@ -273,7 +241,7 @@ const handleBackspace = (e, index) => {
 const verifyOtp = async () => {
     const code = toEnglishDigits(otpDigits.value.join(''));
     if (code.length !== 4) {
-        alert('لطفاً کد تأیید ۴ رقمی را کامل وارد کنید');
+        toast.error({ title: 'خطا!', message: 'لطفاً کد تأیید ۴ رقمی را کامل وارد کنید' })
         return;
     }
 
@@ -284,7 +252,7 @@ const verifyOtp = async () => {
         const res = await $freeApi.post('auth/company-otp-register-verify', {
             name: workspaceName.value,
             sendedto: mobile.value,
-            verificationcode: code
+            verificationcode: code,
         });
 
         // ذخیره توکن و اطلاعات کاربر
@@ -292,14 +260,14 @@ const verifyOtp = async () => {
         const user = res.data.user;
         localStorage.setItem('jwt_token', token);
         localStorage.setItem('user_mobile', user.mobile);
-        localStorage.setItem('workspace_name', workspaceName.value);
 
         $updateAuthHeader(token);
+        if (route.query.i && route.query.p)
+            router.push('/copanel/order?i=' + route.query.i + '&p=' + route.query.p)
+        else
+            router.push('/copanel')
 
-        // انتقال به صفحه اصلی
-        router.push('/copanel');
     } catch (error) {
-        alert('کد تأیید نامعتبر است. لطفاً مجدداً تلاش کنید.');
         console.error(error);
     } finally {
         loading.value = false;
@@ -312,16 +280,14 @@ const resendOtp = async () => {
     try {
         await $freeApi.post('auth/company-otp-register', {
             sendedto: mobile.value,
-            name: workspaceName.value
+            name: workspaceName.value,
         });
-        alert('کد تأیید مجدداً ارسال شد');
         nextTick(() => {
             if (otpRefs.value[0]) {
                 otpRefs.value[0].focus();
             }
         });
     } catch (error) {
-        alert('خطا در ارسال مجدد کد. لطفاً مجدداً تلاش کنید.');
     }
 };
 
@@ -330,6 +296,15 @@ const editNumber = () => {
     otpSent.value = false;
     otpDigits.value = ['', '', '', ''];
 };
+
+// فوکوس خودکار روی فیلد نام فضای کار هنگام لود صفحه
+onMounted(() => {
+    nextTick(() => {
+        if (workspaceNameInput.value) {
+            workspaceNameInput.value.focus();
+        }
+    });
+});
 </script>
 
 <style scoped>

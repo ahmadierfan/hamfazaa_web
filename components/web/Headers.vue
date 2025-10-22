@@ -5,16 +5,16 @@
                 <!-- لوگو و برند -->
                 <div class="flex items-center space-x-4 space-x-reverse">
                     <div class="flex-shrink-0">
-                        <div
-                            class="w-12 h-12 bg-gradient-to-br from-orange-500 to-amber-600 rounded-2xl flex items-center justify-center shadow-lg">
-                            <img src="/images/logo.png" alt="لوگو" class="w-4 h-4" />
-                        </div>
+                        <NuxtLink to="/"
+                            class="w-12 h-12 bg-gradient-to-br cursor-pointer from-orange-500 to-amber-600 rounded-2xl flex items-center justify-center shadow-lg">
+                            <img src="/images/logo.png" alt="همفضا" />
+                        </NuxtLink>
                     </div>
                     <div class="hidden sm:block">
-                        <h1
-                            class="text-2xl font-bold bg-gradient-to-r from-orange-600 to-amber-600 bg-clip-text text-transparent">
+                        <NuxtLink to="/"
+                            class="text-2xl  bg-gradient-to-r from-orange-600 to-amber-600 bg-clip-text text-transparent">
                             همفضا
-                        </h1>
+                        </NuxtLink>
                         <p class="text-xs text-gray-500 mt-1">پلتفرم ابری حرفه‌ای</p>
                     </div>
                 </div>

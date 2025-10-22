@@ -8,6 +8,7 @@ export default defineNuxtConfig({
         '@nuxt/icon',
         'nuxt-toast'
     ],
+    ssr: true,
     icon: {
         collections: ['uil'],
     },

@@ -5,7 +5,8 @@
             <CopanelSidebar />
             <main :class="[
                 'flex-1 transition-all duration-300 min-h-screen bg-gray-50',
-                sidebarStore.isOpen ? 'pr-64' : 'pr-20'
+                sidebarStore.isOpen && !sidebarStore.isMobile ? 'md:pr-64' : 'md:pr-20',
+                'pr-0'
             ]" style="min-height: calc(100vh - 4rem);">
                 <slot />
             </main>
@@ -20,10 +21,6 @@ const sidebarStore = useSidebarStore()
 </script>
 
 <style scoped>
-.rtl {
-    direction: rtl;
-}
-
 .rtl {
     direction: rtl;
 }

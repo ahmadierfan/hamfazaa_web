@@ -1,20 +1,20 @@
 <template>
     <section class="pt-28 w-full bg-gray-50 pb-12 px-4 md:px-8">
         <div class="max-w-6xl mx-auto text-center mb-10">
-            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-2 py-8">
+            <h2 class="text-3xl md:text-4xl  text-gray-900 mb-2 py-8">
                 ابزاری حرفه ای برای رشد کسب و کار
             </h2>
             <p class="text-gray-600">پلن خود را انتخاب کن و همین الان رایگان امتحان کن</p>
 
             <div class="mt-6 flex justify-center items-center gap-3">
-                <span :class="!isAnnual ? 'text-blue-600 font-semibold' : 'text-gray-500'">ماهانه</span>
+                <span :class="!isAnnual ? 'text-blue-600 ' : 'text-gray-500'">ماهانه</span>
                 <label class="relative inline-flex items-center cursor-pointer">
                     <input type="checkbox" v-model="isAnnual" class="sr-only peer" />
                     <div class="w-14 h-7 bg-gray-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full
             after:content-[''] after:absolute after:top-0.5 after:start-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all
             peer-checked:bg-blue-600"></div>
                 </label>
-                <span :class="isAnnual ? 'text-blue-600 font-semibold' : 'text-gray-500'">سالانه (۳۰٪ تخفیف)</span>
+                <span :class="isAnnual ? 'text-blue-600 ' : 'text-gray-500'">سالانه (۳۰٪ تخفیف)</span>
             </div>
         </div>
 
@@ -29,12 +29,12 @@
                 </div>
 
                 <div v-if="plan.name === 'استاندارد'"
-                    class="absolute -top-3 -right-3 bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-4 pt-4 rounded-full text-sm font-bold shadow-lg z-10 rotate-12">
+                    class="absolute -top-3 -right-3 bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-4 pt-4 rounded-full text-sm  shadow-lg z-10 rotate-12">
                     پیشنهاد شروع
                 </div>
 
                 <div class="relative z-1">
-                    <h3 class="text-2xl font-bold mb-1 text-gray-800">{{ plan.name }}</h3>
+                    <h3 class="text-2xl  mb-1 text-gray-800">{{ plan.name }}</h3>
                     <p class="text-gray-500 mb-4">{{ plan.description }}</p>
 
                     <div class="mb-6">
@@ -42,7 +42,7 @@
                             <p class="text-gray-400 line-through text-sm">
                                 {{ plan.price.toLocaleString('fa-IR') }} تومان / ماه
                             </p>
-                            <p class="text-3xl font-bold text-blue-600">
+                            <p class="text-3xl  text-blue-600">
                                 {{ discountedPrice(plan.price).toLocaleString('fa-IR') }} تومان / ماه
                             </p>
                             <p class="text-green-600 text-sm">
@@ -50,19 +50,19 @@
                             </p>
                         </template>
                         <template v-else-if="plan.name !== 'سازمانی'">
-                            <p class="text-3xl font-bold text-blue-600">
+                            <p class="text-3xl  text-blue-600">
                                 {{ plan.price.toLocaleString('fa-IR') }} تومان / ماه
                             </p>
                         </template>
                         <template v-else>
-                            <p class="text-3xl font-bold text-gray-700">
+                            <p class="text-3xl  text-gray-700">
                                 قیمت: توافقی
                             </p>
                         </template>
                     </div>
 
                     <button
-                        class="w-full py-3 rounded-xl transition-all duration-300 font-semibold relative overflow-hidden group mb-6"
+                        class="w-full py-3 rounded-xl transition-all duration-300  relative overflow-hidden group mb-6"
                         :class="getButtonClass(plan.name)" @click="handlePlanAction(plan.name)">
                         <span class="relative z-10">{{ plan.button }}</span>
                         <div

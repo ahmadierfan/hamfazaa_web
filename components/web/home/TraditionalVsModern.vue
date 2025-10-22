@@ -7,7 +7,7 @@
         <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <h2
-                    class="text-4xl md:text-5xl font-black bg-gradient-to-r from-orange-600 to-amber-600 bg-clip-text text-transparent mb-6">
+                    class="text-4xl md:text-5xl  bg-gradient-to-r from-orange-600 to-amber-600 bg-clip-text text-transparent mb-6">
                     چرا همفضا؟
                 </h2>
                 <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
@@ -26,7 +26,7 @@
                                     d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.35 16.5c-.77.833.192 2.5 1.732 2.5z" />
                             </svg>
                         </div>
-                        <h3 class="text-2xl font-black text-red-600">روش‌های سنتی</h3>
+                        <h3 class="text-2xl  text-red-600">روش‌های سنتی</h3>
                     </div>
 
                     <div class="space-y-4">
@@ -38,7 +38,7 @@
                                     d="M6 18L18 6M6 6l12 12" />
                             </svg>
                             <div>
-                                <h4 class="font-bold text-red-700 mb-1">{{ problem.title }}</h4>
+                                <h4 class=" text-red-700 mb-1">{{ problem.title }}</h4>
                                 <p class="text-red-600 text-sm">{{ problem.description }}</p>
                             </div>
                         </div>
@@ -55,7 +55,7 @@
                                     d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
                         </div>
-                        <h3 class="text-2xl font-black text-green-600">راه‌کار همفضا</h3>
+                        <h3 class="text-2xl  text-green-600">راه‌کار همفضا</h3>
                     </div>
 
                     <div class="space-y-4">
@@ -67,7 +67,7 @@
                                     d="M5 13l4 4L19 7" />
                             </svg>
                             <div>
-                                <h4 class="font-bold text-green-700 mb-1">{{ solution.title }}</h4>
+                                <h4 class=" text-green-700 mb-1">{{ solution.title }}</h4>
                                 <p class="text-green-600 text-sm">{{ solution.description }}</p>
                             </div>
                         </div>
@@ -80,7 +80,7 @@
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
                     <div v-for="stat in comparisonStats" :key="stat.id"
                         class="transform hover:scale-110 transition duration-300">
-                        <div class="text-3xl font-black mb-2">{{ stat.value }}</div>
+                        <div class="text-3xl  mb-2">{{ stat.value }}</div>
                         <div class="text-orange-100 text-sm">{{ stat.label }}</div>
                     </div>
                 </div>

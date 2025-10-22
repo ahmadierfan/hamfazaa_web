@@ -36,8 +36,7 @@
                     </svg>
                 </div>
 
-                <h2
-                    class="text-3xl font-bold mb-4 bg-gradient-to-r from-orange-600 to-amber-600 bg-clip-text text-transparent">
+                <h2 class="text-3xl  mb-4 bg-gradient-to-r from-orange-600 to-amber-600 bg-clip-text text-transparent">
                     همفضا
                 </h2>
                 <p class="text-lg text-gray-600 mb-6 font-medium">
@@ -53,7 +52,7 @@
                             </svg>
                         </div>
                         <div>
-                            <h4 class="font-semibold text-gray-800">رزرو هوشمند</h4>
+                            <h4 class=" text-gray-800">رزرو هوشمند</h4>
                             <p class="text-sm text-gray-600">مدیریت زمان‌بندی اتاق‌ها به صورت آنلاین</p>
                         </div>
                     </div>
@@ -66,7 +65,7 @@
                             </svg>
                         </div>
                         <div>
-                            <h4 class="font-semibold text-gray-800">امنیت بالا</h4>
+                            <h4 class=" text-gray-800">امنیت بالا</h4>
                             <p class="text-sm text-gray-600">حفظ حریم خصوصی و امنیت اطلاعات</p>
                         </div>
                     </div>
@@ -79,7 +78,7 @@
                             </svg>
                         </div>
                         <div>
-                            <h4 class="font-semibold text-gray-800">کاربری آسان</h4>
+                            <h4 class=" text-gray-800">کاربری آسان</h4>
                             <p class="text-sm text-gray-600">تجربه کاربری ساده و روان</p>
                         </div>
                     </div>
@@ -100,7 +99,7 @@
                                 d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                         </svg>
                     </div>
-                    <h2 class="text-2xl font-bold text-gray-800">ورود به همفضا</h2>
+                    <h2 class="text-2xl  text-gray-800">ورود به همفضا</h2>
                     <p class="text-sm text-gray-600 mt-2">مدیریت حرفه‌ای فضای کار اشتراکی</p>
                 </div>
 
@@ -141,7 +140,7 @@
                     </div>
 
                     <button :disabled="loadingStore.isLoading"
-                        class="relative w-full py-4 text-white font-bold rounded-2xl overflow-hidden transition-all duration-500 bg-gradient-to-r from-orange-500 to-amber-500 hover:shadow-lg hover:shadow-orange-200 group disabled:opacity-50 disabled:cursor-not-allowed"
+                        class="relative w-full py-4 text-white  rounded-2xl overflow-hidden transition-all duration-500 bg-gradient-to-r from-orange-500 to-amber-500 hover:shadow-lg hover:shadow-orange-200 group disabled:opacity-50 disabled:cursor-not-allowed"
                         @click="sendOtp">
                         <span class="relative z-10">ارسال کد تایید</span>
                         <div
@@ -168,14 +167,14 @@
                     <div class="flex flex-row justify-center gap-3 mb-6" dir="ltr">
                         <template v-for="(digit, index) in 4" :key="index">
                             <input ref="otpRefs" v-model="otpDigits[index]" type="text" maxlength="1"
-                                class="w-14 h-14 text-center border-2 border-gray-300 rounded-xl text-xl font-bold focus:border-orange-500 focus:ring-2 focus:ring-orange-200 outline-none transition-all duration-200 bg-white"
+                                class="w-14 h-14 text-center border-2 border-gray-300 rounded-xl text-xl  focus:border-orange-500 focus:ring-2 focus:ring-orange-200 outline-none transition-all duration-200 bg-white"
                                 @input="handleOtpInput($event, index)"
                                 @keydown.backspace="handleBackspace($event, index)" />
                         </template>
                     </div>
 
                     <button :disabled="loadingStore.isLoading"
-                        class="w-full py-4 bg-gradient-to-r from-orange-500 to-amber-500 hover:shadow-lg hover:shadow-orange-200 text-white rounded-2xl font-bold transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                        class="w-full py-4 bg-gradient-to-r from-orange-500 to-amber-500 hover:shadow-lg hover:shadow-orange-200 text-white rounded-2xl  transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                         @click="verifyOtp">
                         تأیید و ورود
                     </button>
@@ -261,7 +260,7 @@ const handleBackspace = (e, index) => {
 const verifyOtp = async () => {
     const code = toEnglishDigits(otpDigits.value.join(''))
     if (code.length === 4) {
-        const res = await $freeApi.post('auth/verify-otp', {
+        const res = await $freeApi.post('auth/company-login', {
             sendedto: mobile.value,
             verificationcode: code
         })
@@ -286,6 +285,14 @@ const editNumber = () => {
     otpDigits.value = ['', '', '', '']
     mobile.value = ''
 }
+
+onMounted(() => {
+    if (process.client) {
+        const token = localStorage.getItem('jwt_token')
+        if (token)
+            router.push('/copanel')
+    }
+})
 </script>
 
 <style scoped>

@@ -21,10 +21,7 @@
                     :class="org.borderColor">
                     <!-- هدر -->
                     <div class="text-center mb-8">
-                        <div class="w-16 h-16 mx-auto mb-4 rounded-2xl flex items-center justify-center transform group-hover:scale-110 transition duration-300"
-                            :class="org.iconBg">
-                            <component :is="org.icon" class="w-8 h-8 text-white" />
-                        </div>
+
                         <h3 class="text-2xl font-black mb-2" :class="org.titleColor">{{ org.title }}</h3>
                         <p class="text-gray-600">{{ org.subtitle }}</p>
                     </div>
@@ -67,10 +64,10 @@
                         تیم متخصص ما آماده ارائه راه‌حل‌های اختصاصی متناسب با نیازهای خاص سازمان شماست.
                         از مشاوره رایگان تا پیاده‌سازی کامل در کنار شما هستیم.
                     </p>
-                    <button
+                    <a href="tel:+982128427044"
                         class="bg-gradient-to-r from-orange-500 to-amber-500 text-white px-8 py-3 rounded-xl font-bold hover:shadow-lg transform hover:scale-105 transition duration-300">
                         درخواست مشاوره رایگان
-                    </button>
+                    </a>
                 </div>
             </div>
         </div>
@@ -112,12 +109,11 @@ const organizationSizes = ref([
         iconBg: 'bg-green-500',
         titleColor: 'text-green-600',
         borderColor: 'border-green-200',
-        stat: 'رایگان',
+        stat: 'پایه',
         statColor: 'text-green-600',
         buttonClass: 'bg-green-500 text-white hover:bg-green-600',
         features: [
             'مدیریت حداکثر ۵ اتاق جلسه',
-            '۱۰ کاربر فعال',
             'پشتیبانی ایمیلی',
             'گزارش‌های پایه',
             'رزرو آنلاین'

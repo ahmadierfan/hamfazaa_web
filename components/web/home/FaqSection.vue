@@ -7,7 +7,7 @@
         <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <h2
-                    class="text-4xl md:text-5xl font-black bg-gradient-to-r from-orange-600 to-amber-600 bg-clip-text text-transparent mb-6">
+                    class="text-4xl md:text-5xl  bg-gradient-to-r from-orange-600 to-amber-600 bg-clip-text text-transparent mb-6">
                     سوالات متداول
                 </h2>
                 <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
@@ -20,8 +20,7 @@
                     class="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-500 overflow-hidden border border-orange-100 transform hover:scale-[1.02]">
                     <button @click="toggleFAQ(faq.id)"
                         class="w-full px-8 py-6 text-right flex justify-between items-center hover:bg-orange-50 transition duration-300 group">
-                        <span
-                            class="text-lg font-black text-gray-900 group-hover:text-orange-600 transition duration-300 flex-1">
+                        <span class="text-lg  text-gray-900 group-hover:text-orange-600 transition duration-300 flex-1">
                             {{ faq.question }}
                         </span>
                         <div
@@ -72,19 +71,15 @@
                     </div>
 
                     <div class="relative z-10">
-                        <h3 class="text-2xl md:text-3xl font-black mb-4">سوال دیگری دارید؟</h3>
+                        <h3 class="text-2xl md:text-3xl  mb-4">سوال دیگری دارید؟</h3>
                         <p class="text-orange-100 mb-6 text-lg">
                             تیم پشتیبانی ما ۲۴/۷ آماده پاسخگویی به سوالات شماست
                         </p>
                         <div class="flex flex-col sm:flex-row justify-center gap-4">
-                            <button
-                                class="bg-white text-orange-600 px-8 py-3 rounded-xl font-bold hover:scale-105 transform transition duration-300 shadow-lg">
+                            <a href="tel:+982128427044"
+                                class="bg-white text-orange-600 px-8 py-3 rounded-xl  hover:scale-105 transform transition duration-300 shadow-lg">
                                 تماس با پشتیبانی
-                            </button>
-                            <button
-                                class="border-2 border-white text-white px-8 py-3 rounded-xl font-bold hover:bg-white hover:text-orange-600 transform hover:scale-105 transition duration-300">
-                                ارسال تیکت
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -104,7 +99,7 @@ const faqs = ref([
     {
         id: 1,
         question: 'چگونه می‌توانم در سامانه ثبت‌نام کنم؟',
-        answer: 'برای ثبت‌نام در سامانه همفضا، روی دکمه "ثبت‌نام" در منوی اصلی کلیک کنید. سپس اطلاعات شرکت، مدیر سازمان و کارکنان را وارد نمایید. پس از تایید ایمیل و شماره موبایل، می‌توانید از تمامی امکانات سامانه استفاده کنید.'
+        answer: 'برای ثبت‌نام در سامانه همفضا، روی دکمه "ثبت‌نام" در منوی اصلی کلیک کنید. سپس اطلاعات شرکت، مدیر سازمان و کارکنان را وارد نمایید. پس از تایید  شماره موبایل، می‌توانید از تمامی امکانات سامانه استفاده کنید.'
     },
     {
         id: 2,
@@ -133,10 +128,5 @@ const faqs = ref([
             'صورتحساب‌های ماهانه خودکار'
         ]
     },
-    {
-        id: 5,
-        question: 'آیا با تقویم‌های دیگر همگام‌سازی می‌شود؟',
-        answer: 'بله، تقویم همفضا با سرویس‌های معروف تقویم همگام‌سازی می‌شود. می‌توانید رزروهای خود را با Google Calendar، Outlook و تقویم Apple همگام کنید.'
-    }
 ])
 </script>

@@ -5,7 +5,7 @@
             <div class="bg-white rounded-xl shadow-lg border border-gray-100 p-6 mb-6">
                 <div class="flex flex-col md:flex-row md:items-center md:justify-between">
                     <div>
-                        <h1 class="text-2xl font-bold text-gray-800">پشتیبانی همفضا</h1>
+                        <h1 class="text-2xl  text-gray-800">پشتیبانی همفضا</h1>
                         <p class="text-gray-600 mt-1">ما اینجاییم تا به شما کمک کنیم</p>
                     </div>
                     <div class="mt-4 md:mt-0 flex items-center space-x-4 space-x-reverse">
@@ -24,7 +24,7 @@
                 <div>
                     <!-- فرم ثبت درخواست -->
                     <div class="bg-white rounded-xl shadow-lg border border-gray-100 p-6 mb-6">
-                        <h2 class="text-xl font-bold text-gray-800 mb-6">ثبت درخواست پشتیبانی</h2>
+                        <h2 class="text-xl  text-gray-800 mb-6">ثبت درخواست پشتیبانی</h2>
 
                         <form @submit.prevent="submitTicket" class="space-y-6">
                             <!-- موضوع -->

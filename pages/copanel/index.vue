@@ -6,7 +6,7 @@
                 <div class="mx-auto sm:px-6">
                     <div class="flex flex-col md:flex-row md:items-center md:justify-between py-6">
                         <div class="flex-1 min-w-0">
-                            <h1 class="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">
+                            <h1 class="text-2xl  leading-7 text-gray-900 sm:text-3xl sm:truncate">
                                 تقویم رزرو اتاق‌ها
                             </h1>
                             <p class="mt-1 text-sm text-gray-500">
@@ -64,7 +64,7 @@
                         <div class="flex items-center space-x-4 space-x-reverse">
                             <div class="flex-shrink-0">
                                 <div
-                                    class="h-12 w-12 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold">
+                                    class="h-12 w-12 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white ">
                                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
@@ -72,7 +72,7 @@
                                 </div>
                             </div>
                             <div>
-                                <h2 class="text-xl font-semibold text-gray-900">{{ selectedRoomInfo.room }}</h2>
+                                <h2 class="text-xl  text-gray-900">{{ selectedRoomInfo.room }}</h2>
                                 <div class="flex flex-wrap gap-4 mt-1 text-sm text-gray-600">
                                     <span class="flex items-center">
                                         <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -247,12 +247,12 @@
 
                 <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
                     <div class="p-6 calendar-wrapper">
-                        <vue-cal :time="true" :events="filteredEvents" :locale="locale" @event-create="onEventCreate"
-                            :disable-views="['years', 'year']" :selected-date="selectedDate" active-view="month"
-                            :min-date="minSelectableDate" @cell-click="onCellClick" @event-click="onEventClick"
-                            @event-drop="onEventDrop" @event-duration-change="onEventDurationChange"
-                            @event-delete="onEventDelete" @view-change="onViewChange" @ready="onCalendarReady"
-                            :editable-events="{
+                        <vue-cal :time="true" @cell-touchstart="onCellTouchStart" :events="filteredEvents"
+                            :locale="locale" @event-create="onEventCreate" :disable-views="['years', 'year']"
+                            :selected-date="selectedDate" active-view="month" :min-date="minSelectableDate"
+                            @cell-click="onCellClick" @event-click="onEventClick" @event-drop="onEventDrop"
+                            @event-duration-change="onEventDurationChange" @event-delete="onEventDelete"
+                            @view-change="onViewChange" @ready="onCalendarReady" :editable-events="{
                                 title: true,
                                 drag: true,
                                 resize: true,
@@ -300,7 +300,7 @@
                                 </svg>
                             </div>
                             <div>
-                                <h3 class="text-lg font-semibold">{{ isEditing ? 'ویرایش' : 'ساخت' }} رزرو</h3>
+                                <h3 class="text-lg ">{{ isEditing ? 'ویرایش' : 'ساخت' }} رزرو</h3>
                                 <p class="text-blue-100 text-sm mt-1">{{ formatEventDate(selectedDateForModal) }}</p>
                             </div>
                         </div>
@@ -344,7 +344,7 @@
                     <div class="space-y-6">
                         <!-- زمان شروع -->
                         <div class="bg-blue-50 border border-blue-200 rounded-xl p-4">
-                            <label class="block text-sm font-semibold text-blue-800 mb-3 flex items-center">
+                            <label class="block text-sm  text-blue-800 mb-3 flex items-center">
                                 <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -353,15 +353,15 @@
                             </label>
                             <div class="flex items-center justify-center space-x-3 space-x-reverse">
                                 <select v-model="modalStartMinute"
-                                    class="w-20 text-center bg-white border border-blue-300 rounded-lg px-3 py-3 text-lg font-semibold text-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200">
+                                    class="w-20 text-center bg-white border border-blue-300 rounded-lg px-3 py-3 text-lg  text-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200">
                                     <option v-for="minute in minutes" :key="`start-${minute}`" :value="minute"
                                         class="py-2">
                                         {{ minute }}
                                     </option>
                                 </select>
-                                <span class="text-blue-700 text-xl font-bold">:</span>
+                                <span class="text-blue-700 text-xl ">:</span>
                                 <select v-model="modalStartHour"
-                                    class="w-20 text-center bg-white border border-blue-300 rounded-lg px-3 py-3 text-lg font-semibold text-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200">
+                                    class="w-20 text-center bg-white border border-blue-300 rounded-lg px-3 py-3 text-lg  text-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200">
                                     <option v-for="hour in hours" :key="`start-${hour}`" :value="hour" class="py-2">
                                         {{ hour }}
                                     </option>
@@ -371,7 +371,7 @@
 
                         <!-- زمان پایان -->
                         <div class="bg-purple-50 border border-purple-200 rounded-xl p-4">
-                            <label class="block text-sm font-semibold text-purple-800 mb-3 flex items-center">
+                            <label class="block text-sm  text-purple-800 mb-3 flex items-center">
                                 <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -380,15 +380,15 @@
                             </label>
                             <div class="flex items-center justify-center space-x-3 space-x-reverse">
                                 <select v-model="modalEndMinute"
-                                    class="w-20 text-center bg-white border border-purple-300 rounded-lg px-3 py-3 text-lg font-semibold text-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200">
+                                    class="w-20 text-center bg-white border border-purple-300 rounded-lg px-3 py-3 text-lg  text-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200">
                                     <option v-for="minute in minutes" :key="`end-${minute}`" :value="minute"
                                         class="py-2">
                                         {{ minute }}
                                     </option>
                                 </select>
-                                <span class="text-purple-700 text-xl font-bold">:</span>
+                                <span class="text-purple-700 text-xl ">:</span>
                                 <select v-model="modalEndHour"
-                                    class="w-20 text-center bg-white border border-purple-300 rounded-lg px-3 py-3 text-lg font-semibold text-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200">
+                                    class="w-20 text-center bg-white border border-purple-300 rounded-lg px-3 py-3 text-lg  text-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200">
                                     <option v-for="hour in hours" :key="`end-${hour}`" :value="hour" class="py-2">
                                         {{ hour }}
                                     </option>
@@ -402,7 +402,7 @@
                             <div class="text-center">
                                 <p class="text-sm text-green-700 mb-2">زمان انتخاب شده</p>
                                 <div
-                                    class="flex items-center justify-center space-x-4 space-x-reverse text-lg font-bold text-green-800">
+                                    class="flex items-center justify-center space-x-4 space-x-reverse text-lg  text-green-800">
                                     <span class="bg-white px-4 py-2 rounded-lg shadow-sm">
                                         {{ modalStartHour }}:{{ modalStartMinute }}
                                     </span>
@@ -476,7 +476,7 @@
                         </svg>
                     </div>
 
-                    <h3 class="text-lg font-semibold text-gray-900 text-center mb-2">حذف رزرو</h3>
+                    <h3 class="text-lg  text-gray-900 text-center mb-2">حذف رزرو</h3>
                     <p class="text-gray-500 text-center text-sm mb-6">
                         آیا از حذف این رزرو مطمئن هستید؟ این عمل قابل بازگشت نیست.
                     </p>
@@ -578,7 +578,6 @@ const modalTimeError = ref('')
 // لیست ساعت‌ها و دقیقه‌ها
 const hours = ref(Array.from({ length: 24 }, (_, i) => i.toString().padStart(2, '0')))
 const minutes = ref(Array.from({ length: 60 }, (_, i) => i.toString().padStart(2, '0')))
-
 
 // اطلاعات اتاق انتخاب شده
 const selectedRoomInfo = computed(() => {
@@ -735,6 +734,27 @@ const refreshRoomData = async () => {
     }
 }
 
+// تابع جدید برای cell-touchstart در موبایل
+const onCellTouchStart = (event) => {
+    if (!selectedRoom.value || !selectedUser.value) {
+        return
+    }
+
+    // بررسی اینکه آیا روی یک سلول تقویم کلیک شده
+    if (event.cursor.date) {
+        const clickedDate = new Date(event.cursor.date)
+
+        // بررسی اینکه زمان انتخاب شده در گذشته نباشد
+        if (isPastTime(clickedDate)) {
+            showWarning()
+            return
+        }
+
+        // باز کردن مودال برای ساخت ایونت جدید
+        openEventModal(clickedDate)
+    }
+}
+
 // توابع جدید برای مدیریت مودال
 const openEventModal = (date, event = null) => {
     selectedDateForModal.value = date
@@ -750,10 +770,11 @@ const openEventModal = (date, event = null) => {
     modalStartMinute.value = startDate.getMinutes().toString().padStart(2, '0')
 
     if (!event) {
-        modalEndHour.value = endDate.setHours(startDate.getHours() + 1, 0, 0, 0)
-        modalEndMinute.value = endDate.getMinutes().toString().padStart(2, '0')
-    }
-    else {
+        // برای ایونت جدید، پایان را یک ساعت بعد تنظیم می‌کنیم
+        endDate.setHours(startDate.getHours() + 1)
+        modalEndHour.value = endDate.getHours().toString().padStart(2, '0')
+        modalEndMinute.value = '00'
+    } else {
         modalEndHour.value = endDate.getHours().toString().padStart(2, '0')
         modalEndMinute.value = endDate.getMinutes().toString().padStart(2, '0')
     }

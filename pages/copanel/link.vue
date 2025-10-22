@@ -20,8 +20,7 @@
                             d="M13 16h-1v-4h-1m2-4h.01M12 18a9 9 0 110-18 9 9 0 010 18z" />
                     </svg>
                 </div>
-                <h2
-                    class="text-3xl font-bold mb-4 bg-gradient-to-r from-orange-600 to-amber-600 bg-clip-text text-transparent">
+                <h2 class="text-3xl  mb-4 bg-gradient-to-r from-orange-600 to-amber-600 bg-clip-text text-transparent">
                     لینک دعوت شما آماده است!
                 </h2>
                 <p class="text-lg text-gray-600 mb-6 font-medium">
@@ -54,7 +53,7 @@
                                 d="M13 16h-1v-4h-1m2-4h.01M12 18a9 9 0 110-18 9 9 0 010 18z" />
                         </svg>
                     </div>
-                    <h2 class="text-2xl font-bold text-gray-800">لینک دعوت فضای کار</h2>
+                    <h2 class="text-2xl  text-gray-800">لینک دعوت فضای کار</h2>
                     <p class="text-sm text-gray-600 mt-2">با دیگران به اشتراک بگذارید</p>
                 </div>
 
@@ -65,7 +64,7 @@
                         class="w-full text-gray-700 font-medium text-sm outline-none bg-transparent select-all text-center"
                         dir="ltr" />
                     <button @click="copyLink"
-                        class="ml-2 bg-gradient-to-r from-orange-500 to-amber-500 text-white px-4 py-2 rounded-xl text-sm font-semibold hover:shadow-md active:scale-95 transition-all">
+                        class="ml-2 bg-gradient-to-r from-orange-500 to-amber-500 text-white px-4 py-2 rounded-xl text-sm  hover:shadow-md active:scale-95 transition-all">
                         کپی
                     </button>
                 </div>
@@ -79,7 +78,7 @@
 
                 <!-- دکمه بازگشت -->
                 <button
-                    class="w-full py-4 text-white font-bold rounded-2xl overflow-hidden transition-all duration-500 bg-gradient-to-r from-orange-500 to-amber-500 hover:shadow-lg hover:shadow-orange-200 group"
+                    class="w-full py-4 text-white  rounded-2xl overflow-hidden transition-all duration-500 bg-gradient-to-r from-orange-500 to-amber-500 hover:shadow-lg hover:shadow-orange-200 group"
                     @click="goToDashboard">
                     <span class="relative z-10">رفتن به داشبورد</span>
                     <div

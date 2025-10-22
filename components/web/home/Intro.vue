@@ -43,7 +43,7 @@
 
                     <!-- Main Heading -->
                     <h1 class="text-5xl text-white">همفضا</h1>
-                    <p class="text-4xl md:text-6xl lg:text-7xl font-black leading-tight mb-6">
+                    <p class="text-4xl md:text-6xl lg:text-7xl  leading-tight mb-6">
                         <span
                             class="bg-gradient-to-l from-orange-400 via-amber-400 to-orange-400 bg-clip-text text-transparent">
                             انقلابی در
@@ -56,7 +56,7 @@
                     <!-- Description -->
                     <p class="text-xl md:text-2xl text-gray-300 mb-8 leading-relaxed">
                         اولین سامانه جامع مدیریت
-                        <span class="text-orange-400 font-semibold">فضاهای کار اشتراکی</span>
+                        <span class="text-orange-400 ">فضاهای کار اشتراکی</span>
                         در ایران با قابلیت‌های پیشرفته رزرواسیون، مدیریت منابع و آنالیز هوشمند
                     </p>
 
@@ -75,46 +75,36 @@
 
                     <!-- CTA Buttons -->
                     <div class="flex flex-col sm:flex-row gap-4 mb-12">
-                        <button
-                            class="group relative bg-gradient-to-r from-orange-500 to-amber-500 text-white px-8 py-4 rounded-2xl font-bold text-lg shadow-2xl hover:shadow-orange-500/25 transform hover:scale-105 transition-all duration-500 overflow-hidden">
+                        <NuxtLink to="pricing"
+                            class="group relative bg-gradient-to-r from-orange-500 to-amber-500 text-white px-8 py-4 rounded-2xl  text-lg shadow-2xl hover:shadow-orange-500/25 transform hover:scale-105 transition-all duration-500 overflow-hidden">
                             <div
                                 class="absolute inset-0 bg-gradient-to-r from-orange-600 to-amber-600 opacity-0 group-hover:opacity-100 transition duration-500">
                             </div>
                             <span class="relative z-10 flex items-center justify-center">
-                                شروع رایگان ۱۴ روزه
+                                شروع رایگان 7 روزه
                                 <svg class="w-5 h-5 mr-2 transform group-hover:translate-x-1 transition duration-300"
                                     fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M13 7l5 5m0 0l-5 5m5-5H6" />
                                 </svg>
                             </span>
-                        </button>
-
-                        <button
-                            class="group border-2 border-orange-500 text-orange-400 px-8 py-4 rounded-2xl font-bold text-lg hover:bg-orange-500 hover:text-white transform hover:scale-105 transition-all duration-500 flex items-center justify-center">
-                            <svg class="w-5 h-5 ml-2 group-hover:animate-pulse" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                            مشاهده دمو زنده
-                        </button>
+                        </NuxtLink>
                     </div>
 
                     <!-- Trust Badges -->
                     <div class="flex items-center justify-start space-x-8 space-x-reverse">
                         <div class="text-center">
-                            <div class="text-2xl font-black text-white mb-1">۵۰۰+</div>
+                            <div class="text-2xl  text-white mb-1">۵۰۰+</div>
                             <div class="text-orange-300 text-sm">شرکت فعال</div>
                         </div>
                         <div class="w-px h-8 bg-orange-500/30"></div>
                         <div class="text-center">
-                            <div class="text-2xl font-black text-white mb-1">۹۸٪</div>
+                            <div class="text-2xl  text-white mb-1">۹۸٪</div>
                             <div class="text-orange-300 text-sm">رضایت مشتری</div>
                         </div>
                         <div class="w-px h-8 bg-orange-500/30"></div>
                         <div class="text-center">
-                            <div class="text-2xl font-black text-white mb-1">۲۴/۷</div>
+                            <div class="text-2xl  text-white mb-1">۲۴/۷</div>
                             <div class="text-orange-300 text-sm">پشتیبانی</div>
                         </div>
                     </div>
@@ -153,7 +143,7 @@
 
                         <!-- Floating Elements -->
                         <div
-                            class="absolute -top-4 -right-4 bg-gradient-to-r from-orange-500 to-amber-500 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg animate-pulse">
+                            class="absolute -top-4 -right-4 bg-gradient-to-r from-orange-500 to-amber-500 text-white px-4 py-2 rounded-full text-sm  shadow-lg animate-pulse">
                             زنده
                         </div>
                     </div>
@@ -170,7 +160,7 @@
                                 </svg>
                             </div>
                             <div>
-                                <div class="text-white font-bold">رزرو آنی</div>
+                                <div class="text-white ">رزرو آنی</div>
                                 <div class="text-orange-400 text-sm">۳۰ ثانیه‌ای</div>
                             </div>
                         </div>
@@ -187,7 +177,7 @@
                                 </svg>
                             </div>
                             <div>
-                                <div class="text-white font-bold">امنیت بالا</div>
+                                <div class="text-white ">امنیت بالا</div>
                                 <div class="text-orange-400 text-sm">SSL پیشرفته</div>
                             </div>
                         </div>
@@ -199,7 +189,7 @@
         <!-- Scroll Indicator -->
         <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
             <div class="flex flex-col items-center text-orange-400">
-                <span class="text-sm mb-2">کشف بیشتر</span>
+                <span class="text-sm mb-2"></span>
                 <div class="w-6 h-10 border-2 border-orange-500 rounded-full flex justify-center">
                     <div class="w-1 h-3 bg-orange-500 rounded-full mt-2 animate-pulse"></div>
                 </div>

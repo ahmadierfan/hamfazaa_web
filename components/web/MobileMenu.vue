@@ -17,7 +17,7 @@
                             class="w-8 h-8 bg-gradient-to-br from-blue-600 to-blue-700 rounded-lg flex items-center justify-center">
                             <img src="/images/logo.png" alt="لوگو" class="w-4 h-4 filter brightness-0 invert" />
                         </div>
-                        <h2 class="font-bold text-lg text-gray-800">منو</h2>
+                        <h2 class=" text-lg text-gray-800">منو</h2>
                     </div>
                     <button @click="$emit('close')"
                         class="p-2 rounded-lg hover:bg-gray-100 transition-colors duration-300">
@@ -32,7 +32,7 @@
                 <div class="p-6 space-y-4 max-h-[calc(100vh-200px)] overflow-y-auto">
                     <!-- صنایع -->
                     <div class="space-y-2">
-                        <h3 class="font-semibold text-gray-700 text-sm uppercase tracking-wider mb-3">صنایع</h3>
+                        <h3 class=" text-gray-700 text-sm uppercase tracking-wider mb-3">صنایع</h3>
                         <NuxtLink v-for="item in industriesItems" :key="item.href" :to="item.href"
                             class="flex items-center gap-3 p-3 rounded-xl hover:bg-blue-50 transition-colors duration-300 border-r-2 border-transparent hover:border-blue-500"
                             @click="$emit('close')">
@@ -49,7 +49,7 @@
 
                     <!-- راهکارها -->
                     <div class="space-y-2 pt-4 border-t border-gray-100">
-                        <h3 class="font-semibold text-gray-700 text-sm uppercase tracking-wider mb-3">راهکارها</h3>
+                        <h3 class=" text-gray-700 text-sm uppercase tracking-wider mb-3">راهکارها</h3>
                         <NuxtLink v-for="item in solutionsItems" :key="item.href" :to="item.href"
                             class="flex items-center gap-3 p-3 rounded-xl hover:bg-green-50 transition-colors duration-300 border-r-2 border-transparent hover:border-green-500"
                             @click="$emit('close')">
@@ -92,7 +92,7 @@
                 <!-- دکمه اقدام در موبایل -->
                 <div class="absolute bottom-0 left-0 right-0 p-6 border-t border-gray-100 bg-white">
                     <NuxtLink :to="loginBtnRedirectTo"
-                        class="block w-full bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-gray-900 font-bold text-center py-4 rounded-xl transition-all duration-300 transform hover:scale-105"
+                        class="block w-full bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-gray-900  text-center py-4 rounded-xl transition-all duration-300 transform hover:scale-105"
                         @click="$emit('close')">
                         {{ loginBtnText }}
                     </NuxtLink>

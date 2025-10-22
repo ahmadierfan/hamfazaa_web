@@ -7,7 +7,7 @@
         <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <h2
-                    class="text-4xl md:text-5xl font-black bg-gradient-to-r from-orange-600 to-amber-600 bg-clip-text text-transparent mb-6">
+                    class="text-4xl md:text-5xl  bg-gradient-to-r from-orange-600 to-amber-600 bg-clip-text text-transparent mb-6">
                     خدمات اختصاصی
                 </h2>
                 <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
@@ -26,12 +26,30 @@
                     <!-- آیکون -->
                     <div
                         class="relative z-10 w-16 h-16 bg-gradient-to-r from-orange-500 to-amber-500 rounded-2xl flex items-center justify-center mb-6 transform group-hover:scale-110 transition duration-300 shadow-lg">
-                        <component :is="service.icon" class="w-8 h-8 text-white" />
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path v-if="service.icon === 'calendar'" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            <path v-else-if="service.icon === 'users'" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z" />
+                            <path v-else-if="service.icon === 'chart'" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                            <path v-else-if="service.icon === 'payment'" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            <path v-else-if="service.icon === 'security'" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                            <path v-else-if="service.icon === 'sync'" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                        </svg>
                     </div>
 
                     <!-- محتوا -->
-                    <h3
-                        class="text-xl font-black text-gray-900 mb-4 group-hover:text-orange-600 transition duration-300">
+                    <h3 class="text-xl  text-gray-900 mb-4 group-hover:text-orange-600 transition duration-300">
                         {{ service.title }}
                     </h3>
                     <p class="text-gray-600 leading-relaxed mb-6">
@@ -63,97 +81,48 @@
 </template>
 
 <script setup>
-// آیکون‌های SVG
-const CalendarIcon = {
-    template: `
-    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-    </svg>
-  `
-}
-
-const UsersIcon = {
-    template: `
-    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"/>
-    </svg>
-  `
-}
-
-const ChartIcon = {
-    template: `
-    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
-    </svg>
-  `
-}
-
-const PaymentIcon = {
-    template: `
-    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-    </svg>
-  `
-}
-
-const SecurityIcon = {
-    template: `
-    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
-    </svg>
-  `
-}
-
-const SyncIcon = {
-    template: `
-    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
-    </svg>
-  `
-}
-
-const services = ref([
+const services = [
     {
         id: 1,
-        icon: CalendarIcon,
+        icon: 'calendar',
         title: 'تقویم هوشمند',
         description: 'سیستم رزرواسیون پیشرفته با قابلیت همگام‌سازی و اعلان‌های خودکار',
         features: ['رزرو آنی اتاق', 'مدیریت تداخل', 'همگام‌سازی با Google Calendar']
     },
     {
         id: 2,
-        icon: UsersIcon,
+        icon: 'users',
         title: 'مدیریت کاربران',
         description: 'تعریف سطوح دسترسی مختلف برای مدیران، کارکنان و مهمانان',
         features: ['دسترسی چندسطحی', 'مدیریت پروفایل', 'احراز هویت دو مرحله‌ای']
     },
     {
         id: 3,
-        icon: ChartIcon,
+        icon: 'chart',
         title: 'گزارش‌گیری تحلیلی',
         description: 'داشبوردهای تحلیلی پیشرفته برای بررسی الگوهای استفاده',
         features: ['آمار استفاده实时', 'گزارش‌های مالی', 'تحلیل بهره‌وری']
     },
     {
         id: 4,
-        icon: PaymentIcon,
+        icon: 'payment',
         title: 'سیستم پرداخت',
         description: 'سیستم صورتحساب و پرداخت آنلاین برای رزروهای اضافی',
         features: ['درگاه‌های متعدد', 'صورتحساب خودکار', 'سیستم اعتباری']
     },
     {
         id: 5,
-        icon: SecurityIcon,
+        icon: 'security',
         title: 'امنیت بالا',
         description: 'سیستم امنیتی پیشرفته با رمزنگاری داده‌ها و کنترل دسترسی',
         features: ['رمزنگاری End-to-End', 'پشتیبان‌گیری خودکار', 'مطابقت با استانداردها']
     },
     {
         id: 6,
-        icon: SyncIcon,
+        icon: 'sync',
         title: 'همگام‌سازی سریع',
         description: 'همگام‌سازی بلادرنگ بین تمام دستگاه‌ها و پلتفرم‌ها',
         features: ['همگام‌سازی Real-time', 'API کامل', 'پشتیبانی از Webhook']
     }
-])
+]
 </script>
