@@ -5,9 +5,9 @@
         <div class="absolute bottom-10 left-10 w-48 h-48 bg-amber-200 rounded-full opacity-30 animate-bounce"></div>
 
         <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
+            <div class="text-center mb-16" ref="titleRef">
                 <h2
-                    class="text-4xl md:text-5xl  bg-gradient-to-r from-orange-600 to-amber-600 bg-clip-text text-transparent mb-6">
+                    class="text-4xl md:text-5xl bg-gradient-to-r from-orange-600 to-amber-600 bg-clip-text text-transparent mb-6">
                     خدمات اختصاصی
                 </h2>
                 <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
@@ -17,6 +17,7 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <div v-for="(service, index) in services" :key="service.id"
+                    :ref="el => { serviceCardsRefs[index] = el }"
                     class="group bg-white rounded-3xl shadow-xl hover:shadow-2xl p-8 transform hover:-translate-y-2 transition-all duration-500 border border-orange-100 relative overflow-hidden">
                     <!-- پس‌زمینه داینامیک -->
                     <div
@@ -49,7 +50,7 @@
                     </div>
 
                     <!-- محتوا -->
-                    <h3 class="text-xl  text-gray-900 mb-4 group-hover:text-orange-600 transition duration-300">
+                    <h3 class="text-xl text-gray-900 mb-4 group-hover:text-orange-600 transition duration-300">
                         {{ service.title }}
                     </h3>
                     <p class="text-gray-600 leading-relaxed mb-6">
@@ -58,7 +59,8 @@
 
                     <!-- ویژگی‌ها -->
                     <ul class="space-y-2">
-                        <li v-for="feature in service.features" :key="feature"
+                        <li v-for="(feature, featureIndex) in service.features" :key="feature"
+                            :ref="el => { featureRefs[`${service.id}-${featureIndex}`] = el }"
                             class="flex items-center text-sm text-gray-600">
                             <svg class="w-4 h-4 text-green-500 ml-2 flex-shrink-0" fill="currentColor"
                                 viewBox="0 0 20 20">
@@ -81,13 +83,26 @@
 </template>
 
 <script setup>
+import { ref, onMounted, onUnmounted } from 'vue'
+
+// رفرنس‌ها برای المان‌های مختلف
+const titleRef = ref(null)
+const serviceCardsRefs = ref([])
+const featureRefs = ref({})
+
+// وضعیت نمایش المان‌ها
+const isTitleVisible = ref(false)
+const visibleCards = ref([])
+const visibleFeatures = ref([])
+
+// داده‌های خدمات
 const services = [
     {
         id: 1,
         icon: 'calendar',
         title: 'تقویم هوشمند',
         description: 'سیستم رزرواسیون پیشرفته با قابلیت همگام‌سازی و اعلان‌های خودکار',
-        features: ['رزرو آنی اتاق', 'مدیریت تداخل', 'همگام‌سازی با Google Calendar']
+        features: ['رزرو آنی اتاق', 'مدیریت تداخل', 'همخوانی گرافیکی با Google Calendar']
     },
     {
         id: 2,
@@ -101,7 +116,7 @@ const services = [
         icon: 'chart',
         title: 'گزارش‌گیری تحلیلی',
         description: 'داشبوردهای تحلیلی پیشرفته برای بررسی الگوهای استفاده',
-        features: ['آمار استفاده实时', 'گزارش‌های مالی', 'تحلیل بهره‌وری']
+        features: ['آمار استفاده', 'گزارش‌های مالی', 'تحلیل بهره‌وری']
     },
     {
         id: 4,
@@ -125,4 +140,113 @@ const services = [
         features: ['همگام‌سازی Real-time', 'API کامل', 'پشتیبانی از Webhook']
     }
 ]
+
+// تابع بررسی نمایش المان در viewport
+function isElementInViewport(el) {
+    if (!el) return false
+
+    const rect = el.getBoundingClientRect()
+    return (
+        rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.85 &&
+        rect.bottom >= (window.innerHeight || document.documentElement.clientHeight) * 0.15
+    )
+}
+
+// تابع مدیریت اسکرول
+function handleScroll() {
+    // بررسی نمایش عنوان
+    if (titleRef.value && isElementInViewport(titleRef.value) && !isTitleVisible.value) {
+        isTitleVisible.value = true
+        titleRef.value.classList.add('animate-fadeInUp')
+    }
+
+    // بررسی نمایش کارت‌ها
+    serviceCardsRefs.value.forEach((card, index) => {
+        if (card && isElementInViewport(card) && !visibleCards.value.includes(index)) {
+            visibleCards.value.push(index)
+
+            // افزودن کلاس‌های انیمیشن با تأخیر برای افکت آبشاری
+            setTimeout(() => {
+                card.classList.add('animate-fadeInUp')
+                card.style.animationDelay = `${index * 0.1}s`
+            }, 50)
+        }
+    })
+
+    // بررسی نمایش ویژگی‌ها
+    Object.keys(featureRefs.value).forEach(key => {
+        const featureEl = featureRefs.value[key]
+        if (featureEl && isElementInViewport(featureEl) && !visibleFeatures.value.includes(key)) {
+            visibleFeatures.value.push(key)
+
+            // افزودن کلاس انیمیشن با تأخیر
+            setTimeout(() => {
+                featureEl.classList.add('animate-fadeInLeft')
+            }, 100)
+        }
+    })
+}
+
+// افزودن استایل‌های انیمیشن به head
+function addAnimationStyles() {
+    if (document.getElementById('scroll-animations')) return
+
+    const style = document.createElement('style')
+    style.id = 'scroll-animations'
+    style.textContent = `
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .animate-fadeInUp {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+        
+        .animate-fadeInLeft {
+            animation: fadeInLeft 0.5s ease-out forwards;
+        }
+        
+        /* حالت اولیه برای المان‌های انیمیشنی */
+        #services .text-center,
+        #services .grid > div,
+        #services .grid li {
+            opacity: 0;
+        }
+    `
+    document.head.appendChild(style)
+}
+
+// هنگامی که کامپوننت mount شد
+onMounted(() => {
+    addAnimationStyles()
+
+    // بررسی اولیه موقعیت المان‌ها
+    setTimeout(handleScroll, 100)
+
+    // افزودن event listener برای اسکرول
+    window.addEventListener('scroll', handleScroll)
+})
+
+// هنگامی که کامپوننت unmount شد
+onUnmounted(() => {
+    window.removeEventListener('scroll', handleScroll)
+})
 </script>

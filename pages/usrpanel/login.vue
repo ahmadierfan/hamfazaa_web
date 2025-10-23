@@ -187,6 +187,7 @@ definePageMeta({ layout: 'blank' })
 
 const { $freeApi, $updateAuthHeader } = useNuxtApp()
 const router = useRouter()
+const route = useRouter()
 const loadingStore = useLoadingStore()
 
 const mobile = ref('')
@@ -199,15 +200,21 @@ const toEnglishDigits = (str) => {
 }
 
 const sendOtp = async () => {
-    mobile.value = toEnglishDigits(mobile.value)
-
-    if (/^09\d{9}$/.test(mobile.value)) {
-        await $freeApi.post('auth/user-otp', { sendedto: mobile.value })
-        otpSent.value = true
-        nextTick(() => otpRefs.value[0]?.focus())
-    } else {
-        toast.error({ title: 'خطا!', message: 'شماره موبایل را صحیح وارد نمایید' })
+    if (route.query.i) {
+        mobile.value = toEnglishDigits(mobile.value)
+        if (/^09\d{9}$/.test(mobile.value)) {
+            await $freeApi.post('auth/user-otp', {
+                sendedto: mobile.value,
+            })
+            otpSent.value = true
+            nextTick(() => otpRefs.value[0]?.focus())
+        } else {
+            toast.error({ title: 'خطا!', message: 'شماره موبایل را صحیح وارد نمایید' })
+        }
     }
+    else
+        toast.error({ title: 'خطا!', message: 'شماره موبایل را صحیح وارد نمایید' })
+
 }
 
 const handleOtpInput = (e, index) => {
@@ -232,7 +239,8 @@ const verifyOtp = async () => {
     if (code.length === 4) {
         const res = await $freeApi.post('auth/user-verify-otp', {
             sendedto: mobile.value,
-            verificationcode: code
+            verificationcode: code,
+            companyId: route.query.i
         })
         const token = res.data.token
         const user = res.data.user

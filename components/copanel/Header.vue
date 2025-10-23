@@ -35,8 +35,8 @@
                         {{ subscriptionDays > 0 ? `${subscriptionDays} روز باقی مانده` : 'اشتراک منقضی شده' }}
                     </span>
                 </div>
-                <div v-else class="bg-orange-400 px-4 py-2 rounded-lg shadow-sm">
-                    <span class="font-medium">اشتراک ماهانه</span>
+                <div v-else-if="remainingDaysFromStorage" class="bg-orange-400 px-4 py-2 rounded-lg shadow-sm">
+                    <span class="font-medium">{{ remainingDaysFromStorage }} روز مانده</span>
                 </div>
             </div>
 
@@ -60,6 +60,7 @@ import { ref, onMounted } from 'vue'
 
 const { $freeApi } = useNuxtApp()
 const subscriptionDays = ref(null)
+const remainingDaysFromStorage = ref(null)
 const sidebarStore = useSidebarStore()
 
 // تابع برای محاسبه روزهای باقی مانده
@@ -84,13 +85,20 @@ const fetchSubscriptionInfo = async () => {
 }
 
 onMounted(() => {
+    // اگر از localStorage استفاده می‌کنید، باید از process.client اطمینان حاصل کنید
+    if (process.client) {
+        remainingDaysFromStorage.value = localStorage.getItem('remaining_days')
+        console.log(remainingDaysFromStorage.value)
+    }
     //fetchSubscriptionInfo()
 })
 
 const logOut = () => {
     $freeApi.post('logout')
         .then(() => {
-            localStorage.removeItem('jwt_token')
+            if (process.client) {
+                localStorage.removeItem('jwt_token')
+            }
             navigateTo('/login')
         })
 }

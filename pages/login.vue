@@ -231,7 +231,7 @@ const sendOtp = async () => {
     mobile.value = toEnglishDigits(mobile.value)
 
     if (/^09\d{9}$/.test(mobile.value)) {
-        await $freeApi.post('auth/send-otp', { sendedto: mobile.value })
+        await $freeApi.post('auth/company-otp-send', { sendedto: mobile.value })
         otpSent.value = true
         nextTick(() => otpRefs.value[0]?.focus()) // فوکوس روی اولین خانه
     } else {
@@ -266,8 +266,10 @@ const verifyOtp = async () => {
         })
         const token = res.data.token
         const user = res.data.user
+        const remainingDays = res.data.remainingDays
         localStorage.setItem('jwt_token', token)
         localStorage.setItem('user_mobile', user.mobile)
+        localStorage.setItem('remaining_days', remainingDays)
         $updateAuthHeader(token)
         router.push('/copanel')
     } else {

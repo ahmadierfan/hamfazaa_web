@@ -6,7 +6,8 @@ export const useSidebarStore = defineStore('sidebar', () => {
     const route = useRoute()
 
     const menuItems = ref([
-        { id: 1, title: 'تقویم جلسات', path: '/copanel/', icon: 'calendar' },
+        { id: 1, title: 'خانه', path: '/copanel/', icon: 'home' },
+        { id: 1, title: 'تقویم کاری', path: '/copanel/calander', icon: 'calendar' },
         { id: 2, title: 'اتاق ها', path: '/copanel/rooms', icon: 'rooms' },
         { id: 3, title: 'کاربران', path: '/copanel/users', icon: 'users' },
         { id: 4, title: 'لینک اختصاصی', path: '/copanel/link', icon: 'support' },
