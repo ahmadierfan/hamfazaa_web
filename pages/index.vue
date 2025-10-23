@@ -4,7 +4,6 @@
         <WebHomeServices />
         <WebHomeFaqSection />
         <WebHomeOrganizationSizes />
-        <WebHomeTeamSection />
         <WebHomeTraditionalVsModern />
     </div>
 </template>

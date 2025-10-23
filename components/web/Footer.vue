@@ -80,12 +80,6 @@
                 <p class="text-gray-400 text-sm">
                     © ۲۰۲۵ همفضا. تمام حقوق محفوظ است.
                 </p>
-                <div class="flex space-x-6 mt-4 md:mt-0">
-                    <a v-for="policy in policies" :key="policy.name" :href="policy.href"
-                        class="text-gray-400 hover:text-orange-400 text-sm transition duration-300">
-                        {{ policy.name }}
-                    </a>
-                </div>
             </div>
         </div>
     </footer>
