@@ -1,5 +1,6 @@
 <template>
-    <div class="min-h-screen bg-gradient-to-br from-green-50 via-emerald-50 to-green-100 py-12 px-4 sm:px-6 lg:px-8">
+    <div class="min-h-screen bg-gradient-to-br from-green-50 via-emerald-50 to-green-100 py-12 px-4 sm:px-6 lg:px-8"
+        v-if="showPage">
         <div class="max-w-2xl mx-auto" v-if="planData">
             <!-- کارت اصلی -->
             <div
@@ -133,35 +134,20 @@ const router = useRouter()
 // انیمیشن‌ها
 const showPulse = ref(true)
 const showCheck = ref(false)
-const planData = ref(null)
-const isLoading = ref(true)
-const error = ref(null)
+const planData = ref()
+const showPage = ref(false)
 
 const getOrderData = async () => {
-    try {
-        if (!route.query.orderid) {
-            error.value = 'شناسه سفارش یافت نشد'
-            isLoading.value = false
-            return
-        }
-
+    if (route.query.orderid) {
         const { data } = await $freeApi.get('order-detail', {
             params: {
                 orderId: route.query.orderid,
             }
         });
-
-        // اصلاح شرط: اگر داده دریافت شد، آن را تنظیم کن
+        showPage.value = true
         if (data && data.pk_order) {
             planData.value = data
-        } else {
-            error.value = 'داده‌های سفارش نامعتبر است'
         }
-    } catch (err) {
-        console.error('Error fetching order data:', err)
-        error.value = 'خطا در دریافت اطلاعات سفارش'
-    } finally {
-        isLoading.value = false
     }
 }
 
