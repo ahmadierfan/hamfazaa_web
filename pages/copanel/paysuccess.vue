@@ -1,214 +1,140 @@
 <template>
     <div class="min-h-screen bg-gradient-to-br from-green-50 via-emerald-50 to-green-100 py-12 px-4 sm:px-6 lg:px-8">
-        <div class="max-w-2xl mx-auto" v-if="planData && planData.pk_order">
+        <div class="max-w-2xl mx-auto" v-if="planData">
             <!-- کارت اصلی -->
-            <div class="bg-white rounded-2xl shadow-xl border border-green-100 p-8 text-center">
-                <!-- انیمیشن تیک سبز -->
+            <div
+                class="bg-white rounded-2xl shadow-2xl border border-green-100 p-8 text-center relative overflow-hidden animate-fade-in">
+                <!-- انیمیشن دایره تیک -->
                 <div class="flex justify-center mb-6">
                     <div class="relative">
-                        <!-- دایره بیرونی -->
                         <div class="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center">
-                            <!-- دایره میانی -->
-                            <div class="w-20 h-20 bg-green-200 rounded-full flex items-center justify-center">
-                                <!-- تیک -->
-                                <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                    :class="{ 'animate-draw-check': showCheck }">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
-                                        d="M5 13l4 4L19 7" />
+                            <div class="w-20 h-20 bg-green-200 rounded-full flex items-center justify-center relative">
+                                <svg v-if="showCheck" class="w-12 h-12 text-white animate-draw-check" fill="none"
+                                    stroke="currentColor" stroke-width="4" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
                                 </svg>
                             </div>
                         </div>
-
-                        <!-- انیمیشن پالس -->
-                        <div class="absolute inset-0 rounded-full bg-green-200 animate-ping opacity-75"
+                        <div class="absolute inset-0 rounded-full bg-green-300 animate-ping opacity-70"
                             v-if="showPulse"></div>
                     </div>
                 </div>
 
-                <!-- عنوان و متن موفقیت -->
-                <h1 class="text-3xl font-bold text-amber-600 mb-4">پرداخت موفق!</h1>
-                <p class="text-gray-600 text-lg mb-2">پلن انتخابی شما با موفقیت فعال شد</p>
-                <p class="text-gray-500 mb-8">از همکاری شما متشکریم</p>
+                <!-- عنوان -->
+                <h1 class="text-3xl  text-green-600 mb-3">پرداخت با موفقیت انجام شد </h1>
+                <p class="text-gray-600 text-lg mb-6">پلن شما با موفقیت فعال گردید</p>
 
-                <!-- اطلاعات پلن -->
-                <div class="bg-gray-50 rounded-xl p-6 mb-8 text-right">
-                    <h3 class="text-xl font-bold text-gray-800 mb-4">مشخصات پلن فعال شده</h3>
+                <!-- اطلاعات تراکنش -->
+                <div class="bg-green-50 rounded-xl p-6 mb-8 text-right border border-green-100 shadow-inner">
+                    <h3 class="text-xl  text-green-800 mb-4">جزئیات تراکنش</h3>
 
-                    <div class="space-y-3">
-                        <div class="flex justify-between items-center py-2">
-                            <span class="text-gray-600">نام پلن:</span>
-                            <span class="text-gray-900 font-semibold">{{ planData.plan }}</span>
+                    <div class="space-y-3 text-gray-700">
+                        <div class="flex justify-between">
+                            <span>شماره تراکنش:</span>
+                            <span class=" text-gray-900">{{ planData.pk_order }}</span>
                         </div>
 
-                        <div class="flex justify-between items-center py-2">
-                            <span class="text-gray-600">دوره:</span>
-                            <span class="text-gray-900">{{ planData.plan }}</span>
+                        <div class="flex justify-between">
+                            <span>تاریخ پرداخت:</span>
+                            <span class="">{{ planData.startdate }}</span>
                         </div>
 
-                        <div class="flex justify-between items-center py-2">
-                            <span class="text-gray-600">حداکثر کاربر:</span>
-                            <span class="text-gray-900">تا {{ planData.maxusers }} نفر</span>
-                        </div>
-
-                        <div class="flex justify-between items-center py-2 border-t border-gray-200 mt-2 pt-3">
-                            <span class="text-gray-800 font-semibold">مبلغ پرداختی:</span>
-                            <span class="text-green-600 font-bold text-lg">{{ formatPrice(planData.totalprice) }}
-                                تومان</span>
+                        <div class="flex justify-between">
+                            <span>مبلغ پرداختی:</span>
+                            <span class=" text-green-700">{{ formatPrice(planData.totalprice) }} تومان</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- اطلاعات فنی -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8 text-sm text-gray-500">
-                    <div class="text-center">
-                        <p>شماره تراکنش: <span class="font-mono text-gray-700">{{ planData.pk_order }}</span></p>
-                    </div>
-                    <div class="text-center">
-                        <p>تاریخ پرداخت: <span class="font-mono text-gray-700">{{ paymentDate }}</span></p>
+                <!-- مشخصات پلن -->
+                <div class="bg-gradient-to-r from-green-100 to-emerald-50 rounded-xl p-6 mb-8 text-right shadow-sm">
+                    <h3 class="text-xl  text-green-800 mb-4">مشخصات پلن شما</h3>
+                    <div class="space-y-2 text-gray-700">
+                        <div class="flex justify-between">
+                            <span>نام پلن:</span>
+                            <span class="">{{ planData.plan }}</span>
+                        </div>
+
+                        <div class="flex justify-between">
+                            <span>تعداد کاربران:</span>
+                            <span class="">{{ planData.maxusers }} نفر</span>
+                        </div>
+
+                        <div class="flex justify-between">
+                            <span>دوره پرداخت:</span>
+                            <span class="">{{ planData.period }}</span>
+                        </div>
                     </div>
                 </div>
 
-                <!-- دکمه‌های اقدام -->
-                <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <NuxtLink to="/copanel"
-                        class="px-8 py-3 bg-orange-600 text-white rounded-xl font-semibold hover:bg-orange-700 transition-colors duration-200 shadow-lg hover:shadow-xl transform hover:scale-105">
-                        رفتن به داشبورد
-                    </NuxtLink>
-
-                    <NuxtLink to="/copanel"
-                        class="px-8 py-3 bg-white text-amber-600 border border-amber-600 rounded-xl font-semibold hover:bg-amber-50 transition-colors duration-200">
-                        مشاهده آموزش
-                    </NuxtLink>
-                </div>
-
-                <!-- اطلاعات پشتیبانی -->
-                <div class="mt-8 pt-6 border-t border-gray-200">
-                    <div class="flex items-center justify-center space-x-2 space-x-reverse text-sm text-gray-500">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <!-- دکمه بازگشت -->
+                <div class="flex justify-center">
+                    <button @click="goToDashboard"
+                        class="px-8 py-3 bg-green-600 text-white rounded-xl  hover:bg-green-700 transition-all duration-200 shadow-lg hover:shadow-2xl transform hover:scale-105 flex items-center space-x-2 space-x-reverse">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                                d="M11 17l-5-5m0 0l5-5m-5 5h12" />
                         </svg>
-                        <span>اطلاعات پرداخت شما با امنیت کامل ذخیره شد</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- کارت نکات مهم -->
-            <div class="bg-white rounded-2xl shadow-lg border border-orange-100 p-6 mt-6">
-                <h3 class="text-lg text-orange-800 mb-4 flex items-center justify-center space-x-2 space-x-reverse">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <span>نکات مهم</span>
-                </h3>
-
-                <div class="space-y-3 text-sm text-gray-600 text-right">
-                    <div class="flex items-start space-x-2 space-x-reverse">
-                        <svg class="w-4 h-4 text-blue-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                        </svg>
-                        <span>پلن شما بلافاصله پس از پرداخت فعال شده است</span>
-                    </div>
-
-                    <div class="flex items-start space-x-2 space-x-reverse">
-                        <svg class="w-4 h-4 text-blue-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                        </svg>
-                        <span>در صورت هرگونه سوال با پشتیبانی تماس بگیرید</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div v-else class="max-w-md mx-auto">
-            <div class="bg-white rounded-2xl shadow-xl border border-red-100 p-8 text-center">
-                <!-- آیکون خطا -->
-                <div class="flex justify-center mb-6">
-                    <div class="relative">
-                        <div class="w-24 h-24 bg-red-100 rounded-full flex items-center justify-center">
-                            <div class="w-20 h-20 bg-red-200 rounded-full flex items-center justify-center">
-                                <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
-                                        d="M6 18L18 6M6 6l12 12" />
-                                </svg>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- عنوان و متن خطا -->
-                <h1 class="text-2xl font-bold text-red-600 mb-4">مشکل در تراکنش</h1>
-                <p class="text-gray-600 mb-6">متأسفانه در پرداخت شما مشکلی پیش آمده است</p>
-
-                <!-- اطلاعات خطا -->
-                <div class="bg-red-50 rounded-xl p-4 mb-6 text-right">
-                    <div class="space-y-2 text-sm text-red-700">
-                        <div class="flex items-center justify-between">
-                            <span>وضعیت:</span>
-                            <span class="font-semibold">پرداخت ناموفق</span>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <span>کد خطا:</span>
-                            <span class="font-mono">{{ route.query.error || 'نامشخص' }}</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- راهنمایی -->
-                <div class="text-sm text-gray-500 mb-6 space-y-2">
-                    <p class="flex items-center justify-center space-x-2 space-x-reverse">
-                        <svg class="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                        <span>در صورت کسر وجه، مبلغ تا ۷۲ ساعت آینده به حساب شما بازمی‌گردد</span>
-                    </p>
-                </div>
-
-                <!-- دکمه‌های اقدام -->
-                <div class="flex flex-col sm:flex-row gap-3 justify-center">
-                    <NuxtLink to="/pricing"
-                        class="px-6 py-3 bg-red-600 text-white rounded-xl font-semibold hover:bg-red-700 transition-colors duration-200 shadow-lg hover:shadow-xl">
-                        تلاش مجدد
-                    </NuxtLink>
-
-                    <NuxtLink to="/copanel"
-                        class="px-6 py-3 bg-white text-gray-600 border border-gray-300 rounded-xl font-semibold hover:bg-gray-50 transition-colors duration-200">
-                        بازگشت به صفحه اصلی
-                    </NuxtLink>
+                        <span>شروع</span>
+                    </button>
                 </div>
 
                 <!-- پشتیبانی -->
-                <div class="mt-6 pt-4 border-t border-gray-200">
-                    <p class="text-xs text-gray-500 mb-2">در صورت نیاز به کمک</p>
-                    <a href="tel:02128427044"
-                        class="text-blue-600 hover:text-blue-800 text-sm font-semibold transition-colors duration-200">
-                        تماس با پشتیبانی: 02128427044-
-                    </a>
+                <div class="mt-10 pt-6 border-t border-gray-200 text-center">
+                    <p class="text-gray-500 text-sm mb-2">در صورت بروز مشکل، با پشتیبانی تماس بگیرید:</p>
+                    <a href="tel:02128427044" class="text-green-700  hover:underline">28427044 - 021</a>
                 </div>
+            </div>
+        </div>
+        <div v-else class="flex flex-col items-center justify-center min-h-[70vh] text-center animate-fade-in">
+            <div class="relative">
+                <div class="w-24 h-24 bg-red-100 rounded-full flex items-center justify-center shadow-inner">
+                    <svg class="w-12 h-12 text-red-500" fill="none" stroke="currentColor" stroke-width="2"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M12 9v4m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
+                    </svg>
+                </div>
+            </div>
+
+            <h2 class="text-2xl text-red-600 mt-6 mb-2 font-semibold">مشکل در دریافت اطلاعات</h2>
+            <p class="text-gray-600 max-w-sm mb-6 leading-relaxed">
+                متأسفانه در بارگذاری جزئیات سفارش مشکلی پیش آمده است.
+                لطفاً اتصال اینترنت خود را بررسی کرده و دوباره تلاش کنید.
+            </p>
+
+            <div class="flex space-x-4 space-x-reverse">
+                <NuxtLink to="/pricing"
+                    class="px-6 py-2.5 bg-red-500 text-white rounded-xl hover:bg-red-600 transition-all duration-200 shadow-md hover:shadow-lg transform hover:scale-105 flex items-center space-x-2 space-x-reverse">
+
+                    <span>مشاهده پلن ها</span>
+                </NuxtLink>
+            </div>
+
+            <!-- پشتیبانی -->
+            <div class="mt-10 text-gray-500 text-sm">
+                در صورت نیاز به راهنمایی با
+                <a href="tel:02128427044" class="text-red-500 hover:underline font-medium">پشتیبانی</a>
+                تماس بگیرید.
             </div>
         </div>
     </div>
 </template>
 
 <script setup>
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from 'vue-router'
 
-definePageMeta({ layout: "copanel" })
+definePageMeta({ layout: 'copanel' })
 
 const route = useRoute()
-const { $freeApi } = useNuxtApp()
+const { $freeApi } = useNuxtApp();
+const router = useRouter()
 
-// داده‌های حالت
-const showCheck = ref(false)
+// انیمیشن‌ها
 const showPulse = ref(true)
-const transactionId = ref('')
-const paymentDate = ref('')
+const showCheck = ref(false)
 const planData = ref()
 
-// اطلاعات پلن از route
 const getOrderData = async () => {
     if (route.query.orderid) {
         const { data } = await $freeApi.get('order-detail', {
@@ -222,66 +148,56 @@ const getOrderData = async () => {
     }
 }
 
-// انیمیشن‌ها
 onMounted(() => {
     getOrderData()
-    transactionId.value = 1
-    paymentDate.value = getCurrentDate()
 
     setTimeout(() => {
         showCheck.value = true
     }, 500)
-
     setTimeout(() => {
         showPulse.value = false
     }, 2000)
 })
 
-// توابع کمکی
-const formatPrice = (price) => {
-    return new Intl.NumberFormat('fa-IR').format(price)
-}
+const formatPrice = (price) => new Intl.NumberFormat('fa-IR').format(price)
 
-const getCurrentDate = () => {
-    const now = new Date()
-    return now.toLocaleDateString('fa-IR', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit'
-    })
-}
-
+const goToDashboard = () => router.push('/dashboard')
 </script>
 
 <style scoped>
-@keyframes draw-check {
-    0% {
-        stroke-dasharray: 50;
-        stroke-dashoffset: 50;
+@keyframes fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
     }
 
-    100% {
-        stroke-dasharray: 50;
-        stroke-dashoffset: 0;
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 
+@keyframes draw-check {
+    from {
+        stroke-dasharray: 0, 100;
+    }
+
+    to {
+        stroke-dasharray: 100, 0;
+    }
+}
+
+.animate-fade-in {
+    animation: fade-in 0.8s ease-out forwards;
+}
+
 .animate-draw-check {
+    stroke-dasharray: 100;
+    stroke-dashoffset: 100;
     animation: draw-check 0.8s ease-in-out forwards;
 }
 
 .animate-ping {
-    animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
-}
-
-@keyframes ping {
-
-    75%,
-    100% {
-        transform: scale(1.5);
-        opacity: 0;
-    }
+    animation: ping 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
 }
 </style>

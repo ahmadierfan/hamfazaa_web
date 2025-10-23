@@ -56,7 +56,10 @@ export default defineNuxtPlugin((nuxtApp) => {
 
       }
       else if (status === 401) router.push('/login');
-      else if (status === 403) message = 'error.forbidden';
+      else if (status === 403) {
+        message = data.message || t('error.forbidden');
+        router.push('/pricing')
+      }
       else if (status === 404) message = 'error.not_found';
       else if (status === 500)
         var message = error.response?.data?.message || 'error.server';
