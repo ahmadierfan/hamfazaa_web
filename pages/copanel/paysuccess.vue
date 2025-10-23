@@ -133,18 +133,35 @@ const router = useRouter()
 // انیمیشن‌ها
 const showPulse = ref(true)
 const showCheck = ref(false)
-const planData = ref()
+const planData = ref(null)
+const isLoading = ref(true)
+const error = ref(null)
 
 const getOrderData = async () => {
-    if (route.query.orderid) {
+    try {
+        if (!route.query.orderid) {
+            error.value = 'شناسه سفارش یافت نشد'
+            isLoading.value = false
+            return
+        }
+
         const { data } = await $freeApi.get('order-detail', {
             params: {
                 orderId: route.query.orderid,
             }
         });
-        if (planData.value.pk_order) {
+
+        // اصلاح شرط: اگر داده دریافت شد، آن را تنظیم کن
+        if (data && data.pk_order) {
             planData.value = data
+        } else {
+            error.value = 'داده‌های سفارش نامعتبر است'
         }
+    } catch (err) {
+        console.error('Error fetching order data:', err)
+        error.value = 'خطا در دریافت اطلاعات سفارش'
+    } finally {
+        isLoading.value = false
     }
 }
 
