@@ -199,7 +199,7 @@ import { useRoute } from "vue-router";
 definePageMeta({ layout: "copanel" })
 
 const route = useRoute()
-const router = useRouter()
+const { $freeApi } = useNuxtApp()
 
 // داده‌های حالت
 const showCheck = ref(false)
@@ -253,9 +253,6 @@ const getCurrentDate = () => {
     })
 }
 
-const goToPlans = () => {
-    router.push('/plans')
-}
 </script>
 
 <style scoped>
