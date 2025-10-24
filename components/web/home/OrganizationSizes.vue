@@ -65,7 +65,7 @@
                         از مشاوره رایگان تا پیاده‌سازی کامل در کنار شما هستیم.
                     </p>
                     <a href="tel:+982128427044"
-                        class="bg-gradient-to-r from-orange-500 to-amber-500 text-white px-8 py-3 rounded-xl font-bold hover:shadow-lg transform hover:scale-105 transition duration-300">
+                        class="bg-gradient-to-r from-orange-500 to-amber-500 text-white px-8 py-3 rounded-xl  hover:shadow-lg transform hover:scale-105 transition duration-300">
                         درخواست مشاوره رایگان
                     </a>
                 </div>

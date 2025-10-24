@@ -991,7 +991,7 @@ const onEventClick = async (event, e) => {
 const onEventCreate = async (event) => {
     try {
         if (isPastTime(event.event.start) || isPastTime(event.event.end)) {
-            toast.error({ title: 'خطا!', message: 'خطا۱۱' })
+            toast.error({ title: 'خطا!', message: 'زمان آینده انتخاب نمایید' })
             return
         }
 

@@ -24,12 +24,7 @@
                         سازمان‌های مدرن
                     </p>
                     <div class="flex space-x-4">
-                        <!-- شبکه‌های اجتماعی -->
-                        <a referrerpolicy='origin' target='_blank'
-                            href='https://trustseal.enamad.ir/?id=662632&Code=EoCtfOJK9W6t6ZTyxkMBhTkkha3US7Ig'><img
-                                referrerpolicy='origin'
-                                src='https://trustseal.enamad.ir/logo.aspx?id=662632&Code=EoCtfOJK9W6t6ZTyxkMBhTkkha3US7Ig'
-                                alt='' style='cursor:pointer' code='EoCtfOJK9W6t6ZTyxkMBhTkkha3US7Ig'></a>
+
                     </div>
                 </div>
 

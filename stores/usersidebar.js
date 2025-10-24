@@ -1,4 +1,4 @@
-export const useUsrSidebarStore = defineStore('usrsidebar', () => {
+export const useUserSidebarStore = defineStore('usersidebar', () => {
     const isOpen = ref(true)
     const activeMenu = ref(1)
     const isMobile = ref(false)
@@ -6,8 +6,8 @@ export const useUsrSidebarStore = defineStore('usrsidebar', () => {
     const route = useRoute()
 
     const menuItems = ref([
-        { id: 1, title: 'تقویم جلسات', path: '/usrpanel/', icon: 'calendar' },
-        { id: 4, title: 'پرداخت ها', path: '/usrpanel/transactions', icon: 'support' },
+        { id: 1, title: 'تقویم', path: '/userpanel/', icon: 'calendar' },
+        { id: 2, title: ' مالی', path: '/userpanel/wallet', icon: 'wallet' },
     ])
 
     // تشخیص دستگاه موبایل
@@ -30,7 +30,7 @@ export const useUsrSidebarStore = defineStore('usrsidebar', () => {
         const currentPath = route.path
         const activeItem = menuItems.value.find(item => {
             if (item.path === currentPath) return true
-            if (item.path !== '/copanel/' && currentPath.startsWith(item.path)) {
+            if (item.path !== '/userpanel/' && currentPath.startsWith(item.path)) {
                 return true
             }
             return false

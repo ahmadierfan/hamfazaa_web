@@ -247,7 +247,7 @@ const verifyOtp = async () => {
         localStorage.setItem('jwt_token', token)
         localStorage.setItem('user_mobile', user.mobile)
         $updateAuthHeader(token)
-        router.push('/usrpanel')
+        router.push('/userpanel')
     } else {
         toast.error({ title: 'خطا!', message: 'کد ورود را صحیح وارد نمایید' })
     }

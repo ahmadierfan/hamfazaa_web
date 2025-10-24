@@ -287,14 +287,6 @@ const editNumber = () => {
     otpDigits.value = ['', '', '', '']
     mobile.value = ''
 }
-
-onMounted(() => {
-    if (process.client) {
-        const token = localStorage.getItem('jwt_token')
-        if (token)
-            router.push('/copanel')
-    }
-})
 </script>
 
 <style scoped>

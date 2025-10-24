@@ -190,7 +190,7 @@
                         <div class="flex justify-between">
                             <span class="text-gray-500">ساعات کاری:</span>
                             <span class="text-gray-900">{{ formatTime(room.starttime) }} - {{ formatTime(room.endtime)
-                                }}</span>
+                            }}</span>
                         </div>
                         <div class="flex justify-between">
                             <span class="text-gray-500">محدودیت هفتگی:</span>

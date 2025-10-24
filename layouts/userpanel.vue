@@ -1,11 +1,12 @@
 <template>
-    <div class="min-h-screen bg-gray-50 rtl">
-        <UsrpanelHeader />
+    <div class="min-h-screen bg-gray-50 rtl" v-if="isAuthenticated">
+        <UserpanelHeader />
         <div class="flex pt-16">
-            <UsrpanelSidebar />
+            <UserpanelSidebar />
             <main :class="[
                 'flex-1 transition-all duration-300 min-h-screen bg-gray-50',
-                usrsidebarStore.isOpen ? 'pr-64' : 'pr-20'
+                sidebarStore.isOpen && !sidebarStore.isMobile ? 'md:pr-64' : 'md:pr-20',
+                'pr-0'
             ]" style="min-height: calc(100vh - 4rem);">
                 <slot />
             </main>
@@ -14,16 +15,29 @@
 </template>
 
 <script setup>
-import { useUsrSidebarStore } from '~/stores/usrsidebar'
+const sidebarStore = useSidebarStore()
 
-const usrsidebarStore = useUsrSidebarStore()
+import { ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
+
+const isAuthenticated = ref(false)
+const router = useRouter()
+
+onMounted(() => {
+    if (process.client) {
+        const token = localStorage.getItem('jwt_token')
+        if (token) {
+            isAuthenticated.value = true
+        } else {
+            router.replace('/login')
+        }
+    }
+})
+
+
 </script>
 
 <style scoped>
-.rtl {
-    direction: rtl;
-}
-
 .rtl {
     direction: rtl;
 }

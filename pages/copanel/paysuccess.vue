@@ -98,7 +98,7 @@
                 </div>
             </div>
 
-            <h2 class="text-2xl text-red-600 mt-6 mb-2 font-semibold">مشکل در دریافت اطلاعات</h2>
+            <h2 class="text-2xl text-red-600 mt-6 mb-2 ">مشکل در دریافت اطلاعات</h2>
             <p class="text-gray-600 max-w-sm mb-6 leading-relaxed">
                 متأسفانه در بارگذاری جزئیات سفارش مشکلی پیش آمده است.
                 لطفاً اتصال اینترنت خود را بررسی کرده و دوباره تلاش کنید.

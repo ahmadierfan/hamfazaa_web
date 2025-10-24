@@ -1,5 +1,5 @@
 <template>
-    <div class="min-h-screen bg-gray-50 rtl">
+    <div class="min-h-screen bg-gray-50 rtl" v-if="isAuthenticated">
         <CopanelHeader />
         <div class="flex pt-16">
             <CopanelSidebar />
@@ -15,9 +15,25 @@
 </template>
 
 <script setup>
-import { useSidebarStore } from '~/stores/sidebar'
-
 const sidebarStore = useSidebarStore()
+
+import { ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
+
+const isAuthenticated = ref(false)
+const router = useRouter()
+
+onMounted(() => {
+    if (process.client) {
+        const token = localStorage.getItem('jwt_token')
+        if (token) {
+            isAuthenticated.value = true
+        } else {
+            router.replace('/login')
+        }
+    }
+})
+
 </script>
 
 <style scoped>

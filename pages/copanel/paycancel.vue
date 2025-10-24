@@ -27,14 +27,14 @@
                 </div>
 
                 <!-- عنوان و متن خطا -->
-                <h1 class="text-3xl font-bold text-red-600 mb-4">پرداخت ناموفق!</h1>
+                <h1 class="text-3xl  text-red-600 mb-4">پرداخت ناموفق!</h1>
                 <p class="text-gray-600 text-lg mb-2">متاسفانه پرداخت شما با مشکل مواجه شد</p>
-                <p class="text-red-500 font-semibold mb-2">{{ errorMessage }}</p>
+                <p class="text-red-500  mb-2">{{ errorMessage }}</p>
                 <p class="text-gray-500 mb-8">لطفاً مجدداً اقدام به پرداخت نمایید</p>
 
                 <!-- اطلاعات تراکنش -->
                 <div class="bg-gray-50 rounded-xl p-6 mb-8 text-right">
-                    <h3 class="text-xl font-bold text-gray-800 mb-4">اطلاعات تراکنش</h3>
+                    <h3 class="text-xl  text-gray-800 mb-4">اطلاعات تراکنش</h3>
 
                     <div class="space-y-3">
                         <div class="flex justify-between items-center py-2">
@@ -46,7 +46,7 @@
 
                 <!-- دلایل احتمالی -->
                 <div class="bg-orange-50 rounded-xl p-6 mb-8 text-right border border-orange-200">
-                    <h3 class="text-lg font-bold text-orange-800 mb-4">دلایل احتمالی</h3>
+                    <h3 class="text-lg  text-orange-800 mb-4">دلایل احتمالی</h3>
 
                     <div class="space-y-3 text-sm text-orange-700">
                         <div class="flex items-start space-x-2 space-x-reverse">
@@ -69,7 +69,7 @@
                 <!-- دکمه رفتن به تعرفه ها -->
                 <div class="flex justify-center">
                     <button @click="goToPlans"
-                        class="px-8 py-3 bg-red-600 text-white rounded-xl font-semibold hover:bg-red-700 transition-colors duration-200 shadow-lg hover:shadow-xl transform hover:scale-105 flex items-center space-x-2 space-x-reverse">
+                        class="px-8 py-3 bg-red-600 text-white rounded-xl  hover:bg-red-700 transition-colors duration-200 shadow-lg hover:shadow-xl transform hover:scale-105 flex items-center space-x-2 space-x-reverse">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />

@@ -8,7 +8,7 @@
                 <div class="bg-white rounded-2xl shadow-lg border border-gray-200 p-6 mb-6">
                     <div class="flex items-center justify-between">
                         <div>
-                            <h1 class="text-2xl sm:text-3xl font-bold text-gray-900">داشبورد مدیریت</h1>
+                            <h1 class="text-2xl sm:text-3xl  text-gray-900">داشبورد مدیریت</h1>
                             <p class="text-gray-600 mt-2">به سیستم رزرواسیون اتاق جلسات خوش آمدید</p>
                         </div>
                         <div class="bg-gradient-to-r from-green-500 to-green-600 text-white px-4 py-2 rounded-xl">
@@ -30,7 +30,7 @@
                             </div>
                             <div>
                                 <p class="text-gray-600 text-sm">اتاق‌های فعال</p>
-                                <p class="text-2xl font-bold text-gray-900">5</p>
+                                <p class="text-2xl  text-gray-900">5</p>
                             </div>
                         </div>
                     </div>
@@ -46,7 +46,7 @@
                             </div>
                             <div>
                                 <p class="text-gray-600 text-sm">کاربران فعال</p>
-                                <p class="text-2xl font-bold text-gray-900">24</p>
+                                <p class="text-2xl  text-gray-900">24</p>
                             </div>
                         </div>
                     </div>
@@ -62,7 +62,7 @@
                             </div>
                             <div>
                                 <p class="text-gray-600 text-sm">رزرو امروز</p>
-                                <p class="text-2xl font-bold text-gray-900">8</p>
+                                <p class="text-2xl  text-gray-900">8</p>
                             </div>
                         </div>
                     </div>
@@ -78,7 +78,7 @@
                             </div>
                             <div>
                                 <p class="text-gray-600 text-sm">لینک‌های فعال</p>
-                                <p class="text-2xl font-bold text-gray-900">3</p>
+                                <p class="text-2xl  text-gray-900">3</p>
                             </div>
                         </div>
                     </div>
@@ -86,7 +86,7 @@
 
                 <!-- رزروهای اخیر -->
                 <div class="bg-white rounded-2xl shadow-lg border border-gray-200 p-6">
-                    <h2 class="text-xl font-bold text-gray-900 mb-4">رزروهای اخیر</h2>
+                    <h2 class="text-xl  text-gray-900 mb-4">رزروهای اخیر</h2>
                     <div class="space-y-4">
                         <div v-for="i in 3" :key="i"
                             class="flex items-center justify-between p-4 bg-gray-50 rounded-xl">
@@ -246,28 +246,6 @@
                                         d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                                 </svg>
                             </div>
-                            <div class="text-right">
-                                <h2 class="text-2xl  text-gray-900">تعریف اتاق‌های جلسه</h2>
-                                <div class="flex items-center mt-1">
-                                    <span class="text-sm text-gray-500">وضعیت:</span>
-                                    <span v-if="isStepCompleted(1)"
-                                        class="mr-2 text-sm text-green-600 font-medium flex items-center">
-                                        <svg class="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20">
-                                            <path fill-rule="evenodd"
-                                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                                clip-rule="evenodd" />
-                                        </svg>
-                                        تکمیل شده
-                                    </span>
-                                    <span v-else class="mr-2 text-sm text-yellow-600 font-medium flex items-center">
-                                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                        </svg>
-                                        در انتظار انجام
-                                    </span>
-                                </div>
-                            </div>
                         </div>
 
                         <p class="text-gray-600 text-lg mb-6 leading-relaxed text-right">
@@ -317,14 +295,14 @@
                         </div>
 
                         <!-- لینک مستقیم -->
-                        <button @click="navigateToRooms"
+                        <NuxtLink to="/copanel/rooms"
                             class="w-full max-w-md mx-auto bg-orange-500 hover:bg-orange-600 text-white py-4 px-6 rounded-xl font-medium transition-all duration-300 transform hover:scale-105 flex items-center justify-center space-x-3 space-x-reverse shadow-lg">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                             </svg>
                             <span class="text-lg">برای تعریف اتاق اینجا کلیک کنید</span>
-                        </button>
+                        </NuxtLink>
                     </div>
 
                     <!-- مرحله ۲: تعریف کاربران -->
@@ -337,28 +315,6 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z" />
                                 </svg>
-                            </div>
-                            <div class="text-right">
-                                <h2 class="text-2xl  text-gray-900">تعریف کاربران سیستم</h2>
-                                <div class="flex items-center mt-1">
-                                    <span class="text-sm text-gray-500">وضعیت:</span>
-                                    <span v-if="isStepCompleted(2)"
-                                        class="mr-2 text-sm text-green-600 font-medium flex items-center">
-                                        <svg class="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20">
-                                            <path fill-rule="evenodd"
-                                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                                clip-rule="evenodd" />
-                                        </svg>
-                                        تکمیل شده
-                                    </span>
-                                    <span v-else class="mr-2 text-sm text-yellow-600 font-medium flex items-center">
-                                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                        </svg>
-                                        در انتظار انجام
-                                    </span>
-                                </div>
                             </div>
                         </div>
 
@@ -397,14 +353,14 @@
                         </div>
 
                         <!-- لینک مستقیم -->
-                        <button @click="navigateToUsers"
+                        <NuxtLink to="/copanel/users"
                             class="w-full max-w-md mx-auto bg-blue-500 hover:bg-blue-600 text-white py-4 px-6 rounded-xl font-medium transition-all duration-300 transform hover:scale-105 flex items-center justify-center space-x-3 space-x-reverse shadow-lg">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z" />
                             </svg>
                             <span class="text-lg">برای تعریف کاربران اینجا کلیک کنید</span>
-                        </button>
+                        </NuxtLink>
                     </div>
 
                     <!-- مرحله ۳: ساخت لینک -->
@@ -417,28 +373,6 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
                                 </svg>
-                            </div>
-                            <div class="text-right">
-                                <h2 class="text-2xl  text-gray-900">ساخت لینک ویژه رزرو</h2>
-                                <div class="flex items-center mt-1">
-                                    <span class="text-sm text-gray-500">وضعیت:</span>
-                                    <span v-if="isStepCompleted(3)"
-                                        class="mr-2 text-sm text-green-600 font-medium flex items-center">
-                                        <svg class="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20">
-                                            <path fill-rule="evenodd"
-                                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                                clip-rule="evenodd" />
-                                        </svg>
-                                        تکمیل شده
-                                    </span>
-                                    <span v-else class="mr-2 text-sm text-yellow-600 font-medium flex items-center">
-                                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                        </svg>
-                                        در انتظار انجام
-                                    </span>
-                                </div>
                             </div>
                         </div>
 
@@ -474,14 +408,14 @@
                         </div>
 
                         <!-- لینک مستقیم -->
-                        <button @click="navigateToLinks"
+                        <NuxtLink to="/copanel/link"
                             class="w-full max-w-md mx-auto bg-green-500 hover:bg-green-600 text-white py-4 px-6 rounded-xl font-medium transition-all duration-300 transform hover:scale-105 flex items-center justify-center space-x-3 space-x-reverse shadow-lg">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
                             </svg>
                             <span class="text-lg">برای ساخت لینک اینجا کلیک کنید</span>
-                        </button>
+                        </NuxtLink>
                     </div>
 
                     <!-- مرحله ۴: اولین رزرو -->
@@ -494,28 +428,6 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                 </svg>
-                            </div>
-                            <div class="text-right">
-                                <h2 class="text-2xl  text-gray-900">انجام اولین رزرو</h2>
-                                <div class="flex items-center mt-1">
-                                    <span class="text-sm text-gray-500">وضعیت:</span>
-                                    <span v-if="isStepCompleted(4)"
-                                        class="mr-2 text-sm text-green-600 font-medium flex items-center">
-                                        <svg class="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20">
-                                            <path fill-rule="evenodd"
-                                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                                clip-rule="evenodd" />
-                                        </svg>
-                                        تکمیل شده
-                                    </span>
-                                    <span v-else class="mr-2 text-sm text-yellow-600 font-medium flex items-center">
-                                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                        </svg>
-                                        در انتظار انجام
-                                    </span>
-                                </div>
                             </div>
                         </div>
 
@@ -552,28 +464,15 @@
                         </div>
 
                         <!-- لینک مستقیم -->
-                        <button @click="navigateToReservation"
+                        <NuxtLink to="/copanel/calander"
                             class="w-full max-w-md mx-auto bg-purple-500 hover:bg-purple-600 text-white py-4 px-6 rounded-xl font-medium transition-all duration-300 transform hover:scale-105 flex items-center justify-center space-x-3 space-x-reverse shadow-lg mb-4">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                             </svg>
                             <span class="text-lg">برای انجام رزرو اینجا کلیک کنید</span>
-                        </button>
+                        </NuxtLink>
 
-                        <!-- دوره آزمایشی -->
-                        <div class="bg-gradient-to-r from-orange-500 to-orange-600 rounded-xl p-4 text-white">
-                            <div class="flex items-center justify-center space-x-2 space-x-reverse mb-2">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                                <span class="">{{ daysLeft }} روز آزمایشی باقی مانده</span>
-                            </div>
-                            <p class="text-orange-100 text-sm">پس از اتمام دوره آزمایشی، می‌توانید سرویس را فعال نگه
-                                دارید
-                            </p>
-                        </div>
                     </div>
 
                     <!-- دکمه‌های ناوبری -->
@@ -628,7 +527,7 @@
 
 <script setup>
 definePageMeta({
-    layout: 'copanel'
+    layout: 'copanel',
 })
 
 // وضعیت فعلی ویزارد
@@ -684,39 +583,6 @@ const previousStep = () => {
 const goToStep = (step) => {
     // کاربر می‌تواند به هر مرحله‌ای برود
     currentStep.value = step
-}
-
-// توابع ناوبری به صفحات مختلف
-const navigateToRooms = () => {
-    console.log('Navigate to rooms management')
-    if (!completedSteps.value.includes(1)) {
-        completedSteps.value.push(1)
-    }
-    // navigateTo('/rooms')
-}
-
-const navigateToUsers = () => {
-    console.log('Navigate to users management')
-    if (!completedSteps.value.includes(2)) {
-        completedSteps.value.push(2)
-    }
-    // navigateTo('/users')
-}
-
-const navigateToLinks = () => {
-    console.log('Navigate to links creation')
-    if (!completedSteps.value.includes(3)) {
-        completedSteps.value.push(3)
-    }
-    // navigateTo('/links')
-}
-
-const navigateToReservation = () => {
-    console.log('Navigate to reservation')
-    if (!completedSteps.value.includes(4)) {
-        completedSteps.value.push(4)
-    }
-    // navigateTo('/reservation')
 }
 
 const completeWizard = () => {

@@ -30,6 +30,19 @@
         <g v-if="icon === 'home'" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
             <path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1V9.5z" />
         </g>
+
+        <!-- 💰 آیکون کیف پول -->
+        <g v-if="icon === 'wallet'" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+            <path d="M3 6h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z" />
+            <path d="M21 10h-4a2 2 0 0 0-2 2v0a2 2 0 0 0 2 2h4" />
+            <circle cx="17" cy="12" r="1" />
+        </g>
+
+        <!-- 👤 آیکون پروفایل -->
+        <g v-if="icon === 'profile'" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+            <circle cx="12" cy="8" r="4" />
+            <path d="M4 20c0-4 4-6 8-6s8 2 8 6" />
+        </g>
     </svg>
 </template>
 
@@ -38,7 +51,15 @@ defineProps({
     icon: {
         type: String,
         required: true,
-        validator: (value) => ['calendar', 'users', 'support', 'rooms', 'home'].includes(value)
+        validator: (value) => [
+            'calendar',
+            'users',
+            'support',
+            'rooms',
+            'home',
+            'wallet',
+            'profile' // 👈 آیکون جدید
+        ].includes(value)
     }
 })
 </script>

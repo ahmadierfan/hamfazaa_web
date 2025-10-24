@@ -258,8 +258,11 @@ const verifyOtp = async () => {
         // ذخیره توکن و اطلاعات کاربر
         const token = res.data.token;
         const user = res.data.user;
+        const remainingDays = res.data.remainingDays
+
         localStorage.setItem('jwt_token', token);
         localStorage.setItem('user_mobile', user.mobile);
+        localStorage.setItem('remaining_days', remainingDays)
 
         $updateAuthHeader(token);
         if (route.query.i && route.query.p)

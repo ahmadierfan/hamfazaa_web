@@ -59,7 +59,7 @@ import { useRouter } from 'vue-router'
 definePageMeta({ layout: "copanel" })
 
 const router = useRouter()
-const inviteLink = ref("https://hamfazaa.ir/usrpanel/login?i=" + "2")
+const inviteLink = ref("https://hamfazaa.ir/userpanel/login?i=" + "2")
 const copied = ref(false)
 
 const copyLink = async () => {

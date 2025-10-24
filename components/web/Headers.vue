@@ -51,7 +51,23 @@
                     </div>
                 </div>
                 <!-- دکمه‌های ورود/ثبت‌نام -->
-                <div class="hidden md:flex items-center space-x-3 space-x-reverse">
+
+                <div class="hidden md:flex items-center space-x-3 space-x-reverse" v-if="jwt_token">
+                    <NuxtLink to="/copanel"
+                        class="relative group px-6 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 overflow-hidden bg-gradient-to-r from-orange-500 to-amber-500 text-white shadow-lg hover:shadow-xl hover:from-orange-600 hover:to-amber-600 transform hover:-translate-y-0.5">
+                        <span class="relative z-10 flex items-center">
+                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
+                            </svg>
+                            ورود به تقویم
+                        </span>
+                        <div
+                            class="absolute inset-0 bg-gradient-to-r from-amber-600 to-orange-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        </div>
+                    </NuxtLink>
+                </div>
+                <div class="hidden md:flex items-center space-x-3 space-x-reverse" v-else>
                     <NuxtLink to="/login"
                         class="relative group px-6 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 overflow-hidden bg-gradient-to-r from-orange-500 to-amber-500 text-white shadow-lg hover:shadow-xl hover:from-orange-600 hover:to-amber-600 transform hover:-translate-y-0.5">
                         <span class="relative z-10 flex items-center">
@@ -180,6 +196,14 @@
 </template>
 
 <script setup>
+const jwt_token = ref()
+
+onMounted(() => {
+    if (process.client) {
+        jwt_token.value = localStorage.getItem('jwt_token')
+    }
+})
+
 const isOpen = ref(false)
 const activeLink = ref('home')
 </script>

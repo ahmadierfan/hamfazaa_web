@@ -95,7 +95,7 @@
                         <!-- هزینه کاربر اضافی -->
                         <div>
                             <label for="amountperhour" class="block text-sm font-medium text-gray-700 mb-2">
-                                هزینه کاربر اضافی (تومان) *
+                                هزینه کاربر اضافی (ریال) *
                             </label>
                             <input type="number" id="amountperhour" v-model="formData.amountperhour" required min="0"
                                 class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-300"
