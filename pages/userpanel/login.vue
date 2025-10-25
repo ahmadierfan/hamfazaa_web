@@ -98,7 +98,7 @@
                         </div>
                         <h1 class="text-3xl  text-gray-800">همفضا</h1>
                     </div>
-                    <p class="text-sm text-gray-600">پلتفرم ابری مدیریت فضاهای کار اشتراکی</p>
+                    <p class="text-sm text-gray-600">پلتفرم ابری مدیریت فضای کار </p>
                 </div>
 
                 <!-- فرم -->
@@ -106,7 +106,7 @@
 
                     <!-- هدر ساده -->
                     <div class="mb-8">
-                        <h2 class="text-2xl  text-gray-800 mb-2">ورود به پنل مدیریت</h2>
+                        <h2 class="text-2xl  text-gray-800 mb-2">ورود به پنل</h2>
                         <p class="text-sm text-gray-500">لطفاً شماره موبایل خود را وارد کنید</p>
                     </div>
 
