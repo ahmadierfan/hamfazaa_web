@@ -64,7 +64,8 @@ import { ref } from "vue";
 import { useRouter } from "vue-router";
 definePageMeta({ layout: "copanel" });
 
-const router = useRouter();
+const toast = useToast()
+
 const inviteLink = ref("https://hamfazaa.ir/userpanel/login?i=2");
 const copied = ref(false);
 
@@ -72,6 +73,7 @@ const copyLink = async () => {
     try {
         await navigator.clipboard.writeText(inviteLink.value);
         copied.value = true;
+        toast.success({ title: 'تایید', message: 'لینک کپی شد' })
         setTimeout(() => (copied.value = false), 2000);
     } catch {
         alert("کپی لینک انجام نشد، لطفاً دستی کپی کنید.");
