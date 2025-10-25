@@ -768,7 +768,12 @@ const refreshRoomData = async () => {
 
 // تابع جدید برای cell-touchstart در موبایل
 const onCellTouchStart = (event) => {
-    if (!selectedRoom.value || !selectedUser.value) {
+    if (!selectedUser.value) {
+        toast.error({ title: 'خطا!', message: 'کاربر را انتخاب نمایید' })
+        return
+    }
+    if (!selectedRoom.value) {
+        toast.error({ title: 'خطا!', message: 'اتاق را انتخاب نمایید' })
         return
     }
 
