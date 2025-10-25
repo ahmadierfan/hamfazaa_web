@@ -47,15 +47,17 @@
                     </div>
 
                     <!-- Main Heading -->
-                    <h1 class="text-5xl text-white animate-fade-in-up" style="animation-delay: 0.3s">همفضا</h1>
-                    <p class="text-4xl md:text-6xl lg:text-7xl leading-tight mb-6 animate-fade-in-up"
-                        style="animation-delay: 0.4s">
+                    <h1 class="text-5xl text-white animate-fade-in-up" style="animation-delay: 0.3s">
+                        همفضا - نرم افزار
+                        مدیریت فضای کار اشتراکی
+                    </h1>
+                    <p class="text-4xl md:text-6xl lg:text-7xl leading-tight mb-6 animate-fade-in-up">
                         <span
                             class="bg-gradient-to-l from-orange-400 via-amber-400 to-orange-400 bg-clip-text text-transparent">
-                            انقلابی در
+                            اولین سامانه هوشمند
                         </span>
                         <span class="text-white">
-                            مدیریت فضای کار
+                            مدیریت کاووسپیس در ایران
                         </span>
                     </p>
 
@@ -211,6 +213,7 @@
 </template>
 
 <script setup>
+
 // Animation keyframes
 const animations = `
   @keyframes float-slow {

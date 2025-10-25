@@ -18,6 +18,10 @@ export default defineNuxtConfig({
                 { rel: 'icon', type: 'ico', href: '/images/favicon.ico' },
             ],
             meta: [
+                {
+                    name: 'description',
+                    content: 'مدیریت هوشمند فضای کار اشتراکی با سامانه همفضا - رزرو آنلاین اتاق جلسه، مدیریت منابع و آنالیز پیشرفته برای کسب‌وکارها'
+                },
                 { name: 'robots', content: 'noindex, nofollow' }
             ],
             htmlAttrs: {
