@@ -81,7 +81,7 @@ const logOut = () => {
     $freeApi.post('logout')
         .then(() => {
             localStorage.removeItem('jwt_token')
-            navigateTo('/login')
+            navigateTo('/userpanel/login')
         })
 }
 </script>
