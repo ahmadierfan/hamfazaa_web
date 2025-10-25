@@ -6,13 +6,13 @@
                 <div class="flex items-center space-x-4 space-x-reverse">
                     <div class="flex-shrink-0">
                         <NuxtLink to="/"
-                            class="w-12 h-12 bg-gradient-to-br cursor-pointer from-orange-500 to-amber-600 rounded-2xl flex items-center justify-center shadow-lg">
+                            class="w-12 h-12 bg-gradient-to-br cursor-pointer from-orange-500 to-amber-600 rounded-2xl flex items-center justify-center shadow-lg hover:scale-105 transition-all duration-300">
                             <img src="/images/logo.png" alt="همفضا" />
                         </NuxtLink>
                     </div>
                     <div class="hidden sm:block">
                         <NuxtLink to="/"
-                            class="text-2xl bg-gradient-to-r from-orange-600 to-amber-600 bg-clip-text text-transparent">
+                            class="text-2xl bg-gradient-to-r from-orange-600 to-amber-600 bg-clip-text text-transparent font-bold hover:opacity-90 transition-all duration-300">
                             همفضا
                         </NuxtLink>
                         <p class="text-xs text-gray-500 mt-1">پلتفرم ابری حرفه‌ای</p>
@@ -91,52 +91,54 @@
             </div>
         </div>
 
-        <!-- منوی موبایل -->
-        <div v-if="isOpen" class="md:hidden bg-white/95 backdrop-blur-md border-t border-orange-100 shadow-2xl">
-            <div class="px-4 pt-3 pb-6 space-y-2">
-                <NuxtLink to="/"
-                    class="flex items-center px-4 py-3 rounded-xl text-base font-medium transition-all duration-300 group"
-                    :class="activeLink === 'home' ? 'text-orange-600 bg-orange-50' : 'text-gray-700 hover:text-orange-600 hover:bg-orange-50'"
-                    @click="handleMobileClick('home')">
-                    <svg class="w-5 h-5 ml-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M3 12l2-2m0 0l7-7 7 7" />
-                    </svg>
-                    خانه
-                </NuxtLink>
-
-                <NuxtLink to="/pricing"
-                    class="flex items-center px-4 py-3 rounded-xl text-base font-medium transition-all duration-300 group"
-                    :class="activeLink === 'pricing' ? 'text-orange-600 bg-orange-50' : 'text-gray-700 hover:text-orange-600 hover:bg-orange-50'"
-                    @click="handleMobileClick('pricing')">
-                    <svg class="w-5 h-5 ml-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2" />
-                    </svg>
-                    تعرفه‌ها
-                </NuxtLink>
-
-                <div class="pt-4 mt-4 border-t border-orange-100 space-y-3">
-                    <NuxtLink v-if="!jwt_token" to="/login"
-                        class="w-full flex items-center justify-center px-4 py-3 rounded-xl text-sm font-medium bg-gradient-to-r from-orange-500 to-amber-500 text-white shadow-lg hover:shadow-xl hover:from-orange-600 hover:to-amber-600 transition-all duration-300"
-                        @click="isOpen = false">
-                        ورود به حساب
+        <!-- منوی موبایل با انیمیشن -->
+        <transition name="slide-fade">
+            <div v-if="isOpen" class="md:hidden bg-white/95 backdrop-blur-md border-t border-orange-100 shadow-2xl">
+                <div class="px-4 pt-3 pb-6 space-y-2">
+                    <NuxtLink to="/"
+                        class="flex items-center px-4 py-3 rounded-xl text-base font-medium transition-all duration-300 group"
+                        :class="activeLink === 'home' ? 'text-orange-600 bg-orange-50' : 'text-gray-700 hover:text-orange-600 hover:bg-orange-50'"
+                        @click="handleMobileClick('home')">
+                        <svg class="w-5 h-5 ml-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 12l2-2m0 0l7-7 7 7" />
+                        </svg>
+                        خانه
                     </NuxtLink>
 
-                    <NuxtLink v-if="!jwt_token" to="/register"
-                        class="w-full flex items-center justify-center px-4 py-3 rounded-xl text-sm font-medium border-2 border-orange-200 text-orange-600 hover:bg-orange-50 hover:border-orange-300 transition-all duration-300"
-                        @click="isOpen = false">
-                        ایجاد حساب جدید
+                    <NuxtLink to="/pricing"
+                        class="flex items-center px-4 py-3 rounded-xl text-base font-medium transition-all duration-300 group"
+                        :class="activeLink === 'pricing' ? 'text-orange-600 bg-orange-50' : 'text-gray-700 hover:text-orange-600 hover:bg-orange-50'"
+                        @click="handleMobileClick('pricing')">
+                        <svg class="w-5 h-5 ml-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2" />
+                        </svg>
+                        تعرفه‌ها
                     </NuxtLink>
 
-                    <NuxtLink v-else to="/copanel"
-                        class="w-full flex items-center justify-center px-4 py-3 rounded-xl text-sm font-medium bg-gradient-to-r from-orange-500 to-amber-500 text-white shadow-lg hover:shadow-xl hover:from-orange-600 hover:to-amber-600 transition-all duration-300"
-                        @click="isOpen = false">
-                        ورود به تقویم
-                    </NuxtLink>
+                    <div class="pt-4 mt-4 border-t border-orange-100 space-y-3">
+                        <NuxtLink v-if="!jwt_token" to="/login"
+                            class="w-full flex items-center justify-center px-4 py-3 rounded-xl text-sm font-medium bg-gradient-to-r from-orange-500 to-amber-500 text-white shadow-lg hover:shadow-xl hover:from-orange-600 hover:to-amber-600 transition-all duration-300"
+                            @click="isOpen = false">
+                            ورود به حساب
+                        </NuxtLink>
+
+                        <NuxtLink v-if="!jwt_token" to="/register"
+                            class="w-full flex items-center justify-center px-4 py-3 rounded-xl text-sm font-medium border-2 border-orange-200 text-orange-600 hover:bg-orange-50 hover:border-orange-300 transition-all duration-300"
+                            @click="isOpen = false">
+                            ایجاد حساب جدید
+                        </NuxtLink>
+
+                        <NuxtLink v-else to="/copanel"
+                            class="w-full flex items-center justify-center px-4 py-3 rounded-xl text-sm font-medium bg-gradient-to-r from-orange-500 to-amber-500 text-white shadow-lg hover:shadow-xl hover:from-orange-600 hover:to-amber-600 transition-all duration-300"
+                            @click="isOpen = false">
+                            ورود به تقویم
+                        </NuxtLink>
+                    </div>
                 </div>
             </div>
-        </div>
+        </transition>
     </nav>
 </template>
 
@@ -163,3 +165,24 @@ const handleMobileClick = (link) => {
     isOpen.value = false
 }
 </script>
+
+<style scoped>
+/* 🌟 انیمیشن نرم باز و بسته شدن منوی موبایل */
+.slide-fade-enter-active {
+    transition: all 0.4s ease;
+}
+
+.slide-fade-leave-active {
+    transition: all 0.3s ease;
+}
+
+.slide-fade-enter-from {
+    opacity: 0;
+    transform: translateY(-10px);
+}
+
+.slide-fade-leave-to {
+    opacity: 0;
+    transform: translateY(-10px);
+}
+</style>
