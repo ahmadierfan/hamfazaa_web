@@ -24,7 +24,7 @@ export default defineNuxtConfig({
                 lang: 'fa',
                 dir: 'rtl',
             },
-            title: 'همفضا'
+            title: 'نرم افزار مدیریت فضای کار اشتراکی'
         },
     },
     runtimeConfig: {

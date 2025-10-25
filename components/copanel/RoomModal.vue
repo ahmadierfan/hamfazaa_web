@@ -42,9 +42,10 @@
                             <label for="capacity" class="block text-sm font-medium text-gray-700 mb-2">
                                 ظرفیت (نفر) *
                             </label>
-                            <input type="number" id="capacity" v-model="formData.capacity" required min="1"
-                                class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-300"
-                                placeholder="۱۰">
+                            <input type="text" id="capacity" v-model="displayValues.capacity" required
+                                @input="handleNumericInput('capacity', $event)"
+                                class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-300 text-left"
+                                placeholder="۱۰" dir="ltr">
                         </div>
 
                         <!-- ساعت شروع -->
@@ -83,13 +84,13 @@
 
                         <!-- حداکثر ساعت رزرو -->
                         <div>
-                            <label for="maxhoursperuser" class="block text-sm font-medium text-gray-700 mb-2">
-                                حداکثر ساعت رزرو برای هر کاربر *
+                            <label for="maxhoursperweek" class="block text-sm font-medium text-gray-700 mb-2">
+                                حداکثر ساعت رزرو برای هر کاربر در هفته *
                             </label>
-                            <input type="number" id="maxhoursperuser" v-model="formData.maxhoursperweek" required
-                                min="1" max="24"
-                                class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-300"
-                                placeholder="۴">
+                            <input type="text" id="maxhoursperweek" v-model="displayValues.maxhoursperweek" required
+                                @input="handleNumericInput('maxhoursperweek', $event)"
+                                class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-300 text-left"
+                                placeholder="۴" dir="ltr">
                         </div>
 
                         <!-- هزینه کاربر اضافی -->
@@ -97,9 +98,10 @@
                             <label for="amountperhour" class="block text-sm font-medium text-gray-700 mb-2">
                                 هزینه کاربر اضافی (ریال) *
                             </label>
-                            <input type="number" id="amountperhour" v-model="formData.amountperhour" required min="0"
-                                class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-300"
-                                placeholder="۵۰۰۰۰">
+                            <input type="text" id="amountperhour" v-model="displayValues.amountperhour" required
+                                @input="handleNumericInput('amountperhour', $event)"
+                                class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-300 text-left font-mono"
+                                placeholder="۵۰,۰۰۰" dir="ltr">
                         </div>
 
                         <!-- وضعیت -->
@@ -171,52 +173,125 @@ const availableDaysOptions = [
 
 // داده‌های فرم
 const formData = ref({
-    name: '',
+    room: '',
     capacity: 10,
     starttime: '08:00',
     endtime: '18:00',
     availabledays: ['saturday', 'sunday', 'monday', 'tuesday', 'wednesday'],
-    maxhoursperuser: 4,
+    maxhoursperweek: 4,
     amountperhour: 50000,
     isactive: 1,
     description: ''
 })
+
+// مقادیر نمایشی برای فیلدهای عددی
+const displayValues = ref({
+    capacity: '10',
+    maxhoursperweek: '4',
+    amountperhour: '50,000'
+})
+
+// تابع برای تبدیل اعداد فارسی به انگلیسی
+const convertPersianToEnglish = (str) => {
+    const persianNumbers = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
+    const englishNumbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+
+    return str.toString().split('').map(char => {
+        const index = persianNumbers.indexOf(char);
+        return index !== -1 ? englishNumbers[index] : char;
+    }).join('');
+}
+
+// تابع برای فرمت کردن اعداد با جداکننده هزارگان
+const formatNumber = (num) => {
+    if (num === null || num === undefined) return '';
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+
+// تابع برای حذف جداکننده‌ها و تبدیل به عدد
+const parseFormattedNumber = (str) => {
+    if (!str) return 0;
+    const cleaned = convertPersianToEnglish(str).replace(/,/g, '');
+    return parseInt(cleaned) || 0;
+}
+
+// تابع برای مدیریت ورود اعداد
+const handleNumericInput = (field, event) => {
+    let value = event.target.value;
+
+    // حذف همه کاراکترهای غیرعددی به جز کاما
+    value = value.replace(/[^\d,]/g, '');
+
+    // تبدیل اعداد فارسی به انگلیسی
+    value = convertPersianToEnglish(value);
+
+    // حذف کاماهای اضافی و فرمت مجدد
+    const numericValue = value.replace(/,/g, '');
+    if (numericValue === '') {
+        displayValues.value[field] = '';
+        formData.value[field] = 0;
+        return;
+    }
+
+    const number = parseInt(numericValue);
+    if (!isNaN(number)) {
+        formData.value[field] = number;
+        displayValues.value[field] = formatNumber(number);
+    }
+}
+
+// تابع برای مقداردهی اولیه مقادیر نمایشی
+const initializeDisplayValues = () => {
+    displayValues.value.capacity = formatNumber(formData.value.capacity);
+    displayValues.value.maxhoursperweek = formatNumber(formData.value.maxhoursperweek);
+    displayValues.value.amountperhour = formatNumber(formData.value.amountperhour);
+}
 
 // ریست فرم هنگام باز شدن مودال
 watch(() => props.isOpen, (newVal) => {
     if (newVal) {
         if (props.mode === 'edit' && props.room) {
             // پر کردن فرم با داده‌های اتاق
-            formData.value = { ...props.room }
+            formData.value = { ...props.room };
+            initializeDisplayValues();
         } else {
             // ریست فرم برای ایجاد اتاق جدید
             formData.value = {
-                name: '',
+                room: '',
                 capacity: 10,
                 starttime: '08:00',
                 endtime: '18:00',
                 availabledays: ['saturday', 'sunday', 'monday', 'tuesday', 'wednesday'],
-                maxhoursperuser: 4,
+                maxhoursperweek: 4,
                 amountperhour: 50000,
                 isactive: 1,
                 description: ''
-            }
+            };
+            initializeDisplayValues();
         }
     }
 })
 
 // توابع
 const closeModal = () => {
-    emit('close')
+    emit('close');
 }
 
 const handleSubmit = () => {
     // اعتبارسنجی حداقل یک روز انتخاب شده باشد
     if (formData.value.availabledays.length === 0) {
-        alert('لطفاً حداقل یک روز را انتخاب کنید')
-        return
+        alert('لطفاً حداقل یک روز را انتخاب کنید');
+        return;
     }
 
-    emit('save', formData.value)
+    // اطمینان از تبدیل نهایی اعداد
+    const submitData = {
+        ...formData.value,
+        capacity: parseFormattedNumber(displayValues.value.capacity),
+        maxhoursperweek: parseFormattedNumber(displayValues.value.maxhoursperweek),
+        amountperhour: parseFormattedNumber(displayValues.value.amountperhour)
+    };
+
+    emit('save', submitData);
 }
 </script>
