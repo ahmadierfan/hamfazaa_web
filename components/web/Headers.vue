@@ -2,14 +2,13 @@
     <nav class="bg-white/95 backdrop-blur-md shadow-xl sticky top-0 z-50 border-b border-orange-100">
         <div class="max-w-7xl mx-auto px-4">
             <div class="flex justify-between items-center h-20">
+
                 <!-- لوگو -->
                 <div class="flex items-center space-x-4 space-x-reverse">
-                    <div class="flex-shrink-0">
-                        <NuxtLink to="/"
-                            class="w-12 h-12 bg-gradient-to-br cursor-pointer from-orange-500 to-amber-600 rounded-2xl flex items-center justify-center shadow-lg hover:scale-105 transition-all duration-300">
-                            <img src="/images/logo.png" alt="همفضا" />
-                        </NuxtLink>
-                    </div>
+                    <NuxtLink to="/"
+                        class="w-12 h-12 bg-gradient-to-br cursor-pointer from-orange-500 to-amber-600 rounded-2xl flex items-center justify-center shadow-lg hover:scale-105 transition-all duration-300">
+                        <img src="/images/logo.png" alt="همفضا" />
+                    </NuxtLink>
                     <div class="hidden sm:block">
                         <NuxtLink to="/"
                             class="text-2xl bg-gradient-to-r from-orange-600 to-amber-600 bg-clip-text text-transparent font-bold hover:opacity-90 transition-all duration-300">
@@ -27,9 +26,10 @@
                             :class="activeLink === 'home' ? 'text-orange-600 bg-orange-50' : 'text-gray-700 hover:text-orange-600'"
                             @click="setActive('home')">
                             <span class="flex items-center">
+                                <!-- آیکون خانه -->
                                 <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                                        d="M3 12l9-9 9 9v9a1 1 0 01-1 1h-5a1 1 0 01-1-1v-4H9v4a1 1 0 01-1 1H3z" />
                                 </svg>
                                 خانه
                             </span>
@@ -40,9 +40,10 @@
                             :class="activeLink === 'pricing' ? 'text-orange-600 bg-orange-50' : 'text-gray-700 hover:text-orange-600'"
                             @click="setActive('pricing')">
                             <span class="flex items-center">
+                                <!-- آیکون تعرفه‌ها (تگ قیمت) -->
                                 <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
+                                        d="M7 7l10 10M7 7V3a1 1 0 011-1h3l10 10-4 4L7 7zM5 13a2 2 0 104 0 2 2 0 00-4 0z" />
                                 </svg>
                                 تعرفه‌ها
                             </span>
@@ -54,7 +55,8 @@
                 <div v-if="jwt_token" class="hidden md:flex items-center space-x-3 space-x-reverse">
                     <NuxtLink to="/copanel"
                         class="relative group px-6 py-2.5 rounded-xl text-sm font-medium bg-gradient-to-r from-orange-500 to-amber-500 text-white shadow-lg hover:shadow-xl hover:from-orange-600 hover:to-amber-600 transform hover:-translate-y-0.5 transition-all duration-300">
-                        <span class="relative z-10 flex items-center">
+                        <span class="flex items-center">
+                            <!-- آیکون فلش ورود -->
                             <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M11 16l-4-4m0 0l4-4m-4 4h14" />
@@ -66,10 +68,9 @@
 
                 <div v-else class="hidden md:flex items-center space-x-3 space-x-reverse">
                     <NuxtLink to="/login"
-                        class="relative group px-6 py-2.5 rounded-xl text-sm font-medium bg-gradient-to-r from-orange-500 to-amber-500 text-white shadow-lg hover:shadow-xl hover:from-orange-600 hover:to-amber-600 transform hover:-translate-y-0.5 transition-all duration-300">
+                        class="px-6 py-2.5 rounded-xl text-sm font-medium bg-gradient-to-r from-orange-500 to-amber-500 text-white shadow-lg hover:shadow-xl hover:from-orange-600 hover:to-amber-600 transform hover:-translate-y-0.5 transition-all duration-300">
                         ورود
                     </NuxtLink>
-
                     <NuxtLink to="/register"
                         class="px-6 py-2.5 rounded-xl text-sm font-medium border-2 border-orange-200 text-orange-600 hover:bg-orange-50 hover:border-orange-300 transform hover:-translate-y-0.5 transition-all duration-300">
                         ثبت‌نام
@@ -91,17 +92,18 @@
             </div>
         </div>
 
-        <!-- منوی موبایل با انیمیشن -->
-        <transition name="slide-fade">
-            <div v-if="isOpen" class="md:hidden bg-white/95 backdrop-blur-md border-t border-orange-100 shadow-2xl">
-                <div class="px-4 pt-3 pb-6 space-y-2">
+        <!-- منوی موبایل با انیمیشن حرفه‌ای -->
+        <transition name="spring-fade">
+            <div v-if="isOpen"
+                class="md:hidden bg-white/95 backdrop-blur-md border-t border-orange-100 shadow-2xl rounded-b-3xl overflow-hidden">
+                <div class="px-4 pt-3 pb-6 space-y-2 animate-fadeSlide">
                     <NuxtLink to="/"
                         class="flex items-center px-4 py-3 rounded-xl text-base font-medium transition-all duration-300 group"
                         :class="activeLink === 'home' ? 'text-orange-600 bg-orange-50' : 'text-gray-700 hover:text-orange-600 hover:bg-orange-50'"
                         @click="handleMobileClick('home')">
                         <svg class="w-5 h-5 ml-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M3 12l2-2m0 0l7-7 7 7" />
+                                d="M3 12l9-9 9 9v9a1 1 0 01-1 1h-5a1 1 0 01-1-1v-4H9v4a1 1 0 01-1 1H3z" />
                         </svg>
                         خانه
                     </NuxtLink>
@@ -112,7 +114,7 @@
                         @click="handleMobileClick('pricing')">
                         <svg class="w-5 h-5 ml-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2" />
+                                d="M7 7l10 10M7 7V3a1 1 0 011-1h3l10 10-4 4L7 7zM5 13a2 2 0 104 0 2 2 0 00-4 0z" />
                         </svg>
                         تعرفه‌ها
                     </NuxtLink>
@@ -167,22 +169,37 @@ const handleMobileClick = (link) => {
 </script>
 
 <style scoped>
-/* 🌟 انیمیشن نرم باز و بسته شدن منوی موبایل */
-.slide-fade-enter-active {
-    transition: all 0.4s ease;
+/* 🌟 انیمیشن نرم و طبیعی منوی موبایل */
+@keyframes fadeSlide {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.98);
+    }
+
+    60% {
+        opacity: 1;
+        transform: translateY(4px) scale(1.02);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
 }
 
-.slide-fade-leave-active {
-    transition: all 0.3s ease;
+.animate-fadeSlide {
+    animation: fadeSlide 0.45s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-.slide-fade-enter-from {
+/* برای انتقال طبیعی هنگام حذف */
+.spring-fade-enter-active,
+.spring-fade-leave-active {
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.spring-fade-enter-from,
+.spring-fade-leave-to {
     opacity: 0;
-    transform: translateY(-10px);
-}
-
-.slide-fade-leave-to {
-    opacity: 0;
-    transform: translateY(-10px);
+    transform: translateY(-10px) scale(0.98);
 }
 </style>
