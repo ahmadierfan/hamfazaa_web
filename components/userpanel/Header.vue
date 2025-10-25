@@ -25,18 +25,8 @@
 
             <!-- بخش وسط: نمایش روزهای باقی مانده -->
             <div class="flex-1 flex justify-center">
-                <div v-if="subscriptionDays !== null"
-                    class="bg-orange-400 px-4 py-2 rounded-lg shadow-sm flex items-center space-x-2 space-x-reverse">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <span class="font-medium">
-                        {{ subscriptionDays > 0 ? `${subscriptionDays} روز باقی مانده` : 'اشتراک منقضی شده' }}
-                    </span>
-                </div>
-                <div v-else class="bg-orange-400 px-4 py-2 rounded-lg shadow-sm">
-                    <span class="font-medium">اشتراک ماهانه</span>
+                <div class="bg-orange-400 px-4 py-2 rounded-lg shadow-sm">
+                    <span class="font-medium">پنل کاربر</span>
                 </div>
             </div>
 
