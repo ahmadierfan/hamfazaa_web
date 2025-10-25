@@ -187,7 +187,7 @@ definePageMeta({ layout: 'blank' })
 
 const { $freeApi, $updateAuthHeader } = useNuxtApp()
 const router = useRouter()
-const route = useRouter()
+const route = useRoute()
 const loadingStore = useLoadingStore()
 
 const mobile = ref('')
