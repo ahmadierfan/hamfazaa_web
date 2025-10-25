@@ -18,7 +18,7 @@
                     </div>
                     <div>
                         <h1 class="text-xl ">همفضا</h1>
-                        <p class="text-xs text-orange-100 opacity-80">پلتفرم ابری</p>
+                        <p class="text-xs text-orange-100 opacity-80">فعال</p>
                     </div>
                 </div>
             </div>
