@@ -22,15 +22,13 @@
                     </div>
 
                     <h2 class="text-2xl text-white mb-3 leading-relaxed">
-                        پلتفرم ابری مدیریت<br />
-                        فضاهای کار اشتراکی
+                        پلتفرم ابری مدیریت<br /> فضاهای کار اشتراکی
                     </h2>
                     <p class="text-white/80 text-base leading-relaxed">
                         مدیریت حرفه‌ای اعضا، رزرواسیون‌ها و مالی در یک پلتفرم یکپارچه
                     </p>
                 </div>
 
-                <!-- ویژگی‌ها -->
                 <div class="space-y-6">
                     <div class="flex items-start gap-4" v-for="(item, i) in features" :key="i">
                         <div
@@ -126,10 +124,16 @@
                             تایید و ورود
                         </button>
 
-                        <button @click="resendOtp"
-                            class="w-full text-sm text-orange-600 hover:text-orange-700 font-medium transition-colors">
-                            ارسال مجدد کد
-                        </button>
+                        <!-- 🔹 تایمر و ارسال مجدد -->
+                        <div class="text-center">
+                            <button v-if="resendTimer === 0" @click="resendOtp"
+                                class="w-full text-sm text-orange-600 hover:text-orange-700 font-medium transition-colors">
+                                ارسال مجدد کد
+                            </button>
+                            <p v-else class="text-sm text-gray-500 font-medium">
+                                لطفاً {{ formattedTime }} تا امکان ارسال مجدد صبر کنید
+                            </p>
+                        </div>
                     </div>
                 </div>
 
@@ -145,7 +149,7 @@
 </template>
 
 <script setup>
-import { ref, nextTick } from 'vue'
+import { ref, nextTick, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useLoadingStore } from '@/stores/loading'
 
@@ -160,6 +164,8 @@ const mobile = ref('')
 const otpSent = ref(false)
 const otpDigits = ref(['', '', '', ''])
 const otpRefs = ref([])
+const resendTimer = ref(0)
+let timerInterval = null
 
 const features = [
     { title: 'مدیریت یکپارچه', desc: 'کنترل کامل اعضا، رزروها و پرداخت‌ها' },
@@ -167,11 +173,28 @@ const features = [
     { title: 'گزارش‌گیری هوشمند', desc: 'تحلیل و بررسی عملکرد به صورت لحظه‌ای' }
 ]
 
-// 🔹 تبدیل اعداد فارسی و عربی به انگلیسی
+// تبدیل اعداد فارسی و عربی به انگلیسی
 const toEnglishDigits = (str) => {
     return str
         .replace(/[۰-۹]/g, d => String.fromCharCode(d.charCodeAt(0) - 1728)) // فارسی
         .replace(/[٠-٩]/g, d => String.fromCharCode(d.charCodeAt(0) - 1632)) // عربی
+}
+
+// فرمت تایمر (دقیقه:ثانیه)
+const formattedTime = computed(() => {
+    const m = Math.floor(resendTimer.value / 60)
+    const s = resendTimer.value % 60
+    return `${m}:${s.toString().padStart(2, '0')}`
+})
+
+// شروع تایمر
+const startTimer = () => {
+    resendTimer.value = 120
+    clearInterval(timerInterval)
+    timerInterval = setInterval(() => {
+        if (resendTimer.value > 0) resendTimer.value--
+        else clearInterval(timerInterval)
+    }, 1000)
 }
 
 const sendOtp = async () => {
@@ -180,6 +203,7 @@ const sendOtp = async () => {
         if (route.query.i) {
             await $freeApi.post('auth/user-otp', { sendedto: mobile.value })
             otpSent.value = true
+            startTimer()
             nextTick(() => otpRefs.value[0]?.focus())
         } else {
             toast.error({ title: 'خطا!', message: 'خطای شرکت' })
@@ -220,6 +244,7 @@ const verifyOtp = async () => {
 }
 
 const resendOtp = () => {
+    if (resendTimer.value > 0) return
     otpDigits.value = ['', '', '', '']
     sendOtp()
 }
@@ -228,5 +253,10 @@ const editNumber = () => {
     otpSent.value = false
     otpDigits.value = ['', '', '', '']
     mobile.value = ''
+    clearInterval(timerInterval)
 }
 </script>
+
+<style scoped>
+/* فقط tailwind */
+</style>

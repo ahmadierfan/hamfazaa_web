@@ -50,7 +50,7 @@ import { ref, onMounted } from 'vue'
 
 const { $freeApi } = useNuxtApp()
 const subscriptionDays = ref(null)
-const sidebarStore = useSidebarStore()
+const sidebarStore = useUserSidebarStore()
 
 // تابع برای محاسبه روزهای باقی مانده
 const calculateRemainingDays = (expiryDate) => {
