@@ -88,7 +88,6 @@ onMounted(() => {
     // اگر از localStorage استفاده می‌کنید، باید از process.client اطمینان حاصل کنید
     if (process.client) {
         remainingDaysFromStorage.value = localStorage.getItem('remaining_days')
-        console.log(remainingDaysFromStorage.value)
     }
     //fetchSubscriptionInfo()
 })
