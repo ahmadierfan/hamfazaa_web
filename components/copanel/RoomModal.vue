@@ -85,7 +85,7 @@
                         <!-- حداکثر ساعت رزرو -->
                         <div>
                             <label for="maxhoursperweek" class="block text-sm font-medium text-gray-700 mb-2">
-                                حداکثر ساعت رزرو برای هر کاربر در هفته *
+                                حداکثر ساعت رایگان برای هرکاربر در هفته*
                             </label>
                             <input type="text" id="maxhoursperweek" v-model="displayValues.maxhoursperweek" required
                                 @input="handleNumericInput('maxhoursperweek', $event)"
@@ -96,7 +96,7 @@
                         <!-- هزینه کاربر اضافی -->
                         <div>
                             <label for="amountperhour" class="block text-sm font-medium text-gray-700 mb-2">
-                                هزینه کاربر اضافی (ریال) *
+                                هزینه هر ساعت اضافی (ریال) *
                             </label>
                             <input type="text" id="amountperhour" v-model="displayValues.amountperhour" required
                                 @input="handleNumericInput('amountperhour', $event)"
