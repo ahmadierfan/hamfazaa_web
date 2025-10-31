@@ -38,7 +38,7 @@
                 <p class="text-xl text-gray-600 max-w-2xl mx-auto">
                     پلن‌های متنوع همفضا برای کسب‌وکارهای مختلف
                     <br>
-                    <span class="text-orange-600 ">۷ روز تست رایگان</span>
+                    <span class="text-orange-600 ">۲ ماه تست رایگان</span>
                 </p>
 
                 <!-- انتخابگر نوع پلن -->
