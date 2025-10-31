@@ -74,8 +74,8 @@
                             <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
                                 <label v-for="day in availableDaysOptions" :key="day.value"
                                     class="flex items-center p-3 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50 transition-colors duration-200"
-                                    :class="{ 'bg-orange-50 border-orange-500': formData.availabledays.includes(day.value) }">
-                                    <input type="checkbox" :value="day.value" v-model="formData.availabledays"
+                                    :class="{ 'bg-orange-50 border-orange-500': formData.selectedDays.includes(day.value) }">
+                                    <input type="checkbox" :value="day.value" v-model="formData.selectedDays"
                                         class="hidden">
                                     <span class="text-sm font-medium text-gray-700">{{ day.label }}</span>
                                 </label>
@@ -177,7 +177,7 @@ const formData = ref({
     capacity: 10,
     starttime: '08:00',
     endtime: '18:00',
-    availabledays: ['saturday', 'sunday', 'monday', 'tuesday', 'wednesday'],
+    selectedDays: ['saturday', 'sunday', 'monday', 'tuesday', 'wednesday'],
     maxhoursperweek: 4,
     amountperhour: 50000,
     isactive: 1,
@@ -247,12 +247,52 @@ const initializeDisplayValues = () => {
     displayValues.value.amountperhour = formatNumber(formData.value.amountperhour);
 }
 
+// تابع برای پردازش روزهای دریافتی از سرور
+const processAvailableDays = (roomData) => {
+    if (!roomData) return ['saturday', 'sunday', 'monday', 'tuesday', 'wednesday'];
+
+    // اولویت‌های مختلف برای یافتن روزها
+    const possibleFields = [
+        roomData.selectedDays,
+        roomData.availableDays,
+        roomData.available_days,
+        roomData.parsedAvailableDays,
+        roomData.availabledays
+    ];
+
+    for (const field of possibleFields) {
+        if (Array.isArray(field) && field.length > 0) {
+            return field;
+        }
+
+        if (typeof field === 'string' && field.trim() !== '') {
+            try {
+                const cleanString = field.replace(/\\/g, '');
+                const parsed = JSON.parse(cleanString);
+                if (Array.isArray(parsed) && parsed.length > 0) {
+                    return parsed;
+                }
+            } catch (e) {
+                console.error('Error parsing available days:', e);
+            }
+        }
+    }
+
+    return ['saturday', 'sunday', 'monday', 'tuesday', 'wednesday'];
+}
+
 // ریست فرم هنگام باز شدن مودال
 watch(() => props.isOpen, (newVal) => {
     if (newVal) {
         if (props.mode === 'edit' && props.room) {
             // پر کردن فرم با داده‌های اتاق
-            formData.value = { ...props.room };
+            const roomData = { ...props.room };
+
+            formData.value = {
+                ...roomData,
+                selectedDays: processAvailableDays(roomData)
+            };
+
             initializeDisplayValues();
         } else {
             // ریست فرم برای ایجاد اتاق جدید
@@ -261,7 +301,7 @@ watch(() => props.isOpen, (newVal) => {
                 capacity: 10,
                 starttime: '08:00',
                 endtime: '18:00',
-                availabledays: ['saturday', 'sunday', 'monday', 'tuesday', 'wednesday'],
+                selectedDays: ['saturday', 'sunday', 'monday', 'tuesday', 'wednesday'],
                 maxhoursperweek: 4,
                 amountperhour: 50000,
                 isactive: 1,
@@ -279,7 +319,7 @@ const closeModal = () => {
 
 const handleSubmit = () => {
     // اعتبارسنجی حداقل یک روز انتخاب شده باشد
-    if (formData.value.availabledays.length === 0) {
+    if (formData.value.selectedDays.length === 0) {
         alert('لطفاً حداقل یک روز را انتخاب کنید');
         return;
     }
@@ -289,8 +329,14 @@ const handleSubmit = () => {
         ...formData.value,
         capacity: parseFormattedNumber(displayValues.value.capacity),
         maxhoursperweek: parseFormattedNumber(displayValues.value.maxhoursperweek),
-        amountperhour: parseFormattedNumber(displayValues.value.amountperhour)
+        amountperhour: parseFormattedNumber(displayValues.value.amountperhour),
+        // ارسال روزهای انتخاب شده تحت نام استاندارد
+        availabledays: formData.value.selectedDays
     };
+
+    // حذف فیلدهای موقت
+    delete submitData.selectedDays;
+    delete submitData.parsedAvailableDays;
 
     emit('save', submitData);
 }

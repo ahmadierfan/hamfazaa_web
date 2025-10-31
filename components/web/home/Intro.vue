@@ -91,7 +91,7 @@
                                 class="absolute inset-0 bg-gradient-to-r from-orange-600 to-amber-600 opacity-0 group-hover:opacity-100 transition duration-500">
                             </div>
                             <span class="relative z-10 flex items-center justify-center">
-                                شروع رایگان 7 روزه
+                                ۲ ماه استفاده رایگان
                                 <svg class="w-5 h-5 mr-2 transform group-hover:translate-x-1 transition duration-300"
                                     fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

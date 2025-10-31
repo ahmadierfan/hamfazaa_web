@@ -142,12 +142,12 @@
 
                 <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
                     <div class="p-6 calendar-wrapper">
-                        <vue-cal :time="true" :events="filteredEvents" :locale="locale" @event-create="onEventCreate"
-                            :disable-views="['years', 'year']" :selected-date="selectedDate" active-view="month"
-                            :min-date="minSelectableDate" @cell-click="onCellClick" @event-click="onEventClick"
-                            @event-drop="onEventDrop" @event-duration-change="onEventDurationChange"
-                            @event-delete="onEventDelete" @view-change="onViewChange" @ready="onCalendarReady"
-                            :editable-events="{
+                        <vue-cal :time="true" @cell-touchstart="onCellTouchStart" :events="filteredEvents"
+                            :locale="locale" @event-create="onEventCreate" :disable-views="['years', 'year']"
+                            :selected-date="selectedDate" active-view="month" :min-date="minSelectableDate"
+                            @cell-click="onCellClick" @event-click="onEventClick" @event-drop="onEventDrop"
+                            @event-duration-change="onEventDurationChange" @event-delete="onEventDelete"
+                            @view-change="onViewChange" @ready="onCalendarReady" :editable-events="{
                                 title: true,
                                 drag: true,
                                 resize: true,
@@ -564,6 +564,30 @@ const refreshRoomData = async () => {
     }
 }
 
+
+// تابع جدید برای cell-touchstart در موبایل
+const onCellTouchStart = (event) => {
+
+    if (!selectedRoom.value) {
+        toast.error({ title: 'خطا!', message: 'اتاق را انتخاب نمایید' })
+        return
+    }
+
+    // بررسی اینکه آیا روی یک سلول تقویم کلیک شده
+    if (event.cursor.date) {
+        const clickedDate = new Date(event.cursor.date)
+
+        // بررسی اینکه زمان انتخاب شده در گذشته نباشد
+        if (isPastTime(clickedDate)) {
+            showWarning()
+            return
+        }
+
+        // باز کردن مودال برای ساخت ایونت جدید
+        openEventModal(clickedDate)
+    }
+}
+
 // توابع جدید برای مدیریت مودال
 const openEventModal = (date, event = null) => {
     selectedDateForModal.value = date
@@ -579,10 +603,11 @@ const openEventModal = (date, event = null) => {
     modalStartMinute.value = startDate.getMinutes().toString().padStart(2, '0')
 
     if (!event) {
-        modalEndHour.value = endDate.setHours(startDate.getHours() + 1, 0, 0, 0)
-        modalEndMinute.value = endDate.getMinutes().toString().padStart(2, '0')
-    }
-    else {
+        // برای ایونت جدید، پایان را یک ساعت بعد تنظیم می‌کنیم
+        endDate.setHours(startDate.getHours() + 1)
+        modalEndHour.value = endDate.getHours().toString().padStart(2, '0')
+        modalEndMinute.value = '00'
+    } else {
         modalEndHour.value = endDate.getHours().toString().padStart(2, '0')
         modalEndMinute.value = endDate.getMinutes().toString().padStart(2, '0')
     }

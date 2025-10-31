@@ -190,7 +190,7 @@
                         <div class="flex justify-between">
                             <span class="text-gray-500">ساعات کاری:</span>
                             <span class="text-gray-900">{{ formatTime(room.starttime) }} - {{ formatTime(room.endtime)
-                            }}</span>
+                                }}</span>
                         </div>
                         <div class="flex justify-between">
                             <span class="text-gray-500">محدودیت هفتگی:</span>
@@ -405,53 +405,80 @@ const closeModal = () => {
 
 const handleSaveRoom = async (roomData) => {
     try {
-        roomData.starttime = roomData.starttime?.substring(0, 5)
-        roomData.endtime = roomData.endtime?.substring(0, 5)
-        roomData.availabledays = getAvailableDaysForServer(roomData),
+        // آماده‌سازی داده‌ها برای ارسال
+        const saveData = {
+            ...roomData,
+            starttime: roomData.starttime?.substring(0, 5),
+            endtime: roomData.endtime?.substring(0, 5),
+            // استفاده از availabledays که از مودال ارسال می‌شود
+            availabledays: roomData.availabledays || []
+        };
 
-            await $freeApi.post('company-create-update-room', roomData)
+        console.log('Data being sent to server:', saveData);
 
-        getRooms()
-        closeModal()
+        await $freeApi.post('company-create-update-room', saveData);
+
+        getRooms();
+        closeModal();
     } catch (error) {
-        console.error('Error saving room:', error)
+        console.error('Error saving room:', error);
+        alert('خطا در ذخیره‌سازی اتاق: ' + (error.response?.data?.message || error.message));
     }
 }
 
-// تابع برای آماده‌سازی availableDays برای سرور
+// تابع اصلاح شده برای آماده‌سازی availableDays برای سرور
 const getAvailableDaysForServer = (roomData) => {
-    // اولویت‌های مختلف برای پیدا کردن availableDays
-    if (Array.isArray(roomData.availableDays)) {
-        return roomData.availableDays
+    console.log('Available days data:', roomData); // برای دیباگ
+
+    // اولویت اول: selectedDays از مودال
+    if (Array.isArray(roomData.selectedDays) && roomData.selectedDays.length > 0) {
+        console.log('Using selectedDays:', roomData.selectedDays);
+        return roomData.selectedDays;
     }
 
-    if (Array.isArray(roomData.available_days)) {
-        return roomData.available_days
+    // اولویت دوم: availableDays مستقیم
+    if (Array.isArray(roomData.availableDays) && roomData.availableDays.length > 0) {
+        console.log('Using availableDays:', roomData.availableDays);
+        return roomData.availableDays;
     }
 
-    if (Array.isArray(roomData.parsedAvailableDays)) {
-        return roomData.parsedAvailableDays
+    // اولویت سوم: available_days
+    if (Array.isArray(roomData.available_days) && roomData.available_days.length > 0) {
+        console.log('Using available_days:', roomData.available_days);
+        return roomData.available_days;
     }
 
-    // اگر از مودال می‌آید و در selectedDays است
-    if (roomData.selectedDays && Array.isArray(roomData.selectedDays)) {
-        return roomData.selectedDays
+    // اولویت چهارم: parsedAvailableDays
+    if (Array.isArray(roomData.parsedAvailableDays) && roomData.parsedAvailableDays.length > 0) {
+        console.log('Using parsedAvailableDays:', roomData.parsedAvailableDays);
+        return roomData.parsedAvailableDays;
+    }
+
+    // اولویت پنجم: availabledays (با d کوچک)
+    if (Array.isArray(roomData.availabledays) && roomData.availabledays.length > 0) {
+        console.log('Using availabledays:', roomData.availabledays);
+        return roomData.availabledays;
     }
 
     // اگر رشته JSON است
-    const jsonString = roomData.available_days || roomData.availabledays
-    if (typeof jsonString === 'string') {
+    const jsonString = roomData.available_days || roomData.availabledays;
+    if (typeof jsonString === 'string' && jsonString.trim() !== '') {
         try {
-            const cleanString = jsonString.replace(/\\/g, '')
-            const parsed = JSON.parse(cleanString)
-            return Array.isArray(parsed) ? parsed : ['saturday', 'sunday']
+            const cleanString = jsonString.replace(/\\/g, '');
+            const parsed = JSON.parse(cleanString);
+            if (Array.isArray(parsed) && parsed.length > 0) {
+                console.log('Using parsed JSON:', parsed);
+                return parsed;
+            }
         } catch (e) {
-            console.error('Error parsing available days JSON:', e)
+            console.error('Error parsing available days JSON:', e);
         }
     }
 
-    // مقدار پیش‌فرض
-    return ['saturday', 'sunday', 'monday', 'tuesday', 'wednesday']
+    // مقدار پیش‌فرض - روزهای کاری معمول
+    const defaultDays = ['saturday', 'sunday', 'monday', 'tuesday', 'wednesday'];
+    console.log('Using default days:', defaultDays);
+    return defaultDays;
 }
 
 const deleteRoom = async (roomId) => {

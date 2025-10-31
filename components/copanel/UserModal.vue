@@ -30,19 +30,11 @@
                         <!-- Name field -->
                         <div>
                             <label for="name" class="block text-sm font-medium text-gray-700 mb-2">
-                                نام
+                                نام و نام خانوادگی
                             </label>
                             <input type="text" id="name" v-model="formData.name" required
                                 class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-300"
                                 placeholder="نام ">
-                        </div>
-                        <div>
-                            <label for="name" class="block text-sm font-medium text-gray-700 mb-2">
-                                نام خانوادگی
-                            </label>
-                            <input type="text" id="name" v-model="formData.lastname" required
-                                class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-300"
-                                placeholder=" نام خانوادگی">
                         </div>
 
                         <!-- mobile field -->
@@ -63,7 +55,7 @@
                             <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
                                 <!-- Active Radio -->
                                 <label class="relative flex cursor-pointer">
-                                    <input type="radio" name="status" value="1" v-model="formData.isactive"
+                                    <input type="radio" name="status" value="1" v-model.number="formData.isactive"
                                         class="sr-only peer">
                                     <div
                                         class="w-full p-4 border-2 border-gray-200 rounded-xl transition-all duration-300 peer-checked:border-green-500 peer-checked:bg-green-50 peer-checked:ring-2 peer-checked:ring-green-200 hover:border-green-300 hover:bg-green-25">
@@ -88,7 +80,7 @@
 
                                 <!-- Inactive Radio -->
                                 <label class="relative flex cursor-pointer">
-                                    <input type="radio" name="isactive" value="0" v-model="formData.isactive"
+                                    <input type="radio" name="status" value="0" v-model.number="formData.isactive"
                                         class="sr-only peer">
                                     <div
                                         class="w-full p-4 border-2 border-gray-200 rounded-xl transition-all duration-300 peer-checked:border-yellow-500 peer-checked:bg-yellow-50 peer-checked:ring-2 peer-checked:ring-yellow-200 hover:border-yellow-300 hover:bg-yellow-25">
@@ -113,7 +105,7 @@
                             </div>
 
                             <!-- Status descriptions -->
-                            <div class="mt-3 grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs text-gray-500">
+                            <div class="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-gray-500">
                                 <div class="text-center"
                                     :class="{ 'text-green-600 font-medium': formData.isactive === 1 }">
                                     کاربر می‌تواند وارد سیستم شود
@@ -166,12 +158,16 @@ const formData = ref({
     isactive: 1
 })
 
-// Reset form when modal opens
-watch(() => props.isOpen, (newVal) => {
-    if (newVal) {
-        if (props.mode === 'edit' && props.user) {
-            // Fill form with user data
-            formData.value = { ...props.user }
+// Reset form when modal opens or user changes
+watch([() => props.isOpen, () => props.user], ([isOpen, user]) => {
+    if (isOpen) {
+        if (props.mode === 'edit' && user) {
+            // Fill form with user data - ensure isactive is number
+            formData.value = {
+                name: user.name || '',
+                mobile: user.mobile || '',
+                isactive: Number(user.isactive) || 1
+            }
         } else {
             // Reset form for new user
             formData.value = {
@@ -181,7 +177,7 @@ watch(() => props.isOpen, (newVal) => {
             }
         }
     }
-})
+}, { immediate: true })
 
 // Functions
 const closeModal = () => {
@@ -189,6 +185,11 @@ const closeModal = () => {
 }
 
 const handleSubmit = () => {
-    emit('save', formData.value)
+    // Ensure isactive is sent as number
+    const submitData = {
+        ...formData.value,
+        isactive: Number(formData.value.isactive)
+    }
+    emit('save', submitData)
 }
 </script>

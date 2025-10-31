@@ -86,9 +86,6 @@
                                 <div class="text-sm font-medium text-gray-900">{{ user.name }}</div>
                             </td>
                             <td class="px-4 sm:px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm text-gray-900">{{ user.lastname }}</div>
-                            </td>
-                            <td class="px-4 sm:px-6 py-4 whitespace-nowrap">
                                 <div class="text-sm text-gray-900">{{ user.mobile }}</div>
                             </td>
                             <td class="px-4 sm:px-6 py-4 whitespace-nowrap">
@@ -139,7 +136,7 @@
                                 {{ getUserInitials(user) }}
                             </div>
                             <div class="mr-3">
-                                <div class="text-sm font-medium text-gray-900">{{ user.name }} {{ user.lastname }}</div>
+                                <div class="text-sm font-medium text-gray-900">{{ user.name }}</div>
                                 <div class="text-xs text-gray-500">{{ user.mobile }}</div>
                             </div>
                         </div>
@@ -153,10 +150,6 @@
                         <div class="flex justify-between">
                             <span class="text-gray-500">نام:</span>
                             <span class="text-gray-900">{{ user.name }}</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span class="text-gray-500">نام خانوادگی:</span>
-                            <span class="text-gray-900">{{ user.lastname }}</span>
                         </div>
                         <div class="flex justify-between">
                             <span class="text-gray-500">موبایل:</span>
@@ -261,7 +254,6 @@ const filteredUsers = computed(() => {
         const query = searchQuery.value.toLowerCase()
         filtered = filtered.filter(user =>
             user.name?.toLowerCase().includes(query) ||
-            user.lastname?.toLowerCase().includes(query) ||
             user.mobile?.includes(query) ||
             user.email?.toLowerCase().includes(query)
         )
@@ -307,8 +299,7 @@ const getStatusText = (isactive) => {
 // تابع برای گرفتن حروف اول کاربر
 const getUserInitials = (user) => {
     const first = user.name?.charAt(0) || ''
-    const last = user.lastname?.charAt(0) || ''
-    return (first + last).toUpperCase()
+    return (first).toUpperCase()
 }
 
 // توابع مدیریت مودال
@@ -325,11 +316,21 @@ const closeModal = () => {
 
 const handleSaveUser = async (userData) => {
     try {
-        await $freeApi.post('company-create-update-user', userData)
+        // اطمینان از اینکه isactive به صورت عدد ارسال شود
+        const dataToSend = {
+            ...userData,
+            isactive: Number(userData.isactive)
+        }
+
+        await $freeApi.post('company-create-update-user', dataToSend)
         closeModal()
         getUsers()
+
+        // نمایش پیام موفقیت
+        // می‌توانید از یک toast notification استفاده کنید
     } catch (error) {
         console.error('Error saving user:', error)
+        // نمایش پیام خطا
     }
 }
 
