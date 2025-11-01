@@ -8,10 +8,11 @@ export const useSidebarStore = defineStore('sidebar', () => {
     const menuItems = ref([
         { id: 1, title: 'خانه', path: '/copanel/', icon: 'home' },
         { id: 2, title: 'تقویم کاری', path: '/copanel/calander', icon: 'calendar' },
-        { id: 3, title: 'اتاق ها', path: '/copanel/rooms', icon: 'rooms' },
-        { id: 4, title: 'کاربران', path: '/copanel/users', icon: 'users' },
-        { id: 5, title: 'مالی', path: '/copanel/wallet', icon: 'wallet' },
-        { id: 6, title: 'لینک اختصاصی', path: '/copanel/link', icon: 'support' },
+        { id: 3, title: 'گروه کاربران', path: '/copanel/usergroup', icon: 'users' },
+        { id: 4, title: 'اتاق ها', path: '/copanel/rooms', icon: 'rooms' },
+        { id: 5, title: 'کاربران', path: '/copanel/users', icon: 'users' },
+        { id: 6, title: 'مالی', path: '/copanel/wallet', icon: 'wallet' },
+        { id: 7, title: 'لینک اختصاصی', path: '/copanel/link', icon: 'support' },
     ])
 
     // تشخیص دستگاه موبایل
